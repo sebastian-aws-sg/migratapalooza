@@ -1,0 +1,6 @@
+grant codeBase "file:${application}" {
+    permission java.io.FilePermission "${APP_RESOURCE_ROOT}${/}mcx${/}-", "read";
+	permission java.io.FilePermission "${WAS_LOG_ROOT}${/}mcx${/}-", "read";
+	permission java.io.FilePermission "${WAS_LOG_ROOT}${/}mcx${/}-", "write";
+	permission java.security.AllPermission;
+};

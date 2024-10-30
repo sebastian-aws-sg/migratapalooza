@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>mcx</display-name>
+	<distributable id="mcx" />
+
+    <!-- SERVLET DECLARATIONS -->
+    <servlet>
+        <servlet-name>StrutsServlet</servlet-name>
+        <servlet-class>com.dtcc.sharedservices.cwf.web.struts.DtccBaseActionServlet</servlet-class>
+        <init-param>
+          <param-name>config</param-name>
+          <param-value>/WEB-INF/config/cwf/struts-config-cwf.xml, /WEB-INF/config/struts-config.xml</param-value>
+       </init-param>
+       <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet>
+       <servlet-name>SessionTrackerServlet</servlet-name>
+       <servlet-class>com.dtcc.dnv.mcx.servlet.SessionTrackerServlet</servlet-class>
+       <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <!-- SERVLET MAPPINGS -->
+    <servlet-mapping>
+        <servlet-name>StrutsServlet</servlet-name>
+        <url-pattern>/action/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>SessionTrackerServlet</servlet-name>
+        <url-pattern>/servlet/session/*</url-pattern>
+    </servlet-mapping>  
+
+    <jsp-config>
+	   <taglib>
+			<taglib-uri>/WEB-INF/struts-bean.tld</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-bean.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/struts-html.tld</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-html.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/struts-logic.tld</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-logic.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/struts-template.tld</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-template.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/struts-nested.tld</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/struts-nested.tld</taglib-location>
+		</taglib>
+	    <taglib>
+		    <taglib-uri>/WEB-INF/struts-bean-el.tld</taglib-uri>
+		    <taglib-location>/WEB-INF/tlds/struts-bean-el.tld</taglib-location>
+		</taglib>
+		<taglib>
+		    <taglib-uri>/WEB-INF/struts-html-el.tld</taglib-uri>
+		    <taglib-location>/WEB-INF/tlds/struts-html-el.tld</taglib-location>
+		</taglib>
+		<taglib>
+		    <taglib-uri>/WEB-INF/struts-logic-el.tld</taglib-uri>
+		    <taglib-location>/WEB-INF/tlds/struts-logic-el.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/mca-grid.tld</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/mca-grid.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/cwf/cwf-taglibs</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/cwftaglib.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/alert.tld</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/alert.tld</taglib-location>
+		</taglib>	
+		<taglib>
+			<taglib-uri>/WEB-INF/derivServ.tld</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/derivServ.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/taglibs-datetime.tld</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/taglibs-datetime.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+	<security-constraint>
+		<web-resource-collection>
+  			<web-resource-name>StrutsServlet</web-resource-name>
+  			<description></description>
+  			<url-pattern>/action/*</url-pattern>
+  			<http-method>GET</http-method>
+  			<http-method>POST</http-method>
+  		</web-resource-collection>
+
+  		<auth-constraint>
+			<description></description>
+			<role-name>MCX-SUPERUSERUPDATE</role-name>
+			<role-name>MCX-SUPERUSERVIEW</role-name>
+			<role-name>MCX-TMPLTADMIN</role-name>
+
+			<role-name>MCX-DEALERUPDATE</role-name>
+			<role-name>MCX-DEALERVIEW</role-name>
+			<role-name>MCX-CPUPDATE</role-name>
+			<role-name>MCX-CPVIEW</role-name>
+			<role-name>MCX</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<!-- Security Role for DSV Top Level -->
+	<security-role>
+  		<description>TAM Primary Group</description>
+  		<role-name>MCX-SUPERUSERUPDATE</role-name>
+  	</security-role>
+	<security-role>
+  		<description>TAM Primary Group</description>
+  		<role-name>MCX-SUPERUSERVIEW</role-name>
+  	</security-role>
+  		<security-role>
+  		<description>TAM Primary Group</description>
+  		<role-name>MCX-TMPLTADMIN</role-name>
+  	</security-role>
+	<security-role>
+  		<description>TAM Primary Group</description>
+  		<role-name>MCX-DEALERUPDATE</role-name>
+  	</security-role>
+  		<security-role>
+  		<description>TAM Primary Group</description>
+  		<role-name>MCX-DEALERVIEW</role-name>
+  	</security-role>
+	<security-role>
+  		<description>TAM Primary Group</description>
+  		<role-name>MCX-CPUPDATE</role-name>
+  	</security-role>
+	<security-role>
+  		<description>TAM Primary Group</description>
+  		<role-name>MCX-CPVIEW</role-name>
+  	</security-role>
+	<security-role>
+  		<description>TAM Primary Group</description>
+  		<role-name>MCX</role-name>
+  	</security-role>
+
+	<env-entry>
+		<env-entry-name>initialContextFactory</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>com.ibm.websphere.naming.WsnInitialContextFactory</env-entry-value>
+	</env-entry>
+</web-app>

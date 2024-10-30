@@ -1,0 +1,472 @@
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN" "tiles-config_1_1.dtd">
+
+<tiles-definitions>
+
+    <!-- Main page layout used as a root for other pages defintion. -->
+    <definition name="main.layout" path="/WEB-INF/tiles/layouts/mcxMainLayout.jsp">       
+        <put name="header" value="/WEB-INF/jsp/common/header.jsp"/>
+        <!-- Menues -->        
+        <put name="menu" value="/WEB-INF/jsp/common/menuController.jsp"/>
+        <put name="submenu" value="/WEB-INF/jsp/common/submenuController.jsp"/>
+        <put name="menu_highlight" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <!-- Session Tracker -->
+        <put name="session" value="/WEB-INF/jsp/common/sessionTracker.jsp"/>
+        <!-- Error/Messages -->
+        <put name="messages" value="/WEB-INF/tiles/layouts/mcxMsgs.jsp"/>
+        <put name="errors" value="/WEB-INF/tiles/layouts/mcxErrs.jsp"/>
+        <!-- Form -->
+        <put name="form1" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <!-- Footer -->
+        <put name="footer" value="/WEB-INF/jsp/common/footer.jsp"/>
+    </definition>
+    
+    <definition name="main.layout.nomenu" path="/WEB-INF/tiles/layouts/mcxMainLayout.jsp">
+       <put name="header" value="/WEB-INF/jsp/common/simpleHeader.jsp"/>        
+       <put name="menu" value="/WEB-INF/jsp/common/dummy.jsp"/>
+       <put name="submenu" value="/WEB-INF/jsp/common/dummy.jsp"/>
+       <put name="menu_highlight" value="/WEB-INF/jsp/common/dummy.jsp"/>
+       <!-- Session Tracker (Excluded)-->
+       <put name="session" value="/WEB-INF/jsp/common/dummy.jsp"/>       
+       <!-- Error/Messages -->
+       <put name="messages" value="/WEB-INF/tiles/layouts/mcxMsgs.jsp"/>
+       <put name="errors" value="/WEB-INF/tiles/layouts/mcxErrs.jsp"/>
+       <!-- Form -->
+       <put name="form1" value="/WEB-INF/jsp/common/dummy.jsp"/>
+       <!-- Footer -->
+       <put name="footer" value="/WEB-INF/jsp/common/footer.jsp"/>
+    </definition>
+
+    <!-- Simple Generic Layout -->
+    <definition name="simple.layout" path="/WEB-INF/tiles/layouts/simpleLayout.jsp">
+        <put name="title" value="MCA - Xpress"/>
+        <!-- Error/Messages -->
+        <put name="messages" value="/WEB-INF/tiles/layouts/mcxMsgs.jsp"/>
+        <put name="form1" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <put name="errors" value="/WEB-INF/tiles/layouts/mcxErrs.jsp"/>
+    </definition>
+
+	<!-- Start Move -->
+   	<!--  Menu highlight layout  Start -->
+    <definition name="menu.home.pendingmca.layout"  extends="main.layout">    	      
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/home_pendingmca.jsp"/>
+    </definition>    
+
+    <definition name="menu.home.executedmca.layout"  extends="main.layout">    	      
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/home_executedmca.jsp"/>
+    </definition>    
+
+    <definition name="menu.home.pendingenroll.layout"  extends="main.layout">    	      
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/home_pendingenroll.jsp"/>
+    </definition>    
+
+    <definition name="menu.home.approvedenroll.layout"  extends="main.layout">    	      
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/home_approvedenroll.jsp"/>
+    </definition>    
+    
+    <definition name="menu.enrollment.layout" extends="main.layout">    	      
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/enrollment.jsp"/>
+    </definition> 
+        
+    <definition name="menu.managedoc.preexistmca.layout" extends="main.layout">    	      
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/managedoc_preexistmca.jsp"/>
+    </definition>     
+
+    <definition name="menu.managedoc.search.layout" extends="main.layout">    	      
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/managedoc_search.jsp"/>
+    </definition>     
+
+    <definition name="menu.managedoc.other.layout" extends="main.layout">    	      
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/managedoc_other.jsp"/>
+    </definition>     
+
+    <definition name="menu.alerts.view.layout" extends="main.layout">
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/alerts_view.jsp"/>
+    </definition>
+    
+    <definition name="menu.alerts.post.layout" extends="main.layout">
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/alerts_post.jsp"/>
+    </definition>
+    
+    <definition name="menu.mcasetup.layout" extends="main.layout">
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/mcasetup.jsp"/>
+    </definition>
+    
+   <definition name="menu.mcawizard.layout" extends="main.layout">
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/mcawizard.jsp"/>
+    </definition>
+
+   <definition name="menu.mcas.layout" extends="main.layout">
+       <put name="menu_highlight" value="/WEB-INF/jsp/menu/mcas.jsp"/>
+    </definition>
+
+    <definition name="menu.body.layout" path="/WEB-INF/jsp/menu/menuscriptLayout.jsp">
+       <put name="menu_highlight" value="/WEB-INF/jsp/common/dummy.jsp"/>
+       <put name="content_body" value="/WEB-INF/jsp/common/dummy.jsp"/>
+   	</definition>
+   	
+    <definition name="menu.mcas" path="/WEB-INF/jsp/menu/mcas.jsp"/>
+
+    <definition name="menu.mcawizard" path="/WEB-INF/jsp/menu/mcawizard.jsp"/>
+
+   	<!--  Menu highlight layout  End -->
+	<!-- End Move -->
+
+    <!-- Error Page Definitions -->
+    <definition name="mcx.error.page" extends="main.layout">
+        <put name="dummy1" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <put name="form1" value="/WEB-INF/jsp/common/error.jsp"/>        
+    </definition>  
+    
+    <definition name="mcx.popup.error" extends="simple.layout">
+        <put name="dummy1" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <put name="form1" value="/WEB-INF/jsp/common/error.jsp"/>        
+    </definition>  
+    
+    <definition name="mcx.signon.error.page" extends="main.layout.nomenu">
+        <put name="dummy1" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <put name="form1" value="/WEB-INF/jsp/common/error.jsp"/>        
+    </definition> 
+    
+    <definition name="mcx.logout.page" extends="main.layout.nomenu">
+        <put name="dummy1" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <put name="form1" value="/WEB-INF/jsp/common/logout.jsp"/>        
+    </definition> 
+    
+    <!-- admin -->
+    <definition name="adminSetup.page"  extends="menu.mcasetup.layout">    	      
+        <put name="form1" value="/WEB-INF/jsp/admin/MCASetup.jsp"/>
+    </definition>    
+
+	<definition name = "admin.adminModifyPopup" extends = "simple.layout">
+      <put name = "form1" value = "/WEB-INF/jsp/admin/adminModifyPopup.jsp"/>
+    </definition>     
+
+    <definition name = "admin.adminEditTerm" extends = "simple.layout">
+      <put name = "form1" value = "/WEB-INF/jsp/admin/adminEditTrmPopup.jsp"/>
+    </definition>     
+
+    <definition name = "admin.post" extends = "simple.layout">
+      <put name = "form1" value = "/WEB-INF/jsp/admin/postPopup.jsp"/>
+    </definition>
+	<definition name="mcx.mca.confirmMain"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/confirmationMain.jsp" />
+    </definition>
+
+	<!-- Home page -->
+    <definition name="pendingmca.page" extends="menu.home.pendingmca.layout">
+        <put name="form1" value="/WEB-INF/jsp/homepage/PendingMCA.jsp"/>
+    </definition>
+
+    <definition name="executedmca.page" extends="menu.home.executedmca.layout">
+        <put name="form1" value="/WEB-INF/jsp/homepage/ExecutedMCA.jsp"/>
+    </definition>
+    
+    <definition name="printpendingmca.page" extends="simple.layout">
+		<put name="form1" value="/WEB-INF/jsp/homepage/PendingMCA.jsp" />
+	</definition>
+
+	<definition name="printexecutedmca.page" extends="simple.layout">
+		<put name="form1" value="/WEB-INF/jsp/homepage/ExecutedMCA.jsp" />
+	</definition>
+	
+	<definition name="home.pendingExecutedMain" extends="simple.layout">
+		<put name="form1" value="/WEB-INF/jsp/homepage/PendingExecutedMain.jsp" />
+	</definition>	   
+
+     <definition name = "home.pendingApproval" extends = "menu.home.pendingenroll.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/homepage/dealerPendingEnrollApproval.jsp" />
+    </definition>
+    
+    <definition name="home.printpendingApproval"
+		extends="simple.layout">
+		<put name="form1"
+			value="/WEB-INF/jsp/homepage/dealerPendingEnrollApproval.jsp" />
+	</definition>
+    
+    
+    <definition name = "home.approvedFirms" extends = "menu.home.approvedenroll.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/homepage/dealerApprovedFirms.jsp" />
+    </definition>
+    
+    <definition name="home.printapprovedFirms"
+		extends="simple.layout">
+		<put name="form1"
+			value="/WEB-INF/jsp/homepage/dealerApprovedFirms.jsp" />
+	</definition>    
+    
+    <definition name = "home.pendingApproval.approve" extends = "simple.layout">
+    	<put name="title" value="Dearler / CP Approve Confirmation"/> 
+    	<put name = "form1" value = "/WEB-INF/jsp/homepage/dealerApprovalConfirm.jsp" />
+    </definition>
+    
+    <definition name = "home.pendingDeny.deny" extends = "simple.layout">
+    	<put name="title" value="Dealer / CP Approve Confirmation"/> 
+    	<put name = "form1" value = "/WEB-INF/jsp/homepage/dealerdenyConfirm.jsp" />
+    </definition>
+	
+    <definition name = "home.denyMain" extends = "simple.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/homepage/dealerdenyConfirmMain.jsp"/>
+    </definition>
+    <definition name = "home.enrollmentApprovalPopup" extends = "simple.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/homepage/enrollmentApprovalPopup.jsp"/>
+    </definition>
+    
+    <definition name = "mcx.enrollApprovalError.page" extends = "main.layout">
+      <put name="header" value="/WEB-INF/jsp/common/dummy.jsp"/>
+      <put name="menu" value="/WEB-INF/jsp/common/dummy.jsp"/>
+      <put name = "form1" value = "/WEB-INF/jsp/homepage/dealerApprovalConfirm.jsp" />
+      <put name="footer" value="/WEB-INF/jsp/common/dummy.jsp"/>
+    </definition>
+    
+    <definition name = "mcx.enrollDenyError.page" extends = "main.layout">
+      <put name="header" value="/WEB-INF/jsp/common/dummy.jsp"/>
+      <put name="menu" value="/WEB-INF/jsp/common/dummy.jsp"/>
+      <put name = "form1" value = "/WEB-INF/jsp/homepage/dealerdenyConfirm.jsp" />
+      <put name="footer" value="/WEB-INF/jsp/common/dummy.jsp"/>
+    </definition>
+
+	<!-- User pop up -->
+    <definition name="userdetails.page" extends="simple.layout">
+    	<put name="title" value="User Details"/>
+        <put name="form1" value="/WEB-INF/jsp/homepage/UserDetailsPopup.jsp"/>
+    </definition>
+
+
+
+    <!-- Enrollment	-->
+    <definition name="enroll.stepone" extends="menu.enrollment.layout">
+        <put name="form1" value="/WEB-INF/jsp/enrollment/EnrollStepOne.jsp"/>
+    </definition>
+	<definition name="enroll.steptwo" extends="menu.enrollment.layout">
+        <put name="form1" value="/WEB-INF/jsp/enrollment/EnrollStepTwo.jsp"/>
+    </definition>
+	<definition name="enroll.selectmca" extends="simple.layout">
+        <put name="form1" value="/WEB-INF/jsp/enrollment/EnrollSelectMCA.jsp"/>
+    </definition>
+	<definition name="enroll.confirm" extends="menu.enrollment.layout">
+        <put name="form1" value="/WEB-INF/jsp/enrollment/EnrollConfirmation.jsp"/>
+    </definition>
+        <definition name="firmdetails.page" extends="simple.layout">
+    	<put name="title" value="Firm Details"/>
+        <put name="form1" value="/WEB-INF/jsp/enrollment/CPDetailsPopup.jsp"/>
+    </definition>
+
+
+    <!--  Manage Document: Search Screen          -->
+    <definition name = "ManagedDocument.search" extends = "menu.managedoc.search.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/managedocs/SearchDocuments.jsp" />
+    </definition>
+
+    <!-- Manage Document: Add CP Window -->
+     <definition name = "ManagedDocument.addCP" extends = "main.layout">
+      <put name="header" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <put name="menu" value="/WEB-INF/jsp/common/dummy.jsp"/>
+
+        <!-- Form -->
+        <put name = "form1" value = "/WEB-INF/jsp/managedocs/AddCP.jsp" />
+        <!-- Footer -->
+        <put name="footer" value="/WEB-INF/jsp/common/dummy.jsp"/>
+
+    </definition>
+
+    <definition name = "ManagedDocument.addCPMain" extends = "simple.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/managedocs/AddCPMain.jsp" />
+    </definition>
+
+
+
+    <!-- Manage Document: Edit CP Window -->
+    <definition name = "ManagedDocument.editCP" extends = "main.layout" >
+             <put name="header" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <put name="menu" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <!-- Form -->
+        <put name = "form1" value = "/WEB-INF/jsp/managedocs/EditCP.jsp" />
+        <put name="footer" value="/WEB-INF/jsp/common/dummy.jsp"/>
+
+    </definition>
+
+    <definition name = "ManagedDocument.editCPMain" extends = "simple.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/managedocs/EditCPMain.jsp" />
+    </definition>
+
+
+    <definition name = "ManagedDocument.editCPMain12" extends = "simple.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/managedocs/errorpage.jsp" />
+    </definition>
+    
+     <definition name = "ManagedDocument.deleteCP" extends = "main.layout" >
+             <put name="header" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <put name="menu" value="/WEB-INF/jsp/common/dummy.jsp"/>
+        <!-- Form -->
+        <put name = "form1" value = "/WEB-INF/jsp/managedocs/DeleteCP.jsp" />
+        <put name="footer" value="/WEB-INF/jsp/common/dummy.jsp"/>                       
+    </definition>
+
+    <definition name = "ManagedDocument.deleteCPRouter" extends = "simple.layout" >
+        <put name = "form1" value = "/WEB-INF/jsp/managedocs/DeleteCPRouter.jsp" />
+    </definition>
+
+    <!--  Manage Document: Pre-existing Screen -->
+    <definition name = "ManagedDocument.preexisting" extends = "menu.managedoc.preexistmca.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/managedocs/PreExistingDocs.jsp" />
+    </definition>
+
+    <definition name = "ManagedDocument.others" extends = "menu.managedoc.other.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/managedocs/OtherDocs.jsp" />
+    </definition>
+
+    <!--  Admin -->
+    <definition name="postalert.page" extends="menu.alerts.post.layout">
+        <put name="form1" value="/WEB-INF/jsp/admin/AdminPostAlert.jsp"/>
+    </definition>
+    <definition name="adminviewalert.page" extends="menu.alerts.view.layout">
+        <put name="form1" value="/WEB-INF/jsp/admin/AdminViewAlerts.jsp"/>
+    </definition>
+    <definition name="adminviewalertdetail.page" extends="menu.alerts.view.layout">
+        <put name="form1" value="/WEB-INF/jsp/admin/AdminViewAlertDetail.jsp"/>
+    </definition>
+    <definition name="adminmcasetup.page" extends="menu.mcasetup.layout">
+        <put name="form1" value="/WEB-INF/jsp/admin/MCASetup.jsp"/>
+    </definition>
+	<definition name = "mca.adminPrintViewPopup" extends = "simple.layout">
+      <put name = "form1" value = "/WEB-INF/jsp/admin/adminPrintViewPopup.jsp"/>
+    </definition>
+
+    <!--  Alert -->
+    <definition name="userviewalert.page" extends="main.layout">
+        <put name="form1" value="/WEB-INF/jsp/alert/UserViewAlerts.jsp"/>
+    </definition>
+    <definition name="userviewalertdetail.page" extends="main.layout">
+        <put name="form1" value="/WEB-INF/jsp/alert/UserViewAlertDetail.jsp"/>
+    </definition>
+
+    <!-- MCA Wizard Start -->
+    <definition name="mcx.mca.view" extends="main.layout">
+        <put name="form1" value="/WEB-INF/jsp/mca/viewMCA.jsp"/>
+	</definition>
+
+    <definition name="mcx.mca.printview"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/printMCA.jsp" />
+    </definition>
+
+    <definition name="indus_pub_view_content"  extends="menu.body.layout">
+        <put name="content_body" value="/WEB-INF/jsp/mca/indus_pub_view_content.jsp"/>
+        <put name="menu_highlight" value="menu.mcas" type="definition"/>
+   	</definition>
+
+    <definition name="mca_negotiation_content" extends="menu.body.layout">
+        <put name="content_body" value="/WEB-INF/jsp/mca/mca_negotiation_content.jsp"/>
+        <put name="menu_highlight" value="menu.mcas" type="definition"/>
+   	</definition>
+
+   <definition name="mca_wizard_step1_content" extends="menu.body.layout">
+        <put name="content_body" value="/WEB-INF/jsp/mca/mca_wizard_step1_content.jsp"/>
+        <put name="menu_highlight" value="menu.mcawizard" type="definition"/>
+   	</definition>
+   	
+   <definition name="mca_wizard_step2_content" extends="menu.body.layout">
+        <put name="content_body" value="/WEB-INF/jsp/mca/mca_wizard_step2_content.jsp"/>
+        <put name="menu_highlight" value="menu.mcawizard" type="definition"/>
+   	</definition>
+   	
+    <definition name="home.cp.page" extends="menu.home.pendingmca.layout">
+        <put name="form1" value="/WEB-INF/jsp/homepage/cp_pending_mca.jsp"/>
+    </definition>
+
+    <definition name="home.dl.page" extends="menu.mcawizard.layout">
+    </definition>
+    
+    <definition name="mcx.mca.viewISDATerm"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/view_ISDA_Term.jsp" />
+    </definition>
+
+    <definition name="mcx.mca.router"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/mca_router.jsp" />
+    </definition>
+
+    <definition name="mcx.mca.postamendment"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/dealer_post_amendment.jsp" />
+    </definition>
+
+    <definition name="mcx.mca.postcomment" extends = "simple.layout">
+     	<put name="form1" value="/WEB-INF/jsp/mca/term_comment.jsp" />
+    </definition>
+
+    <definition name="mcx.template.name"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/save_template.jsp" />
+    </definition>
+
+    <definition name="mcx.apply.cp"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/apply_template.jsp" />
+    </definition>
+
+    <definition name="mcx.execute.mca"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/executeMCA.jsp" />
+    </definition>
+
+    <definition name="mcx.confirm.mca"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/confirmation.jsp" />
+    </definition>
+
+<definition name = "mcx.mca.viewCommentPopup" extends = "simple.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/mca/viewCommentPopup.jsp"/>
+    </definition>
+    
+    <definition name = "mcx.mca.viewISDAPopup" extends = "simple.layout">
+    	<put name = "form1" value = "/WEB-INF/jsp/mca/viewISDAPopup.jsp"/>
+    </definition>
+	<definition name="mcx.mca.executeMain"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/executeMCAMain.jsp" />
+    </definition>
+	<definition name="mca.save_template_main"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/mca/save_template_main.jsp" />
+    </definition>
+	<definition name="mca.view_comment_Main" extends = "simple.layout">
+     	<put name="form1" value="/WEB-INF/jsp/mca/term_comment_main.jsp" />
+    </definition>
+	<definition name = "mcx.mca.postamendment.popup" extends = "simple.layout">
+      <put name = "form1" value = "/WEB-INF/jsp/mca/postAmendmentPopup.jsp"/>
+    </definition>
+    <definition name = "mca.agreeAmendmentPopup" extends = "simple.layout">
+      <put name = "form1" value = "/WEB-INF/jsp/mca/agreeAmendmentPopup.jsp"/>
+    </definition>
+    <definition name = "mca.viewTermPopup" extends = "simple.layout">
+      <put name = "form1" value = "/WEB-INF/jsp/mca/viewTermPopup.jsp"/>
+    </definition>
+    <definition name = "mca.applyToCPPopup" extends = "simple.layout">
+      <put name = "form1" value = "/WEB-INF/jsp/mca/applyToCPPopup.jsp"/>
+    </definition>
+    <definition name = "mca.printViewPopup" extends = "simple.layout">
+      <put name = "form1" value = "/WEB-INF/jsp/mca/printViewPopup.jsp"/>
+    </definition>
+    
+
+	<!-- MCA Wizard End-->
+
+   	<!-- Admin Start -->   	
+   	<definition name="isda.admin.mca.setup" extends="menu.mcasetup.layout">
+        <put name="form1" value="/WEB-INF/jsp/admin/mca_setup_term_details.jsp"/>
+    </definition>
+
+    <!-- Admin - Modify Term - pop up screen -->
+    <definition name="unlock.isda.admin.mca.term"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/admin/admin_isda_modify.jsp" />
+    </definition>
+
+    <definition name="lock.isda.admin.mca.term"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/admin/admin_isda_view.jsp" />
+    </definition>
+
+    <!-- Admin - Publish Date - pop up screen -->
+    <definition name="isda.admin.mca.publish"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/admin/approve_status_popup.jsp" />
+    </definition>	
+
+    <definition name="isda.admin.mca.router"  extends = "simple.layout">
+	    <put name="form1" value="/WEB-INF/jsp/admin/admin_router.jsp" />
+    </definition>
+   	<!-- Admin End -->
+
+
+    
+</tiles-definitions>

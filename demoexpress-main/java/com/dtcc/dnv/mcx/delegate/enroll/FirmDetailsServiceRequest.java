@@ -1,0 +1,59 @@
+/*
+ * Created on Aug 29, 2007
+ *
+ * To change the template for this generated file go to
+ * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
+ */
+package com.dtcc.dnv.mcx.delegate.enroll;
+
+import com.dtcc.dnv.mcx.delegate.MCXAbstractServiceRequest;
+import com.dtcc.dnv.otc.common.security.model.AuditInfo;
+
+
+/**
+ * Copyright © 2003 The Depository Trust & Clearing Company. All rights
+ * reserved.
+ * 
+ * Depository Trust & Clearing Corporation (DTCC) 55, Water Street, New York, NY
+ * 10048, U.S.A All Rights Reserved.
+ * 
+ * This software may contain (in part or full) confidential/proprietary
+ * information of DTCC. ("Confidential Information"). Disclosure of such
+ * Confidential Information is prohibited and should be used only for its
+ * intended purpose in accordance with rules and regulations of DTCC.
+ * 
+ * @author Nithya R
+ * @date Sep 10, 2007
+ * @version 1.0
+ * 
+ * Service request for retrieving the firm details when a user clicks on the counterparty link available in various pages.
+ * 
+ **/
+public class FirmDetailsServiceRequest extends MCXAbstractServiceRequest
+{
+
+    public FirmDetailsServiceRequest(AuditInfo auditInfo)
+    {
+        super(auditInfo);
+    }
+
+    private String id;
+
+    /**
+     * @return Returns the id.
+     */
+    public String getId()
+    {
+        return id;
+    }
+
+    /**
+     * @param id
+     *            The id to set.
+     */
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
+}

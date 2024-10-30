@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+    <!-- General appender for the application file output -->
+    <appender name="FileLog" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${WAS_LOG_ROOT}${file.separator}mcx${file.separator}MCXLog.txt" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="ImmediateFlush" value="true"/>
+        <param name="Threshold" value="DEBUG"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d] %-5p %c %x - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- The CSF FileLog is set up so that it will not show the error level because
+         the internal routines for CSF choose the error levels.  It uses log4j only
+         to direct the output. -->
+    <appender name="CSF-FileLog" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${WAS_LOG_ROOT}${file.separator}mcx${file.separator}CSFLog.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+             <param name="ConversionPattern" value="CSF[%d]  %c %x - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- Appender for CWF file output -->
+    <appender name="CWF-FileLog" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${WAS_LOG_ROOT}${file.separator}mcx${file.separator}CWFLog.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+             <param name="ConversionPattern" value="CWF[%d] %-5p %c %x - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="ITOLog" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="${WAS_LOG_ROOT}${file.separator}mcx${file.separator}mcxlog4jito.log"/>
+        <param name="DatePattern" value="yyyy-MM-dd"/>
+         <param name="Threshold" value="ERROR"/>
+        <param name="ImmediateFlush" value="true"/>
+
+        <layout class="com.dtcc.sharedservices.cwf.logging.ITO_Layout">
+
+            <param name="systemCode"  value="MCX"/>
+            <param name="msgNumber"   value="9009"/>
+            <param name="pagerLevel"  value="N"/>
+			<param name="emailLevel"  value="Y"/>
+            <param name="objectName"  value="MCX"/>
+            <param name="msgGroup"    value="Group1"/>
+
+            <!-- # OPTIONAL - Pattern to output the level, message, location, and date   -->
+            <param name="conversionPattern" value=" %-5p: %m (%F:%M:%L) [%d] %n"/>
+        </layout>
+         </appender>
+
+   <!-- Level values can be DEBUG, INFO, WARN, ERROR, FATAL -->
+
+   <!-- Additivity is set to false to prevent these messages from being
+        written to the root logger. -->
+
+   <!-- CWF Logger -->
+   <logger name="com.dtcc.sharedservices.cwf" additivity="false">
+      <level value="INFO"/>
+      <appender-ref ref="CWF-FileLog"/>
+   </logger>
+
+   <!-- CsF Loggers - one for users (security) and one for AZN (entitlementsAPI)-->
+   <!-- The current implementation of CSF uses only the ERROR level for
+        logging. The internal level of logging performed in CSF is controled
+        by a setting in its property files. If the is set to ERROR, they will
+        show based on the settings in the property file.  If this is set to FATAL
+        or OFF, then nothing will be displayed, regardless of the settings in the
+        property file. -->
+   <logger name="com.dtcc.sharedservices.security" additivity="false">
+      <level value="ERROR"/>
+      <appender-ref ref="CSF-FileLog"/>      
+   </logger>
+   <logger name="com.dtcc.sharedservices.entitlementsAPI" additivity="false">
+      <level value="ERROR"/>
+      <appender-ref ref="CSF-FileLog"/>      
+   </logger>
+
+      <!-- This gets the rest of the messages -->
+   <root>
+      <level value="INFO"/>
+      <appender-ref ref="ITOLog" />
+      <appender-ref ref="FileLog"/>      
+   </root>
+</log4j:configuration>

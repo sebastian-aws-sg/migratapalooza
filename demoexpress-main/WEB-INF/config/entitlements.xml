@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<entitlements>      
+    <privilege type="TransactionType">
+            <key>View</key>        
+            <acls>
+	            <acl>D</acl>
+	            <acl>I</acl>
+            </acls>	            
+            <description>View privilege</description>
+    </privilege>
+    <privilege type="TransactionType">
+            <key>Modify</key>        
+            <acls>
+	            <acl>D</acl>
+            </acls>	            
+            <description>Modify/Update privilege</description>
+    </privilege>
+</entitlements>

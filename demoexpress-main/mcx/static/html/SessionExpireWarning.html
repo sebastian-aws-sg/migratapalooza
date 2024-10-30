@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+  <HEAD>
+		<TITLE>MCA-Xpress</TITLE>
+		<LINK rel="stylesheet" href="/mcx/static/css/primary.css" type="text/css">
+		<SCRIPT language="JavaScript" src="/mcx/static/js/prototype.js"></SCRIPT>
+  </HEAD>
+  <BODY bgcolor="#ffffff">
+
+	<form name="form">
+
+		<table width="100%" border="0" cellpadding="3" cellspacing="2">
+			<tr>
+				<td colspan="2" align="left" valign="baseline">
+				  <h2>Timeout</h2>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					Your session will expire in 1 minute. Do you wish to continue?
+			    </td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td align="left">
+				  <input type="button" class="timeout" value="&nbsp;&nbsp;Yes&nbsp;" onclick="continueSession();self.close();">
+				  <input type="button" class="timeout" value="&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;" onclick="logOut();">
+				</td>
+			</tr>
+		</table>
+		<SCRIPT>
+
+		  window.setInterval(function () { logOut(); }, 50000);
+
+		  function continueSession()  {
+			  new Ajax.Request('/mcx/servlet/session?aid=ref',
+			  {
+				method:'get',
+				onSuccess: function(transport){}
+			  });
+		  }
+
+		  function logOut() {
+			window.opener.location.href="/mcx/action/logOut";
+			self.close();
+	  	  }
+
+		</SCRIPT>
+	</form>
+  </BODY>
+</HTML>

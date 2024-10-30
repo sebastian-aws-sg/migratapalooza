@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+    "struts-config_1_2.dtd">
+
+<struts-config>  
+        
+   <!-- ** Global Exceptions ** -->
+   <global-exceptions>
+    
+      <exception key="errors.cwf.general"
+                 handler="com.dtcc.sharedservices.cwf.web.struts.DefaultExceptionHandler"
+    	         path="mcx.error.page"
+      	         scope="request"
+    	         type="com.dtcc.sharedservices.cwf.exceptions.CwfException"/>
+    	         
+      <exception key="errors.cwf.nouser"
+                 handler="com.dtcc.sharedservices.cwf.web.struts.DefaultExceptionHandler"
+    	         path="mcx.error.page"
+    	         scope="request"
+    	         type="com.dtcc.sharedservices.cwf.exceptions.CwfNoUserException"/>
+    	          
+   </global-exceptions>
+
+    <!-- ** Global Forward Definitions ** -->
+    <global-forwards>
+		<forward name="errorPage" path="mcx.error.page"/>
+	</global-forwards> 
+
+</struts-config>

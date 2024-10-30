@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!-- DOCTYPE digester-rules SYSTEM "digester-rules.dtd" -->
+
+<!-- Digester file descriptor to parse entitlements file -->
+<digester-rules>
+
+<!-- iterate through upper-level node -->
+<pattern value="entitlements">
+
+    <!-- create top-level Java Object EntitlementDefinitions -->
+    <object-create-rule classname="com.dtcc.dnv.otc.common.security.xmldb.EntitlementDefinitions" />
+
+    <!-- iterate though mid-level privilege component -->
+    <pattern value="privilege">
+
+        <!-- create mid-level privilege node -->
+        <object-create-rule classname="com.dtcc.dnv.otc.common.security.xmldb.Privilege" />
+
+        <!-- populate type attribute,
+            as well as, values of the String key, String description -->        
+        <set-properties-rule>
+            <alias attr-name="type" prop-name="type" />
+        </set-properties-rule>        
+        <call-method-rule pattern="key"  methodname="setKey"  paramcount="0" /> 
+        <call-method-rule pattern="description"  methodname="setDescription"  paramcount="0" /> 	
+
+        <!-- iterate though acls/acl pattern -->        	        	
+	    <pattern value="acls/acl">
+
+                <!-- create Acl Java Object for lower-level leaf -->
+ 	            <object-create-rule classname="com.dtcc.dnv.otc.common.security.xmldb.Acl" />
+
+                <!-- set String acl -->
+	            <call-method-rule methodname="setAcl"   paramcount="0" /> 
+
+                <!-- add acl object to next object in a stack -->
+                <set-next-rule methodname="addAcl" />
+                
+	    </pattern>
+
+        <!-- add privilege object to next objec in a stack  -->
+        <set-next-rule methodname="addPrivilege" />
+                
+    </pattern>
+        
+</pattern>
+</digester-rules>

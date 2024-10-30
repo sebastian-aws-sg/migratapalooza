@@ -1,0 +1,64 @@
+/*CSS Document*/
+
+.comment_head_txt
+{
+color:#000000;
+font-size:12px;
+font-family:trebuchet MS, Tahoma, Verdana, Arial;
+font-weight:bold;
+text-decoration: none;
+padding: 0px 0px 0px 15px;
+} 
+
+.comment_top_txt
+{
+color:#5B5E63;
+font-size:12px;
+font-family:trebuchet MS, Tahoma, Verdana, Arial;
+text-decoration: none;
+padding: 0px 0px 0px 15px;
+}
+
+.enter_comm
+{
+color:#000000;
+font-size:12px;
+font-family:trebuchet MS, Tahoma, Verdana, Arial;
+font-weight:bold;
+background-color:#D5EBF9;
+text-decoration: none;
+padding: 0px 0px 0px 15px;
+} 
+
+.comment_spacer
+{
+background-color:#D5EBF9;
+}
+
+.enroll
+{
+    background:url(../images/enroll.gif) top right no-repeat;
+	height:20px;
+	border:0px solid #00629F;
+	padding-right:5px;
+	color:#FFFFFF;
+	font: bold 11px trebuchet MS, Tahoma, Verdana, Arial;
+	width:69px;
+	cursor:hand;
+}
+
+.border_comment
+{
+border: 1px solid #ABD7F4;
+}
+
+.blue_header
+{
+color:#000000;
+font-size:18px;
+font-family:trebuchet MS, Tahoma, Verdana, Arial;
+text-decoration: none;
+background: url(../images/comment_bg.gif) repeat-x left top;
+height:23px;
+padding: 10px 0px 10px 15px;
+} 

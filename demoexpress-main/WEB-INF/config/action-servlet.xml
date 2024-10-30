@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+    <!-- Add your Spring managed Struts actions here -->
+    <bean 	name="/DSSignon"
+    		class="com.dtcc.dnv.otc.common.action.DSSignonAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="defUserManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+    <bean 	name="/mainmenu"
+    		class="com.dtcc.dnv.mcx.action.router.MainPageRouterAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+    <bean 	name="/logOut"
+    		class="com.dtcc.dnv.mcx.action.logout.LogOutAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="defUserManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    
+     <!-- Admin -->
+    <bean 	name="/adminSetup" 
+    		class="com.dtcc.dnv.mcx.action.admin.MCATypeListAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+
+
+    <!--  Admin Alert -->
+    <bean 	name="/adminPostAlert"
+    		class="com.dtcc.dnv.mcx.action.alert.PostAlertAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+    <bean 	name="/adminViewAlert"
+    		class="com.dtcc.dnv.mcx.action.alert.ViewAlertAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+    <bean 	name="/adminViewAlertDetail"
+    		class="com.dtcc.dnv.mcx.action.alert.ViewAlertDetailAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+    <!--  User Alert -->
+    <bean 	name="/userViewAlert"
+    		class="com.dtcc.dnv.mcx.action.alert.ViewAlertAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+    <bean 	name="/userViewAlertDetail"
+    		class="com.dtcc.dnv.mcx.action.alert.ViewAlertDetailAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+
+    <!-- Home page -->
+    <bean 	name="/getDealerDetails"
+    		class="com.dtcc.dnv.mcx.action.homepage.DisplayMCAsAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/dealerPendingApproval"
+    		class="com.dtcc.dnv.mcx.action.homepage.PendingApprovalAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/dealerEnrollApproval"
+    		class="com.dtcc.dnv.mcx.action.homepage.EnrollementApprovalAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/dealerDenyEnrollments"
+    		class="com.dtcc.dnv.mcx.action.homepage.EnrollementApprovalAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/displayUser"
+    		class="com.dtcc.dnv.mcx.action.homepage.UserDetailsDisplayAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    
+
+
+	<!-- Enrollment Action -->
+    <bean 	name="/getDealerInfo"
+    		class="com.dtcc.dnv.mcx.action.enroll.DealerListAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/selectDealer"
+    		class="com.dtcc.dnv.mcx.action.enroll.SelectDealerAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/selectMCA"
+    		class="com.dtcc.dnv.mcx.action.enroll.SelectMCAAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/enrollDealer"
+    		class="com.dtcc.dnv.mcx.action.enroll.EnrollDealerAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/viewEnrollConfirm"
+    		class="com.dtcc.dnv.mcx.action.enroll.ViewEnrollConfirmAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>   
+    
+    <bean 	name="/displayDealer"
+    		class="com.dtcc.dnv.mcx.action.enroll.FirmDetailsDisplayAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+	<!-- Manage Document Action -->
+    <bean 	name="/searchDealerNames"
+    		class="com.dtcc.dnv.mcx.action.managedocs.DealerClientListAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/search"
+    		class="com.dtcc.dnv.mcx.action.managedocs.SearchAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/manageDoc"
+    		class="com.dtcc.dnv.mcx.action.managedocs.ManageDocsAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/mcaManageCP"
+    		class="com.dtcc.dnv.mcx.action.managedocs.ManageCounterPartyAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/deletecpWindow" 
+    		class="com.dtcc.dnv.mcx.action.managedocs.ReassignListAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+     <bean 	name="/deletecpWindow1" 
+    		class="com.dtcc.dnv.mcx.action.managedocs.ReassignListAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    <bean 	name="/deleteReassignCPWindow" 
+    		class="com.dtcc.dnv.mcx.action.managedocs.DeleteReassignCPAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    
+    <bean 	name="/deleteCPDoc" 
+    		class="com.dtcc.dnv.mcx.action.managedocs.DeleteCPDocAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+    
+    <bean 	name="/downloadMCADoc" 
+    		class="com.dtcc.dnv.mcx.action.managedocs.DownloadMCADocAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+    <bean 	name="/uploadManageDoc" 
+    		class="com.dtcc.dnv.mcx.action.managedocs.UploadManageDocAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+	<!-- MCA Start -->
+	<bean name="/ViewMCA" class="com.dtcc.dnv.mcx.action.mca.ViewMCAAction" singleton="false" >
+			<property name="userManager"><ref bean="userManager"/></property>
+			<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+	</bean>
+	<bean name="/save_amendment" class="com.dtcc.dnv.mcx.action.mca.SaveAmendmentAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>    
+
+	<bean name="/viewISDATerm" class="com.dtcc.dnv.mcx.action.mca.ViewISDATermAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>  
+
+	<bean name="/viewAmendment" class="com.dtcc.dnv.mcx.action.mca.ViewAmendmentAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>    
+	<bean name="/agreeAmendment" class="com.dtcc.dnv.mcx.action.mca.AgreeAmendmentAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>     
+	
+	<bean name="/getImageDoc" class="com.dtcc.dnv.mcx.action.mca.GetImageDocumentAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>    
+
+	<bean name="/post_comment" class="com.dtcc.dnv.mcx.action.mca.PostCommentAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>    
+
+	<bean name="/view_comment" class="com.dtcc.dnv.mcx.action.mca.ViewCommentAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>    
+
+	<bean name="/generateTemplateName" class="com.dtcc.dnv.mcx.action.mca.GenerateTemplateNameAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>   
+
+	<bean name="/saveTemplate" class="com.dtcc.dnv.mcx.action.mca.SaveTemplateAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>   
+
+	<bean name="/getApplyTemplateToCP" class="com.dtcc.dnv.mcx.action.mca.EnrolledCounterpartyListAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>   
+
+	<bean name="/applyTemplateToCP" class="com.dtcc.dnv.mcx.action.mca.ApplyTemplateToCounterpartyAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>   
+
+	<bean name="/sendTemplateToCP" class="com.dtcc.dnv.mcx.action.mca.SendTemplateToCounterpartyAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>   
+
+	<bean name="/executeMCA" class="com.dtcc.dnv.mcx.action.mca.ExecuteMCAAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>   
+
+	<bean name="/negotiateMCA" class="com.dtcc.dnv.mcx.action.mca.RenegotiateMCAAction" singleton="false" >
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>   
+
+	<!-- MCA End -->
+    <!-- Admin Starts -->
+	<!-- Admin - MCA Setup -->
+    <bean 	name="/ViewAdminISDATemplate" 
+    		class="com.dtcc.dnv.mcx.action.admin.ViewAdminMCASetupAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+	<!-- Admin - SAVE MCA Setup -->
+	<bean 	name="/SaveAdminTemplate" 
+    		class="com.dtcc.dnv.mcx.action.admin.SaveTemplateSetupAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+	<!-- Admin - Submit for approval MCA Setup -->
+	<!-- Admin - Unlock MCA Setup -->
+    <bean 	name="/UnlockAdminTemplate" 
+    		class="com.dtcc.dnv.mcx.action.admin.UnlockTemplateSetupAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+	<!-- Admin - Approve Reject MCA Setup -->
+    <bean 	name="/ApproveRejectAdminTemplate" 
+    		class="com.dtcc.dnv.mcx.action.admin.AppRejTemplateSetupAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+	<!-- Admin -  Modify Term - pop up screen -->
+    <bean 	name="/ViewAdminISDATermDetail" 
+    		class="com.dtcc.dnv.mcx.action.admin.ViewISDATermDetailAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+	<!-- Admin - Unlock MCA Setup -->
+    <bean 	name="/AdminISDAModify" 
+    		class="com.dtcc.dnv.mcx.action.admin.PostISDATermDetailAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+	<!-- Admin - Approval Date -->
+    <bean 	name="/ApprovalDate" 
+    		class="com.dtcc.dnv.mcx.action.admin.ApprovalDateAction"
+    		singleton="false">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    		<property name="entitlementsManager"><ref bean="entitlementsManager"/></property>
+    </bean>
+
+<!-- Admin Ends -->
+
+	<bean id="defUserManager" class="com.dtcc.dnv.otc.common.security.model.ExCUOUserManager">
+		<!-- This constructor arguement takes a list all the roles needed by this application. -->
+		<constructor-arg type="java.lang.String" value="MCX, MCX-SUPERUSERUPDATE, MCX-SUPERUSERVIEW, MCX-TMPLTADMIN, MCX-DEALERUPDATE, MCX-DEALERVIEW, MCX-CPUPDATE, MCX-CPVIEW"/>
+	</bean>
+	<!-- MCX Specific User Manager -->
+	<bean id="userManager" class="com.dtcc.dnv.mcx.user.MCXCUOUserManager"></bean>
+	<bean id="entitlementsManager" class="com.dtcc.sharedservices.cwf.security.NullEntitlementsManagerImpl"></bean>
+
+</beans>

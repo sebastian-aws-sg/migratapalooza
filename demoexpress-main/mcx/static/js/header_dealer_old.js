@@ -1,0 +1,2 @@
+// JavaScript Document
+document.getElementById("head").innerHTML="<table width='1100' cellpadding='0'  cellspacing=' 0' ><tr><td width='847'   class=' header'  id=' head' ><img src='../images/head2.gif'  alt=' Logo2'  /></td><td width='71'    class=' header sign'  id=' head' >Signed in as:</td><td width='99'    class=' header con8'  id=' head' >Dealer 1</td><td width='74'   class=' header signout'  id=' head' ><a href=' #' >Sign out</a></td></tr></table>"

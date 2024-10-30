@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+    "struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ** Form Bean Definitions ** -->
+	<form-beans>
+
+		<!-- Signon Form -->
+		<form-bean name="DSSignonForm" type="com.dtcc.dnv.otc.common.form.DSSignonForm" />
+
+		<!-- Home page -->
+		<form-bean name="DisplayMCAsForm" type="com.dtcc.dnv.mcx.form.DisplayMCAsForm" />
+		<form-bean name="UserDetailsForm" type="com.dtcc.dnv.mcx.form.UserDetailsForm" />
+
+		<!-- Enrollment Form -->
+		<form-bean name="EnrollmentForm" type="com.dtcc.dnv.mcx.form.EnrollmentForm" />
+		<form-bean name="SelectMCAForm" type="com.dtcc.dnv.mcx.form.SelectMCAForm" />
+		<form-bean name="FirmDetailsForm" type="com.dtcc.dnv.mcx.form.FirmDetailsForm" />
+		<form-bean name="PendingApprovalForm" type="com.dtcc.dnv.mcx.form.PendingApprovalForm" />
+		<!-- Alert -->
+		<form-bean name="AlertForm" type="com.dtcc.dnv.mcx.form.AlertForm" />
+
+		<!-- Manage Documents -->
+		<form-bean name="ManagedDocumentForm" type="com.dtcc.dnv.mcx.form.ManagedDocumentForm" />
+
+		<!--  MCA  -->
+		<form-bean name="TemplateForm" type="com.dtcc.dnv.mcx.form.TemplateForm">
+		</form-bean>
+	   	<form-bean name="TermForm" type="com.dtcc.dnv.mcx.form.TermForm">
+	   	</form-bean>
+
+	   		<!-- admin -->
+		<form-bean name="MCASetupForm" type="com.dtcc.dnv.mcx.form.MCASetupForm" />
+
+	</form-beans>
+
+	<!-- ** Global Exception Handler Definitions ** -->
+	<global-exceptions></global-exceptions>
+
+	<!-- ** Global Forward Definitions ** -->
+	<global-forwards>
+		<forward name="error" path="mcx.error.page" />
+		<forward name="errorPopup" path="mcx.popup.error" />
+		<forward name="authorizationError" path="mcx.error.page" />
+		<forward name="firstPage" path="/action/DSSignon" />
+		<forward name="noSession" path="mcx.logout.page" />
+	</global-forwards>
+
+	<action-mappings>
+
+        <action path="/DSSignon"
+                type="org.springframework.web.struts.DelegatingActionProxy"
+                name="DSSignonForm"
+                input="/WEB-INF/jsp/user/MCXSignon.jsp"
+                scope="request"
+                validate="false">
+		  <forward name="success" path="/action/mainmenu"/>
+		  <forward name="initial" path="/WEB-INF/jsp/user/MCXSignon.jsp"/>
+		  <forward name="usertypes" path="/WEB-INF/jsp/user/MCXSignon.jsp"/>
+		  <forward name="mcxsuperuser" path="/WEB-INF/jsp/user/MCXSignon.jsp"/>
+		  <forward name="signon.failure" path="/WEB-INF/jsp/user/MCXSignon.jsp"/>
+		  <forward name="signon.mcxsuperuser.MCXMDL001" path="mcx.signon.error.page"/>
+		  <forward name="signon.mcxsuperuser.MCXMDL002" path="mcx.signon.error.page"/>
+		  <forward name="signon.mcxuserguid.MCXMDL001" path="mcx.signon.error.page"/>
+  		  <forward name="signon.mcxuserguid.MCXMDL003" path="mcx.signon.error.page"/>
+   		  <forward name="signon.mcxuserguid.DSSMDLBUS" path="mcx.signon.error.page"/>
+		  <forward name="signon.usertypes.DSSMDL003" path="mcx.signon.error.page"/>
+		  <forward name="signon.system.DSSMSYS001" path="mcx.signon.error.page"/>
+		  <forward name="signon.system.DSSMSYS002" path="mcx.signon.error.page"/>
+		  <forward name="failure" path="mcx.signon.error.page" />
+        </action>
+
+		<action path="/mainmenu"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        validate="false">
+			<forward name="failure" path="mcx.signon.error.page" />
+			<forward name="dealer" path="/action/dealerPendingApproval?selectedTab=P&amp;printParam=N" redirect="true" />
+			<forward name="client" path="/action/getDealerDetails?mcaStatus=P&amp;printParam=N" redirect="true" />
+			<forward name="tmpltAdmin" path="/action/adminSetup" redirect="true" />
+
+		</action>
+
+		<!-- Logout - Note - Should not use CWF request processor -->
+		<action path="/logOut"
+		        type="com.dtcc.dnv.mcx.action.logout.LogOutAction">
+           <forward name="success" path="mcx.logout.page"/>
+		</action>
+
+		<action path="/adminMcaSetUp"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        roles="MCX-TMPLTADMIN">
+         	<forward name="passby" path="adminmcasetup.page" redirect="true"/>
+		</action>
+
+		<!-- admin -->
+		<action path="/adminSetup"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="MCASetupForm"
+		        scope="session"
+		        roles="MCX-TMPLTADMIN">
+   			<forward name="success" path="adminSetup.page" redirect="true"/>
+			<forward name="failure" path="mcx.error.page" redirect="true"/>
+	   	</action>
+
+		<!-- Admin Alert -->
+		<action path="/adminPostAlert"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="AlertForm"
+		        scope="request"
+		        roles="MCX-TMPLTADMIN">
+			<forward name="topostalert" path="postalert.page" />
+			<forward name="postalertsuccess" path="/action/adminViewAlert" redirect="true"/>
+		</action>
+		
+		<action path="/adminViewAlert"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="AlertForm"
+		        scope="request"
+		        roles="MCX-TMPLTADMIN">
+			<forward name="showalerts" path="adminviewalert.page" />
+		</action>
+		
+		<action path="/adminViewAlertDetail"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="AlertForm"
+		        scope="request"
+		        roles="MCX-TMPLTADMIN">
+			<forward name="showalertdetail" path="adminviewalertdetail.page" />
+		</action>
+
+		<!-- Dealer/User Alert -->
+		<action path="/userViewAlert"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="AlertForm"
+		        scope="request"
+		        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE,MCX-TMPLTADMIN"
+				>
+			<forward name="showalerts" path="userviewalert.page" />
+		</action>
+		
+		<action path="/userViewAlertDetail"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="AlertForm"
+		        scope="request"
+		        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE,MCX-TMPLTADMIN"
+				>
+			<forward name="showalertdetail" path="userviewalertdetail.page" />
+		</action>
+
+		<!-- Home page -->
+		<action path="/getDealerDetails"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="DisplayMCAsForm"
+		        scope="session"
+		        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+			<forward name="pending_success" path="pendingmca.page" />
+			<forward name="executed_success" path="executedmca.page" />
+			<forward name="pending_printsuccess" path="printpendingmca.page" />
+			<forward name="executed_printsuccess" path="printexecutedmca.page" />			
+		</action>
+		
+		
+		
+		<action path="/getDealerDetailsMain"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="home.pendingExecutedMain"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+
+		<action path="/dealerPendingApproval"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="PendingApprovalForm"
+		        scope="session"
+		        roles="MCX-SUPERUSERVIEW,MCX-DEALERUPDATE,
+		               MCX-DEALERVIEW,MCX-SUPERUSERUPDATE">
+	   		<forward name="success" path="home.pendingApproval" />
+	   		<forward name="printsuccess" path="home.printpendingApproval" />	   		
+	   		<forward name="appsuccess" path="home.pendingApproval.approve" />
+	   		<forward name="PrintApproveFirmSuccess" path="home.printapprovedFirms" />
+	   		<forward name="denysuccess" path="home.pendingDeny.deny" />
+			<forward name="ApproveFirmSuccess" path="home.approvedFirms"/>
+			<forward name="failure" path="mcx.error.page" />
+		</action>
+
+		<action path="/dealerEnrollApproval"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="PendingApprovalForm"
+		        scope="session"
+		        roles="MCX-DEALERUPDATE,MCX-SUPERUSERUPDATE">
+   			<forward name="success" path="home.pendingApproval.approve"/>
+			<forward name="failure" path="mcx.enrollApprovalError.page" />
+   		</action>
+
+   		<action path="/dealerDenyEnrollments"
+   		        type="org.springframework.web.struts.DelegatingActionProxy"
+   		        name="PendingApprovalForm"
+   		        scope="session"
+   		        roles="MCX-DEALERUPDATE,MCX-SUPERUSERUPDATE">
+			<forward name="success" path="home.pendingDeny.deny"/>
+			<forward name="failure" path="mcx.enrollDenyError.page" />
+		</action>
+		
+		<action path="/displayUser"
+			    type="org.springframework.web.struts.DelegatingActionProxy"
+			    name="UserDetailsForm"
+			    scope="request"
+			    validate="false"
+			    roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+			           MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE,
+			           MCX-TMPLTADMIN">
+			<forward name="success" path="userdetails.page" />
+		</action>
+
+		<action path="/denyMain"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="home.denyMain"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERUPDATE,
+		               MCX-DEALERVIEW,MCX-SUPERUSERUPDATE">
+   		</action>
+   		
+   		<action path="/enrollmentApprovalPopup"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="home.enrollmentApprovalPopup"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERUPDATE,
+		               MCX-DEALERVIEW,MCX-SUPERUSERUPDATE">
+   		</action>
+
+		<!-- Enrollment Action -->
+		<action path="/getDealerInfo"
+			    type="org.springframework.web.struts.DelegatingActionProxy"
+			    scope="request"
+			    name="EnrollmentForm"
+			    roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+			           MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+			<forward name="success" path="enroll.stepone" />
+			<forward name="failure" path="mcx.error.page" />
+		</action>
+		
+		<action path="/selectDealer"
+			    type="org.springframework.web.struts.DelegatingActionProxy"
+			    scope="request"
+			    name="EnrollmentForm"
+			    roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+			<forward name="success" path="enroll.steptwo" />
+			<forward name="failure" path="mcx.error.page" />
+		</action>
+		
+		<action path="/selectMCA"
+			    type="org.springframework.web.struts.DelegatingActionProxy"
+			    scope="request"
+			    name="SelectMCAForm"
+			    roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+			<forward name="success" path="enroll.selectmca" />
+			<forward name="failure" path="mcx.error.page" />
+		</action>
+		
+		<action path="/enrollDealer"
+			    type="org.springframework.web.struts.DelegatingActionProxy"
+			    name="EnrollmentForm"
+			    roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+			<forward name="success" path="/action/viewEnrollConfirm" redirect="true"/>
+			<forward name="failure" path="mcx.error.page" />
+			<forward name="enrollFailure" path="/action/getDealerInfo" />
+		</action>
+		
+		<action path="/viewEnrollConfirm"
+			    type="org.springframework.web.struts.DelegatingActionProxy"
+			    name="EnrollmentForm"
+			    roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+			<forward name="success" path="enroll.confirm" redirect="true"/>
+			<forward name="failure" path="mcx.error.page" />
+		</action>
+		
+		<action path="/displayDealer"
+			    type="org.springframework.web.struts.DelegatingActionProxy"
+			    name="FirmDetailsForm"
+			    scope="request"
+			    validate="false"
+			    roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+			           MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+			<forward name="success" path="firmdetails.page" />
+		</action>
+
+
+		<!-- Manage Documents -->
+		<action path="/searchDealerNames"
+		        type="org.springframework.web.struts.DelegatingActionProxy" 
+		        name="ManagedDocumentForm"
+		        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,
+		               MCX-SUPERUSERVIEW,MCX-DEALERVIEW,
+		               MCX-CPUPDATE,MCX-CPVIEW">
+   			<forward name="success" path="ManagedDocument.search" />
+   			<forward name="failure" path="mcx.error.page" />
+   		</action>
+   		
+	   	<action path="/search"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="ManagedDocumentForm"
+	   	        scope="session"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-SUPERUSERVIEW,
+	   	               MCX-DEALERVIEW,MCX-CPUPDATE,MCX-CPVIEW">
+	   		<forward name="success" path="ManagedDocument.search" />
+	   		<forward name="failure" path="mcx.error.page" />
+	   	</action>
+
+   		<action path="/manageDoc"
+   		        type="org.springframework.web.struts.DelegatingActionProxy"
+   		        name="ManagedDocumentForm"
+   		        scope="session"
+   		        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-SUPERUSERVIEW,
+   		               MCX-DEALERVIEW,MCX-CPUPDATE,MCX-CPVIEW">
+   			<forward name="PreExisting" path="ManagedDocument.preexisting" />
+   			<forward name="Others" path="ManagedDocument.others" />
+   			<forward name="failure" path="mcx.error.page" />
+	   	</action>
+
+	   	<action path="/mcaManageCP"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="ManagedDocumentForm"
+	   	        scope="request"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+	   		<forward name="successEDITCP" path="ManagedDocument.editCP" redirect="true"/>
+	   		<forward name="failureEDITCP" path="ManagedDocument.editCP" redirect="true"/>
+	   		<forward name="successADDCP" path="ManagedDocument.addCP" redirect="true"/>
+	   		<forward name="failureADDCP" path="ManagedDocument.addCP" redirect="true"/>
+	   	</action>
+
+	   	<action path="/addcpWindow"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="ManagedDocument.addCPMain"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+
+   		<action path="/addcpWindow1"
+   		        type="org.apache.struts.actions.ForwardAction"
+   		        parameter ="ManagedDocument.addCP"
+   		        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+	   	</action>
+
+   		<action path="/editcpWindow"
+   		        type="org.apache.struts.actions.ForwardAction"
+   		        parameter ="ManagedDocument.editCPMain"
+   		        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+
+   		<action path="/editcpWindow1"
+   		        type="org.apache.struts.actions.ForwardAction"
+   		        parameter ="ManagedDocument.editCP"
+   		        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+	   	</action>
+	   	
+	   		<action path="/deletecpWindow1" 
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="ManagedDocumentForm"  
+	   	        scope="request"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+	   	   	<forward name="success" path="ManagedDocument.deleteCPRouter" redirect="true"/>
+	   		<forward name="failure" path="ManagedDocument.deleteCPRouter" redirect="true"/>
+	   	</action>
+
+	   	<action path="/deletecpWindow"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="ManagedDocumentForm"
+	   	        scope="request"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+	   		<forward name="success" path="ManagedDocument.deleteCP" redirect="true"/>
+	   		<forward name="failure" path="ManagedDocument.deleteCP" redirect="true"/>
+	   	</action>
+
+	   	<action path="/deleteReassignCPWindow"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="ManagedDocumentForm"
+	   	        scope="request"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+	   		<forward name="success" path="ManagedDocument.deleteCP" redirect="true"/>
+	   		<forward name="deleteCPsuccess" path="ManagedDocument.deleteCP" redirect="true"/>
+	   		<forward name="failure" path="ManagedDocument.deleteCP" redirect="true"/>
+	   	</action>
+
+	   	<action path="/deleteCPDoc"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="ManagedDocumentForm"
+	   	        scope="request"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   			<forward name="PreExisting" path="/action/manageDoc?manageDocTab=P&amp;documentsDeleted=true" />
+   			<forward name="Others" path="/action/manageDoc?manageDocTab=O&amp;documentsDeleted=true" />
+   			<forward name="Search" path="/action/search?manageDocs=SEARCH&amp;documentsDeleted=true"  />
+   			<forward name="PreExistingfailure" path="/action/manageDoc?manageDocTab=P&amp;documentsDeleted=false" />
+   			<forward name="Othersfailure" path="/action/manageDoc?manageDocTab=O&amp;documentsDeleted=false" />
+   			<forward name="Searchfailure" path="/action/search?manageDocs=SEARCH&amp;documentsDeleted=false"  />
+   			<forward name="failure" path="mcx.error.page" redirect="true"/>
+	   	</action>
+
+	   	<action path="/downloadMCADoc"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="ManagedDocumentForm"
+	   	        scope="request"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,
+	   	               MCX-SUPERUSERVIEW,MCX-DEALERVIEW,
+	   	               MCX-CPUPDATE,MCX-CPVIEW">
+   			<forward name="PreExisting" path="/action/manageDoc?manageDocTab=P&amp;manageDocs=DOWNLOAD" />
+   			<forward name="Others" path="/action/manageDoc?manageDocTab=O&amp;manageDocs=DOWNLOAD" />
+   			<forward name="Search" path="/action/search?manageDocs=SEARCH"  />
+   			<forward name="ExecutedMCAs" path="/action/getDealerDetails?mcaStatus=E" />
+   			<forward name="failure" path="mcx.error.page" redirect="true"/>
+	   	</action>
+
+	   	<action path="/uploadManageDoc"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="ManagedDocumentForm"
+	   	        scope="request"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   			<forward name="PreExisting" path="/action/manageDoc?manageDocTab=P&amp;documentsUploaded=true" />
+   			<forward name="Others" path="/action/manageDoc?manageDocTab=O&amp;documentsUploaded=true" />
+   			<forward name="PreExistingfailure" path="/action/manageDoc?manageDocTab=P&amp;documentsUploaded=false" />
+   			<forward name="Othersfailure" path="/action/manageDoc?manageDocTab=O&amp;documentsUploaded=false" />
+   			<forward name="failure" path="mcx.error.page" />
+	   	</action>
+
+
+
+
+		<!--  MCA Start -->
+	   	<action path="/ViewMCA"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TemplateForm"
+	   	        scope="request" 
+	   	        validate="false" 
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+	   	               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE,MCX-TMPLTADMIN">
+	   		<forward name="success" path="mcx.mca.view"> </forward>
+   			<forward name="printview" path="mcx.mca.printview"/>
+	   	</action>
+
+		<action path="/save_amendment"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="TermForm"
+	   	        scope="request" 
+		        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE" >
+	   		<forward name="success" path="mcx.mca.router" />
+	   		<forward name="failure" path="mcx.mca.postamendment" />
+	   	</action>
+
+	   	<action path="/viewISDATerm"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TermForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+	   	               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   			<forward name="success" path="mcx.mca.viewISDATerm" redirect="true"/>
+	   	</action>
+
+	   	<action path="/viewAmendment"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TermForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+	   		<forward name="success" path="mcx.mca.postamendment"/>
+	   		<forward name="failure" path="mcx.mca.router"/>
+	   	</action>
+
+	   	<action path="/agreeAmendment"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TermForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+	   	   	<forward name="success" path="mcx.mca.router"/>
+	   	</action>
+
+	   	<action path="/getImageDoc"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TermForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+	   	               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,
+	   	               MCX-CPUPDATE,MCX-TMPLTADMIN">
+	   	</action>
+
+	   	<action path="/post_comment"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TermForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   			<forward name="success" path="mcx.mca.router" redirect="true"/>
+   			<forward name="failure" path="mcx.mca.postcomment" redirect="true"/>   			
+	   	</action>
+
+   		<action path="/view_comment"
+   		        type="org.springframework.web.struts.DelegatingActionProxy"
+   		        name="TermForm"
+	   	        scope="request" 
+   		        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+   		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE" >
+   			<forward name="success" path="mcx.mca.postcomment" redirect="true"/>
+	   	</action>
+
+	   	<action path="/generateTemplateName"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TemplateForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE" >
+	   		<forward name="success" path="mcx.template.name"> </forward>
+	   	</action>
+
+	   	<action path="/saveTemplate"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TemplateForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE" >
+	   		<forward name="success" path="mcx.mca.router"> </forward>
+	   		<forward name="default" path="/action/ViewMCA?sltInd=RG"> </forward>
+	   		<forward name="delete" path="/action/ViewMCA" > </forward>
+	   		<forward name="negotiation" path="/action/ViewMCA" > </forward>
+	   		<forward name="failure" path="mcx.template.name" > </forward>
+	   	</action>
+
+	   	<action path="/getApplyTemplateToCP"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TemplateForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE">
+	   		<forward name="success" path="mcx.apply.cp"> </forward>
+	   	</action>
+
+	   	<action path="/applyTemplateToCP"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TemplateForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE">
+	   		<forward name="success" path="mcx.mca.router"> </forward>
+	   	</action>
+
+	   	<action path="/sendTemplateToCP"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TemplateForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE" >
+	   		<forward name="success" path="/action/getDealerDetails?mcaStatus=P" redirect="true"> </forward>
+	   		<forward name="businesserr" path="/action/ViewMCA" > </forward>
+	   		<forward name="popupbusinesserr" path="mcx.mca.router" > </forward>
+	   		<forward name="submit" path="mcx.mca.router"> </forward>
+	   		<forward name="confirm" path="mcx.confirm.mca" > </forward>
+	   	</action>
+
+	   	<action path="/executeMCA"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TemplateForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE" >
+	   		<forward name="success" path="mcx.mca.router"> </forward>
+	   		<forward name="execute" path="mcx.execute.mca"> </forward>
+	   	</action>
+
+	   	<action path="/negotiateMCA"
+	   	        type="org.springframework.web.struts.DelegatingActionProxy"
+	   	        name="TemplateForm"
+	   	        scope="request" 
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+	   		<forward name="success" path="/action/ViewMCA" > </forward>			
+	   	</action>
+
+		<action path="/viewCommentPopup"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mcx.mca.viewCommentPopup"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+				MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+   		
+   		<action path="/viewISDAPopup"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mcx.mca.viewISDAPopup"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+				MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+		<action path="/postAmendment"
+                    type="org.apache.struts.actions.ForwardAction"
+                    parameter ="mcx.mca.postamendment.popup"
+                    roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+            	</action>
+			<action path="/executeMCAMain"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mcx.mca.executeMain"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+		<action path="/sendTemplateToCPMain"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mcx.mca.confirmMain"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+   		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+			<action path="/generateTemplateNameMain"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mca.save_template_main"
+	   	        roles="MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE">
+   		</action>
+		<action path="/view_comment_main"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mca.view_comment_Main"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+   		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+   		<action path="/agreeAmendmentPopup"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mca.agreeAmendmentPopup"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+   		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+   		
+   		<action path="/viewTermPopup"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mca.viewTermPopup"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+   		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+   		
+   		<action path="/applyToCPPopup"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mca.applyToCPPopup"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+   		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+   		
+   		<action path="/printViewPopup"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mca.printViewPopup"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+   		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE">
+   		</action>
+   		
+   		<action path="/adminPrintViewPopup"
+	   	        type="org.apache.struts.actions.ForwardAction"
+	   	        parameter ="mca.adminPrintViewPopup"
+	   	        roles="MCX-SUPERUSERVIEW,MCX-DEALERVIEW,MCX-CPVIEW,
+   		               MCX-SUPERUSERUPDATE,MCX-DEALERUPDATE,MCX-CPUPDATE,MCX-TMPLTADMIN">
+   		</action>
+
+		<!-- MCA Ends -->
+
+		<!-- Admin Starts -->
+		<action path="/ViewAdminISDATemplate"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="TemplateForm"
+		        roles="MCX-TMPLTADMIN">
+	   		<forward name="success" path="isda.admin.mca.setup" redirect="true"/>
+	   		<forward name="printview" path="mcx.mca.printview" redirect="true"/>
+	   	</action>
+
+		<action path="/SaveAdminTemplate"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="TemplateForm"
+		        roles="MCX-SUPERUSERUPDATE,MCX-TMPLTADMIN">
+	   		<forward name="success" path="/action/ViewAdminISDATemplate" />
+	   	</action>
+
+		<action path="/UnlockAdminTemplate"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="TemplateForm"
+		        roles="MCX-SUPERUSERUPDATE,MCX-TMPLTADMIN,MCX-DEALERUPDATE,MCX-CPUPDATE" >
+	   		<forward name="success" path="/action/ViewAdminISDATemplate" />
+	   		<forward name="MCA" path="/action/ViewMCA" />
+	   	</action>
+
+		<action path="/ApproveRejectAdminTemplate"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="TemplateForm"
+		        roles="MCX-TMPLTADMIN">
+	   		<forward name="success" path="/action/adminSetup" redirect="true"/>
+	   		<forward name="error" path="/action/ViewAdminISDATemplate" redirect="true"/>
+	   	</action>
+
+		<action path="/ViewAdminISDATermDetail"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="TermForm"
+		        roles="MCX-TMPLTADMIN">
+	   		<forward name="unlocked" path="unlock.isda.admin.mca.term" redirect="true"/>
+	   		<forward name="locked" path="lock.isda.admin.mca.term" redirect="true"/>
+	   	</action>
+
+		<action path="/AdminISDAModify"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="TermForm"
+		        roles="MCX-TMPLTADMIN">
+	   		<forward name="success" path="isda.admin.mca.router" redirect="true"/>
+			<forward name="failure" path="unlock.isda.admin.mca.term" redirect="true"/>
+	   	</action>
+
+		<action path="/ApprovalDate"
+		        type="org.springframework.web.struts.DelegatingActionProxy"
+		        name="TemplateForm"
+		        roles="MCX-TMPLTADMIN">
+	   		<forward name="success" path="isda.admin.mca.publish" redirect="true" />
+	   	</action>
+		
+		<action path="/adminModifyPopup"
+                    type="org.apache.struts.actions.ForwardAction"
+                    parameter ="admin.adminModifyPopup"
+                    roles="MCX-TMPLTADMIN">
+            </action>
+            
+
+            <action path="/adminEditTerm"
+                    type="org.apache.struts.actions.ForwardAction"
+                    parameter ="admin.adminEditTerm"
+                    roles="MCX-TMPLTADMIN">
+            </action>
+            
+
+            <action path="/post"
+                    type="org.apache.struts.actions.ForwardAction"
+                    parameter ="admin.post"
+                    roles="MCX-TMPLTADMIN">
+            </action>
+		<!-- Admin Ends -->
+	</action-mappings>
+
+
+	<!-- DS Request Processor -->
+	<controller
+		contentType="text/html;charset=UTF-8"
+		locale="true"
+		nocache="false"
+		maxFileSize="80M"
+		processorClass="com.dtcc.dnv.otc.common.action.DSRequestProcessor">
+	</controller>
+
+	<message-resources parameter="com.dtcc.dnv.mcx.resources.ApplicationResources" null="false" />
+
+	<!-- Spring Plugin -->
+	<plug-in
+		className="org.springframework.web.struts.ContextLoaderPlugIn">
+		<set-property property="contextConfigLocation"
+			value="/WEB-INF/config/action-servlet.xml" />
+	</plug-in>
+
+	<!-- Tiles Plugin -->
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-debug" value="3" />
+		<set-property property="definitions-parser-validate"
+			value="true" />
+		<set-property property="definitions-parser-details" value="0" />
+		<set-property property="definitions-config"
+			value="/WEB-INF/config/cwf/tiles-defs-cwf.xml,/WEB-INF/config/tiles-defs.xml" />
+	</plug-in>
+
+	<!-- user respository : DLV  -->
+	<plug-in
+		className="com.dtcc.dnv.otc.common.security.xmldb.XMLDatabasePlugIn">
+		<set-property property="pathname"
+			value="/WEB-INF/config/entitlements.xml" />
+		<set-property property="rules"
+			value="/WEB-INF/config/entitlements-rules.xml" />
+	</plug-in>
+
+</struts-config>
