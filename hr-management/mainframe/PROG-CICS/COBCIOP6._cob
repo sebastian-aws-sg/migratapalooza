@@ -1,0 +1,356 @@
+      *-----------------------------------------------------------------
+      *    COBCIOP6 - SAMPLE COBOL-CICS PROGRAM TO DEMONSTRATE CICS     
+      *               INTERACTING WITH COBOL AND CICS MAP               
+      *                                                                 
+      *               USER ENTERS DEPARTMENT NUMBER FROM THE SCREEN AND ..
+      *               COBOL-CICS PROGRAM CALLS COBOL PROGRAM TO GET/SET 
+      *               DEPARTMENT DETAILS IN THE DATABASE.                 
+      *-----------------------------------------------------------------
+      *                                                                 
+      *--------------------PART OF MYTELCO HR APPLICATION-----------
+      *                                                                 
+      *-----------------------------------------------------------------
+       IDENTIFICATION DIVISION.                                         
+       PROGRAM-ID.   COBCIOP6.                                          
+       AUTHOR.       CAST SOFTWARE                                      
+       DATE-WRITTEN. AUGUST 2005.                                       
+                                                                        
+       EJECT                                                            
+       ENVIRONMENT DIVISION.                                            
+       DATA DIVISION.                                                   
+                                                                        
+       WORKING-STORAGE SECTION.                                         
+                                                                        
+       01  DEPARTMENT-MASTER-RECORD.                                      
+      *        ** key field                                             
+
+           03 DEPTNO                       PIC X(3).
+           03 DEPTNAME                     PIC X(36).
+           03 MGRNO                        PIC X(6).
+           03 ADMRDEPT                     PIC X(3).
+           03 LOCATION                     PIC X(16).
+           03 FILLER                       PIC X(41).                   
+                                                                        
+                                                                        
+       01  SWITCHES.                                                    
+           03  ERROR-SWITCH                PIC X VALUE SPACE.           
+               88  ERRORS                        VALUE "Y".             
+                                                                        
+       01  SWITCH-OFF                      PIC X VALUE "N".             
+      *    ** report headings & detail line                             
+                                                                        
+                                                                        
+      *    ** message table                                             
+                                                                        
+       01  MESSAGE-TABLE.                                               
+           03  FILLER  PIC X(30) VALUE "I-RECORD ADDED              ".  
+           03  FILLER  PIC X(30) VALUE "I-RECORD CHANGED            ".  
+           03  FILLER  PIC X(30) VALUE "E-DEPARTMENT CODE INVALID   ".  
+           03  FILLER  PIC X(30) VALUE "E-ZIP CODE NOT NUMERIC      ".  
+           03  FILLER  PIC X(30) VALUE "E-INVALID DATE              ".  
+           03  FILLER  PIC X(30) VALUE "I-ENTER EMPLOYEE NUMBER     ".  
+           03  FILLER  PIC X(30) VALUE "I-ENTER EMPLOYEE DETAILS    ".  
+           03  FILLER  PIC X(30) VALUE "I-ENTER CHANGE DETAILS      ".  
+           03  FILLER  PIC X(30) VALUE "I-SCR VALID PF10 TO UPDATE  ".  
+           03  FILLER  PIC X(30) VALUE "E-NAME MISSING              ".  
+           03  FILLER  PIC X(30) VALUE "E-ADDRESS LINE 1 MISSING    ".  
+           03  FILLER  PIC X(30) VALUE "E-JOINED > TERMINATED DATE  ".  
+           03  FILLER  PIC X(30) VALUE "E-DATE MISSING              ".  
+           03  FILLER  PIC X(30) VALUE "E-EMPLOYEE NO NOT NUMERIC   ".  
+                                                                        
+       01  MSG-TABLE-RED REDEFINES MESSAGE-TABLE.                       
+           03  MSG OCCURS 14 TIMES.                                     
+               05  FILLER                  PIC X(30).                   
+
+       01  EIBDATE     PIC S9(07) COMP-3.
+                                                                        
+      *    ** work variables                                            
+                                                                        
+       01  WORK-VARS.                                                   
+           03  WORK-TODAYS-MMDDYY          PIC 9(8).                    
+           03  WORK-MSG-CODE               PIC 99.                      
+      *    TARGET OF EIBDATE ASSIGNMENT MUST BE PIC 9(7) COMP-3.        
+           03  WORK-EIB-DATE               PIC 9(7) COMP-3.             
+           03  WORK-EIB-DATE-CHAR.                                      
+               05  FILLER                  PIC X(1).                    
+               05  WORK-EIB-CENTURY        PIC X(1).                    
+               05  WORK-EIB-YYDDD          PIC X(5).                    
+           03  WORK-JOINED-YYDDD           PIC 9(5).                    
+           03  WORK-JOINED-MMDDYY.                                      
+               05  WORK-JOINED-MMDD        PIC X(6).                    
+               05  WORK-JOINED-YY          PIC 99.                      
+           03  WORK-SEC-EXP                PIC 9(5).                    
+           03  WORK-TERMINATED-YYDDD       PIC 9(5).                    
+                                                                        
+       01  COMMAREA                                                     
+           03 PDEPTNOI                     PIC X(6)                     
+           03 PDEPTNAMEO                   PIC X(4)                     
+           03 PMGRNOO                      PIC X(30)                    
+           03 PADMRDEPTO                   PIC X(8)                     
+           03 PLOCATIONO                   PIC X(8)                     
+           03 PADD-DEPT-FLAG               PIC X(1)                     
+                                                                        
+       01  EMP-LENGTH                      PIC S9(4) COMP VALUE +200.   
+       01  DEP-LENGTH                      PIC S9(4) COMP VALUE +80.    
+       01  RESPONSE                        PIC S9(8) COMP VALUE +0.     
+       01  LAST-DEPTNO                     PIC X(6)  VALUE SPACES.      
+       01  DFHRESP OCCURS 10               PIC S9(8) COMP VALUE +0.
+       01  NOTFND                          PIC 9 VALUE 1.
+                                                                        
+       01  COBDATE-PARAMETERS.                                          
+           03  COBDATE-DATE                PIC X(8).                    
+           03  COBDATE-DATE-RED1 REDEFINES COBDATE-DATE.                
+               05  COBDATE-DATE-YYDDD      PIC 9(5).                    
+               05  FILLER                  PIC X(3).                    
+           03  COBDATE-DATE-RED2 REDEFINES COBDATE-DATE.                
+               05  COBDATE-DATE-YYMMDD     PIC 9(6).                    
+               05  FILLER                  PIC X(2).                    
+           03  COBDATE-INPUT-FORMAT        PIC X(8).                    
+           03  COBDATE-OUTPUT-FORMAT       PIC X(8).                    
+           03  COBDATE-MESSAGE             PIC X(30).                   
+                                                                        
+           COPY DFHBMSCA.                                               
+                                                                        
+           COPY DFHAID.                                                 
+                                                                        
+           COPY DEPTM.                                                  
+                                                                        
+                                                                        
+                                                                        
+           EJECT                                                        
+      *-----------------------------------------------------------------                                                                  
+      * PROCEDURE DIVISION.
+      *-----------------------------------------------------------------                                                                  
+       PROCEDURE DIVISION.                                              
+                                                                        
+      *    handle conditions                                            
+                                                                        
+           EXEC CICS 
+               IGNORE CONDITION 
+               LENGERR 
+           END-EXEC.                 
+
+           EXEC CICS 
+               IGNORE CONDITION 
+               MAPFAIL 
+           END-EXEC.                 
+
+           EXEC CICS 
+               HANDLE AID 
+               PF3(910-EXIT) 
+           END-EXEC.                 
+           
+           EXEC CICS 
+               HANDLE CONDITION 
+               ERROR(900-ERRORS) 
+           END-EXEC.       
+                                                                        
+      *    **  retrieve todays date                                     
+                                                                        
+           MOVE EIBDATE        TO  WORK-EIB-DATE.                       
+           MOVE WORK-EIB-DATE  TO  WORK-EIB-DATE-CHAR.                  
+           MOVE WORK-EIB-YYDDD TO  COBDATE-DATE.                        
+           MOVE "YYDDD"        TO  COBDATE-INPUT-FORMAT.                
+           MOVE "MM/DD/YY"     TO  COBDATE-OUTPUT-FORMAT.               
+           CALL "COBDTE3" USING COBDATE-DATE                            
+                                COBDATE-INPUT-FORMAT                    
+                                COBDATE-OUTPUT-FORMAT                   
+                                COBDATE-MESSAGE.                        
+           MOVE COBDATE-DATE   TO  WORK-TODAYS-MMDDYY.                  
+                                                                        
+           MOVE SPACES         TO  DEPTMO.                              
+           MOVE 6              TO  WORK-MSG-CODE.                       
+           MOVE -1             TO  DEPTMNOL.                           
+           GO TO 300-SEND-MAP.                                          
+                                                                        
+      *-----------------------------------------------------------------                                                                  
+      * RECEIVE MAP RECEIVES THE CICS MAP.                                                                                                   
+      *-----------------------------------------------------------------                                                                  
+       200-RECEIVE-MAP.                                                 
+                                                                        
+           EXEC CICS RECEIVE MAPSET("DEPTMAP") MAP("MAP") INTO(DEPTMI) END-EXEC.        
+                                                                        
+      *    **  validate department number                                 
+                                                                        
+           IF  DEPTMNOL = ZERO THEN                                    
+               MOVE -1             TO  DEPTMNOL                        
+               MOVE 6              TO  WORK-MSG-CODE                    
+               GO TO 300-SEND-MAP                                       
+           ELSE                                                         
+               IF DEPTMNOI IS NOT NUMERIC THEN                         
+                  MOVE -1             TO  DEPTMNOL                     
+                  MOVE 14             TO  WORK-MSG-CODE                 
+                  GO TO 300-SEND-MAP                                    
+               END-IF                                                   
+           END-IF.                                                      
+                                                                        
+      *    **  employee number changed                                  
+                                                                        
+           IF  DEPTMNOI NOT = LAST-DEPTNO THEN                         
+               MOVE DEPTMNOI TO LAST-DEPTNO                            
+               PERFORM 400-READ-EMP-RECORD                              
+               MOVE -1        TO DEPTMNOL                              
+            ELSE                                                        
+               PERFORM 500-VALIDATE-SCREEN                              
+               IF  NOT ERRORS THEN                                      
+                   IF  EIBAID = DFHPF10 THEN                            
+                       PERFORM 600-UPDATE-EMP-RECORD                    
+                   ELSE                                                 
+                       MOVE 9  TO WORK-MSG-CODE                         
+                   END-IF                                               
+               END-IF                                                   
+           END-IF.                                                      
+                                                                        
+           MOVE DFHBMFSE    TO  PDEPTNOI                                    
+                                PDEPTNAMEO                                  
+                                PMGRNOO                                     
+                                PADMRDEPTO                                  
+                                PLOCATIONO                                  
+                                PADD-DEPT-FLAG.                              
+                                                             
+      *-----------------------------------------------------------------                                                                  
+      * THIS PARA SEND THE MAP TO CICS SCREEN USING THE OUTPUT COMM AREA                                                                 
+      *-----------------------------------------------------------------                                                                  
+       300-SEND-MAP.                                                   
+           MOVE MSG(WORK-MSG-CODE) TO DEPTMMSGO.                        
+           EXEC CICS SEND MAPSET("DEPTMAP") MAP("MAP") FROM(DEPTMO)                     
+                         CURSOR FREEKB END-EXEC.                        
+           GO TO 200-RECEIVE-MAP.                                       
+                                                                        
+                       
+      *-----------------------------------------------------------------                                                                  
+      * THIS PARA MAKES A CALL TO COBOL PROGRAM TO GET EMPLOYEE RECORDS.                                                                    
+      *-----------------------------------------------------------------                                                                  
+       400-READ-EMP-RECORD.           
+           MOVE "N"        TO  PADD-DEPT-FLAG                              
+           MOVE DEPTMNOI   TO  PDEPTNOI.                                   
+           CALL "COBDEPTP" USING COMMAREA.                              
+           MOVE SPACES     TO  PADD-DEPT-FLAG.                             
+                                                                        
+           MOVE SPACES         TO  DEPTNO.                              
+           MOVE DEPTNO         TO  DEPTMNOO.                           
+                                                                        
+           IF  RESPONSE = DFHRESP(NOTFND) THEN                          
+               MOVE "Y"                  TO PADD-DEPT-FLAG                
+               MOVE 7                    TO WORK-MSG-CODE               
+               MOVE SPACES               TO PDEPTNOI                   
+                                            PDEPTNAMEO                  
+                                            PMGRNOO        
+                                            PADMRDEPTO    
+                                            PLOCATIONO    
+
+           ELSE                                                         
+               MOVE DEPTNAME             TO PDEPTNAMEO                  
+               MOVE MGRNO                TO PMGRNOO                 
+               MOVE ADMRDEPT             TO PADMRDEPTO                 
+               MOVE LOCATION             TO PLOCATIONO                 
+      *                                                                 
+           END-IF.                                                      
+                                                                        
+      *-----------------------------------------------------------------                                                                  
+      * THIS PARA VALIDATES WHETHER THE USER HAS GIVEN PROPER INPUT.                                                                        
+      *-----------------------------------------------------------------                                                                  
+       500-VALIDATE-SCREEN.                                             
+                                                                        
+           MOVE SWITCH-OFF  TO  ERROR-SWITCH.                           
+                                                                        
+           IF  DEPTMNAMEI IS NOT > SPACES   THEN                        
+               MOVE DFHBMASB  TO  DEPTMNAMEA                            
+               IF  NOT ERRORS THEN                                      
+                   SET ERRORS TO TRUE                                   
+                   MOVE -1    TO DEPTMNAMEL                             
+                   MOVE 10    TO WORK-MSG-CODE                          
+               END-IF                                                   
+           END-IF                                                       
+                                                                        
+           IF  DEPTMMGRNOI IS NOT > SPACES   THEN                       
+               MOVE DFHBMASB  TO  DEPTMMGRNOA                           
+               IF  NOT ERRORS THEN                                      
+                   SET ERRORS TO TRUE                                   
+                   MOVE -1    TO DEPTMMGRNOL                            
+                   MOVE 11    TO WORK-MSG-CODE                          
+               END-IF                                                   
+           END-IF                                                       
+                                                                        
+           IF  DEPTMMGRNOI IS NOT NUMERIC THEN                            
+               MOVE DFHBMASB  TO  DEPTMMGRNOA                             
+               IF  NOT ERRORS THEN                                      
+                   SET ERRORS TO TRUE                                   
+                   MOVE -1    TO DEPTMMGRNOL                              
+                   MOVE 4     TO WORK-MSG-CODE                          
+               END-IF                                                   
+           END-IF                 
+           
+           IF  DEPTMADMRI IS NOT > SPACES   THEN                       
+               MOVE DFHBMASB  TO  DEPTMADMRA                           
+               IF  NOT ERRORS THEN                                      
+                   SET ERRORS TO TRUE                                   
+                   MOVE -1    TO DEPTMADMRL                            
+                   MOVE 11    TO WORK-MSG-CODE                          
+               END-IF                                                   
+           END-IF                                                       
+
+           IF  DEPTMADMRI IS NOT NUMERIC THEN                            
+               MOVE DFHBMASB  TO  DEPTMADMRA                             
+               IF  NOT ERRORS THEN                                      
+                   SET ERRORS TO TRUE                                   
+                   MOVE -1    TO DEPTMADMRL                              
+                   MOVE 4     TO WORK-MSG-CODE                          
+               END-IF                                                   
+           END-IF                                                       
+                                                                        
+           IF  DEPTMLOCATIONF IS NOT > SPACES THEN                            
+               MOVE DFHBMASB  TO  DEPTMLOCATIONA                             
+               IF  NOT ERRORS THEN                                      
+                   SET ERRORS TO TRUE                                   
+                   MOVE -1    TO DEPTMLOCATIONL                              
+                   MOVE 11    TO WORK-MSG-CODE                          
+               END-IF                                                   
+           END-IF                                                       
+
+                                                                        
+      *-----------------------------------------------------------------                                                                  
+      * THIS PARA MAKES A CALL TO COBOL PROGRAM TO UPDATE EMPLOYEE DATA.                                                                    
+      *-----------------------------------------------------------------                                                                  
+       600-UPDATE-EMP-RECORD.                                           
+                                                                        
+           MOVE "N"                TO  PADD-DEPT-FLAG                     
+           MOVE DEPTMNOI           TO  DEPTNO.                          
+           CALL "COBDEPTP"      USING  COMMAREA.                        
+           MOVE SPACES             TO  PADD-DEPT-FLAG.                    
+                                                                        
+           MOVE SPACES             TO  DEPARTMENT-MASTER-RECORD.          
+           MOVE PDEPTNOI           TO  DEPTNO.                            
+           MOVE PDEPTNAMEO         TO  DEPTNAME.                          
+           MOVE PMGRNOO            TO  MGRNO.                        
+           MOVE PADMRDEPTO         TO  ADMRDEPT.                        
+           MOVE PLOCATIONO         TO  LOCATION.                        
+
+                                                                        
+           IF  PADD-DEPT-FLAG = "Y"  THEN                                 
+               CALL "COBDEPTP"       USING COMMAREA                     
+               MOVE 1    TO  WORK-MSG-CODE                              
+               MOVE SPACES TO PADD-DEPT-FLAG                              
+           ELSE                                                         
+               CALL "COBDEPTP"       USING COMMAREA                     
+               MOVE 2    TO  WORK-MSG-CODE                              
+           END-IF.                                                      
+                                                                        
+       900-ERRORS.                                                      
+                                                                        
+           MOVE "TRANSACTION ABNORMALLY TERMINATED" TO DEPTMMSGO.       
+           GO TO 999-EXIT.                                              
+                                                                        
+       910-EXIT.                                                        
+                                                                        
+           MOVE "PROCESSING COMPLETED"              TO DEPTMMSGO.       
+           GO TO 999-EXIT.                                              
+                                                                        
+       999-EXIT.                                                        
+           MOVE DFHBMASB                 TO DEPTMMSGA.                  
+           EXEC CICS SEND TEXT FROM(DEPTMMSGO) LENGTH(57)               
+                               ERASE END-EXEC.                          
+           EXEC CICS RETURN END-EXEC.                                   
+                                                                        
+                                                                        
+      *END PROGRAM CAST.                                                

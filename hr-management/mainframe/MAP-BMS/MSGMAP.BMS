@@ -1,0 +1,49 @@
+*              ********************************************************
+*              Map for Application : PART OF MYTELCO HR APPLICATION     
+*              Programmer Name : CAST SOFTWARE                         
+*              THIS IS A DUMMY MAP.         
+*              ********************************************************
+MSGMAP  DFHMSD TYPE=&SYSPARM,                                          X
+               TIOAPFX=YES,                                            X
+               MODE=INOUT,                                             X
+               LANG=COBOL
+MAP     DFHMDI SIZE=(24,80),                                           X
+               LINE=01,                                                X
+               COLUMN=01,                                              X
+               DSATTS=(COLOR,HILIGHT),                                 X
+               MAPATTS=(COLOR,HILIGHT)
+TITLE   DFHMDF POS=(02,20),                                            X
+               INITIAL='MSG INFORMATION SYSTEM',                       X
+               LENGTH=32,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=YELLOW,                                           X
+               HILIGHT=UNDERLINE
+ETITLE  DFHMDF POS=(04,28),                                            X
+               INITIAL='MSG Details',                                  X
+               LENGTH=16,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=TURQUOISE,                                        X
+               HILIGHT=UNDERLINE
+F1KEY   DFHMDF POS=(21,12),                                            X
+               INITIAL='F1 - Fetch MSG details',                       X
+               LENGTH=27,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=PINK,                                             X
+               HILIGHT=UNDERLINE
+F2KEY   DFHMDF POS=(22,12),                                            X
+               INITIAL='F2 - Update MSG details',                      X
+               LENGTH=28,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=PINK,                                             X
+               HILIGHT=UNDERLINE
+F3KEY   DFHMDF POS=(23,12),                                            X
+               INITIAL='F3 - Exit from program.',                      X
+               LENGTH=23,                                              X
+               ATTRB=(ASKIP,NORM),                                     X
+               COLOR=PINK,                                             X
+               HILIGHT=UNDERLINE
+        DFHMDF POS=(24,79),                                            X
+               INITIAL=' ',                                            X
+               LENGTH=1
+        DFHMSD TYPE=FINAL                                               
+        END                                                             

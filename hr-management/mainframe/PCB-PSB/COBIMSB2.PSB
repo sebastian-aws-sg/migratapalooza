@@ -1,0 +1,12 @@
+*********************************************************************** 
+*                                                                     *
+*          NAME:  COBIMSB2                                            * 
+*          PSB FOR COBIMSB2 PROGRAM                                   * 
+*                                                                     * 
+*********************************************************************** 
+         
+         PCB TYPE=GSAM,NAME=GSASEQ,PROCOPT=A,PCBNAME=GSAPCB
+                                                                                 
+*-------------- PSBGEN ----------------------------------------------*  
+         PSBGEN LANG=COBOL,PSBNAME=COBIMSB2                              
+         PRINT NOGEN                                                    

@@ -1,0 +1,14 @@
+**********************************************************************
+*               DBD FOR JOB DETAILS DATABASE WHICH KEEPS             * 
+*            DETAILS OF JOBS SUBMITTED BY LOCAL SUBSIDIARIES         *
+*           TO TRANSFER EMPLOYEE DATA TO CENTRAL DB2 DATABASE        * 
+**********************************************************************
+       DBD      NAME=DBDJOBDT,ACCESS=(HSAM,OSAM)
+       DATASET  DD1=CASTJBDT,DEVICE=3380
+*-------------------ROOT JOB DETAILS SEGMENT --------------------------
+       SEGM     NAME=JOBDET,PARENT=0,BYTES=58
+       FIELD    NAME=(JOBID,SEQ,U),BYTES=20,START=1,TYPE=C
+       FIELD    NAME=SUBSIDIARY,BYTES=20,START=21,TYPE=C
+       FIELD    NAME=DEPTNO,BYTES=3,START=41,TYPE=C
+       FIELD    NAME=RUNDATE,BYTES=10,START=44,TYPE=C
+       FIELD    NAME=RUNTIME,BYTES=5,START=54,TYPE=C

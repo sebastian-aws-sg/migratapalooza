@@ -1,0 +1,55 @@
+*              ********************************************************
+*              Map for Application : PART OF MYTELCO HR APPLICATION     
+*              Programmer Name : CAST SOFTWARE                         
+*              This Map accepts SUBSIDIARY ID and displays USERNAME.         
+*              ********************************************************
+SUBMAP  DFHMSD TYPE=&SYSPARM,                                          X
+               TIOAPFX=YES,                                            X
+               MODE=INOUT,                                             X
+               LANG=COBOL
+MAP     DFHMDI SIZE=(24,80),                                           X
+               LINE=01,                                                X
+               COLUMN=01,                                              X
+               DSATTS=(COLOR,HILIGHT),                                 X
+               MAPATTS=(COLOR,HILIGHT)
+TITLE   DFHMDF POS=(02,20),                                            X
+               INITIAL='CAST SUBSIDIARY SYSTEM',                       X
+               LENGTH=32,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=YELLOW,                                           X
+               HILIGHT=UNDERLINE
+SUBID   DFHMDF POS=(06,06),                                            X
+               INITIAL='Subsidiary Id  :',                             X
+               LENGTH=14,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=DEFAULT
+SUBIDI  DFHMDF POS=(06,22),                                            X
+               LENGTH=4,                                               X
+               ATTRB=(UNPROT,NORM,IC),                                 X
+               PICIN='XXXXXX',                                         X
+               VALIDN=(MUSTENTER)
+USER    DFHMDF POS=(08,06),                                            X
+               INITIAL='YYMM         :',                               X
+               LENGTH=14,                                              X
+               ATTRB=(ASKIP,BRT)
+USERI   DFHMDF POS=(08,22),                                            X
+               LENGTH=4,                                               X
+               ATTRB=(UNPROT,NORM)
+PASS     DFHMDF POS=(10,06),                                           X
+               INITIAL='Salary          :',                            X
+               LENGTH=24,                                              X
+               ATTRB=(ASKIP,BRT)
+PASSI    DFHMDF POS=(10,22),                                           X
+               LENGTH=10,                                              X
+               ATTRB=(UNPROT,NORM)
+F1KEY   DFHMDF POS=(21,12),                                            X
+               INITIAL='F1 - Fetch subsidiary username details',       X
+               LENGTH=37,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=PINK,                                             X
+               HILIGHT=UNDERLINE
+        DFHMDF POS=(24,79),                                            X
+               INITIAL=' ',                                            X
+               LENGTH=1
+        DFHMSD TYPE=FINAL                                               
+        END                                                             

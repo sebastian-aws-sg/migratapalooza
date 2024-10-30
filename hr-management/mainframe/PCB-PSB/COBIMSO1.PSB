@@ -1,0 +1,13 @@
+*********************************************************************** 
+*                                                                     *
+*          NAME:  COBIMSO1                                            * 
+*          PSB FOR COBIMSO1 PROGRAM                                   * 
+*                                                                     * 
+*********************************************************************** 
+
+         PCB  TYPE=DB,NAME=DBDJOBDT,KEYLEN=20,PROCOPT=E,PCBNAME=JOBPCB
+         SENSEG  NAME=JOBDET,PARENT=0                      
+            
+*-------------- PSBGEN ----------------------------------------------*  
+         PSBGEN  LANG=COBOL,PSBNAME=COBIMSO1,CMPAT=YES                    
+         END                                                            

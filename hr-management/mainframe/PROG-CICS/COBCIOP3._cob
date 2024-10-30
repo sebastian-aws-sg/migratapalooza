@@ -1,0 +1,517 @@
+      *-----------------------------------------------------------------
+      *    COBCIOP3 - SAMPLE CICS PROGRAM PRINT PROJECT DETAILS ON
+      *               THE CICS SCREEN. PROJECT INFORMATION CAN BE 
+      *               REQUESTED BY THE ACCOUNT MANAGER OR PROJECT       
+      *               MANAGERS FOR REFERENCES CAN BE UPDATED IF REQUIRED.                  
+      *               THIS PROGRAM CALLS ANOTHER COBOL PROGRAM TO GET ..
+      *               PROJECT DETAILS. IT CALLS SAME PROGRAM FOR UPDATING 
+      *               THE RECORDS.
+      *-----------------------------------------------------------------
+      *                                                                 
+      *--------------------PART OF MYTELCO HR APPLICATION-----------
+      *                                                                 
+      *-----------------------------------------------------------------
+       IDENTIFICATION DIVISION.                                         
+       PROGRAM-ID.   COBCIOP3.                                          
+       AUTHOR.       CAST SOFTWARE                                      
+       DATE-WRITTEN. AUGUST 2005.                                       
+                                                                        
+       EJECT                                                            
+       ENVIRONMENT DIVISION.                                            
+       DATA DIVISION.                                                   
+                                                                        
+       WORKING-STORAGE SECTION.                                         
+                                                                        
+       01  PROJECT-MASTER-RECORD.                                      
+      *        ** key field                                             
+           03  PROJ-NO                     PIC X(6).                    
+           03  PROJ-DEPT-CODE              PIC X(4).                    
+           03  PROJ-NAME                   PIC X(30).                   
+           03  PROJ-EMP                    PIC X(30).                   
+      *        ** format (yymmdd)                                       
+           03  PROJ-DATE-STARTED           PIC 9(6).                    
+      *        ** format (yymmdd)                                       
+           03  PROJ-DATE-ENDED             PIC 9(6).                    
+                                                                        
+       01  DEPT-MASTER-RECORD.                                          
+      *        ** key field                                             
+           03  DEPT-CODE                   PIC X(4).                    
+           03  DEPT-DESCRIPTION            PIC X(30).                   
+      *        ** format (yyddd) packed                                 
+           03  DEPT-DATE-MAINTAINED        PIC 9(5) COMP-3.             
+           03  FILLER                      PIC X(43).                   
+                                                                        
+       01  SWITCHES.                                                    
+           03  ERROR-SWITCH                PIC X VALUE SPACE.           
+               88  ERRORS                        VALUE "Y".             
+                                                                        
+       01  SWITCH-OFF                      PIC X VALUE "N".             
+      *    ** report headings & detail line                             
+                                                                        
+                                                                        
+      *    ** message table                                             
+                                                                        
+       01  MESSAGE-TABLE.                                               
+           03  FILLER  PIC X(30) VALUE "I-RECORD ADDED              ".  
+           03  FILLER  PIC X(30) VALUE "I-RECORD CHANGED            ".  
+           03  FILLER  PIC X(30) VALUE "P-DEPARTMENT CODE INVALID   ".  
+           03  FILLER  PIC X(30) VALUE "PROJ-CODE NOT NUMERIC       ".  
+           03  FILLER  PIC X(30) VALUE "E-INVALID DATE              ".  
+           03  FILLER  PIC X(30) VALUE "I-ENTER EMPLOYEE NUMBER     ".  
+           03  FILLER  PIC X(30) VALUE "I-ENTER EMPLOYEE DETAILS    ".  
+           03  FILLER  PIC X(30) VALUE "I-ENTER CHANGE DETAILS      ".  
+           03  FILLER  PIC X(30) VALUE "I-SCR VALID PF10 TO UPDATE  ".  
+           03  FILLER  PIC X(30) VALUE "E-NAME MISSING              ".  
+           03  FILLER  PIC X(30) VALUE "E-ADDRESS LINE 1 MISSING    ".  
+           03  FILLER  PIC X(30) VALUE "E-JOINED > TERMINATED DATE  ".  
+           03  FILLER  PIC X(30) VALUE "E-DATE MISSING              ".  
+           03  FILLER  PIC X(30) VALUE "E-EMPLOYEE NO NOT NUMERIC   ".  
+                                                                        
+       01  MSG-TABLE-RED REDEFINES MESSAGE-TABLE.                       
+           03  MSG OCCURS 14 TIMES.                                     
+               05  FILLER                  PIC X(30).                   
+
+       01  EIBDATE     PIC S9(07) COMP-3.
+                                                                        
+      *    ** work variables                                            
+                                                                        
+       01  WORK-VARS.                                                   
+           03  WORK-TODAYS-MMDDYY          PIC 9(8).                    
+           03  WORK-MSG-CODE               PIC 99.                      
+      *    TARGET OF EIBDATE ASSIGNMENT MUST BE PIC 9(7) COMP-3.        
+           03  WORK-EIB-DATE               PIC 9(7) COMP-3.             
+           03  WORK-EIB-DATE-CHAR.                                      
+               05  FILLER                  PIC X(1).                    
+               05  WORK-EIB-CENTURY        PIC X(1).                    
+               05  WORK-EIB-YYDDD          PIC X(5).                    
+           03  WORK-JOINED-YYDDD           PIC 9(5).                    
+           03  WORK-JOINED-MMDDYY.                                      
+               05  WORK-JOINED-MMDD        PIC X(6).                    
+               05  WORK-JOINED-YY          PIC 99.                      
+           03  WORK-SEC-EXP                PIC 9(5).                    
+           03  WORK-TERMINATED-YYDDD       PIC 9(5).                    
+                                                                        
+       01  COMMAREA                                                     
+           03  PROJPRJI                    PIC X(6)                                   
+           03  PROJDEPO                    PIC X(4)                                   
+           03  PROJNAMEO                   PIC X(30)                                  
+           03  PROJEMPO                    PIC X(8)                                   
+           03  PROJSDATEO                  PIC X(8)                                   
+           03  PROJEDATEO                  PIC X(8)                                   
+           03  ADD-PRJ-FLAG                PIC X(1)                                   
+                                                                        
+       01  PROJ-LENGTH                     PIC S9(4) COMP VALUE +200.   
+       01  DEP-LENGTH                      PIC S9(4) COMP VALUE +80.    
+       01  RESPONSE                        PIC S9(8) COMP VALUE +0.     
+       01  LAST-PROJ-NO                    PIC X(6)  VALUE SPACES.      
+       01  DFHRESP OCCURS 10               PIC S9(8) COMP VALUE +0.
+       01  NOTFND                          PIC 9 VALUE 1.
+                                                                        
+       01  COBDATE-PARAMETERS.                                          
+           03  COBDATE-DATE                PIC X(8).                    
+           03  COBDATE-DATE-RED1 REDEFINES COBDATE-DATE.                
+               05  COBDATE-DATE-YYDDD      PIC 9(5).                    
+               05  FILLER                  PIC X(3).                    
+           03  COBDATE-DATE-RED2 REDEFINES COBDATE-DATE.                
+               05  COBDATE-DATE-YYMMDD     PIC 9(6).                    
+               05  FILLER                  PIC X(2).                    
+           03  COBDATE-INPUT-FORMAT        PIC X(8).                    
+           03  COBDATE-OUTPUT-FORMAT       PIC X(8).                    
+           03  COBDATE-MESSAGE             PIC X(30).                   
+                                                                        
+           COPY DFHBMSCA.                                               
+                                                                        
+           COPY DFHAID.                                                 
+                                                                        
+           COPY PROJM.                                                  
+                                                                        
+                                                                        
+                                                                        
+           EJECT                                                        
+      *-----------------------------------------------------------------                                                                  
+      * PROCEDURE DIVISION.
+      *-----------------------------------------------------------------                                                                  
+       PROCEDURE DIVISION.                                              
+                                                                        
+      *    handle conditions                                            
+                                                                        
+           EXEC CICS 
+               IGNORE CONDITION 
+               LENGERR 
+           END-EXEC.                 
+
+           EXEC CICS 
+               IGNORE CONDITION 
+               MAPFAIL 
+           END-EXEC.                 
+
+           EXEC CICS 
+               HANDLE AID 
+               PF3(910-EXIT) 
+           END-EXEC.                 
+           
+           EXEC CICS 
+               HANDLE CONDITION 
+               ERROR(900-ERRORS) 
+           END-EXEC.       
+                                                                        
+      *    **  retrieve todays date                                     
+           MOVE EIBDATE        TO  WORK-EIB-DATE.                       
+           MOVE WORK-EIB-DATE  TO  WORK-EIB-DATE-CHAR.                  
+           MOVE WORK-EIB-YYDDD TO  COBDATE-DATE.                        
+           MOVE "YYDDD"        TO  COBDATE-INPUT-FORMAT.                
+           MOVE "MM/DD/YY"     TO  COBDATE-OUTPUT-FORMAT.               
+           CALL "COBDTE3" USING COBDATE-DATE                            
+                                COBDATE-INPUT-FORMAT                    
+                                COBDATE-OUTPUT-FORMAT                   
+                                COBDATE-MESSAGE.                        
+           MOVE COBDATE-DATE   TO  WORK-TODAYS-MMDDYY.                  
+           MOVE SPACES         TO  PROJMO                              
+           MOVE 6              TO  WORK-MSG-CODE.                       
+           MOVE -1             TO  PROJMEMPL.                           
+           GO TO 300-SEND-MAP.                                          
+                                                                        
+      *-----------------------------------------------------------------                                                                  
+      * RECEIVE MAP RECEIVES THE CICS MAP.                                                                                                   
+      *-----------------------------------------------------------------                                                                  
+       200-RECEIVE-MAP.                                                 
+                                                                        
+           EXEC CICS RECEIVE MAPSET("PROJMAP") MAP("MAP") INTO(PROJMI) END-EXEC.        
+                                                                        
+      *    **  validate employee number                                 
+                                                                        
+           IF  PROJMEMPL = ZERO THEN                                    
+               MOVE -1             TO  PROJMEMPL                        
+               MOVE 6              TO  WORK-MSG-CODE                    
+               GO TO 300-SEND-MAP                                       
+           ELSE                                                         
+               IF PROJMEMPI IS NOT NUMERIC THEN                         
+                  MOVE -1             TO  PROJMEMPL                     
+                  MOVE 14             TO  WORK-MSG-CODE                 
+                  GO TO 300-SEND-MAP                                    
+               END-IF                                                   
+           END-IF.                                                      
+                                                                        
+      *    **  employee number changed                                  
+                                                                        
+           IF  PROJMEMPI NOT = LAST-PROJ-NO THEN                         
+               MOVE PROJMEMPI TO LAST-PROJ-NO                            
+               PERFORM 400-READ-PROJ-RECORD                              
+               MOVE -1        TO PROJMDEPL                              
+            ELSE                                                        
+               PERFORM 500-VALIDATE-SCREEN                              
+               IF  NOT ERRORS THEN                                      
+                   IF  EIBAID = DFHPF10 THEN                            
+                       PERFORM 600-UPDATE-EMP-RECORD                    
+                   ELSE                                                 
+                       MOVE 9  TO WORK-MSG-CODE                         
+                   END-IF                                               
+               END-IF                                                   
+           END-IF.                                                      
+                                                                        
+           MOVE DFHBMFSE    TO  PROJMEMPA                               
+                                PROJMDEPA                               
+                                PROJMNAMEA                              
+                                PROJMADDR1A                             
+                                PROJMADDR2A                             
+                                PROJMADDR3A                             
+                                PROJMZIPA                               
+                                PROJMJDATEA                             
+                                PROJMBDATEA                             
+                                PROJMTDATEA                             
+                                PROJMSDATEA.                            
+                                                                        
+      *-----------------------------------------------------------------                                                                  
+      * THIS PARA SEND THE MAP TO CICS SCREEN USING THE OUTPUT COMM AREA                                                                 
+      *-----------------------------------------------------------------                                                                  
+       300-SEND-MAP.                                                   
+           MOVE MSG(WORK-MSG-CODE) TO PROJMMSGO.                        
+           EXEC CICS SEND MAPSET("PROJMAP") MAP("MAP") FROM(PROJMO)                     
+                         CURSOR FREEKB END-EXEC.                        
+           GO TO 200-RECEIVE-MAP.                                       
+                                                                        
+                       
+      *-----------------------------------------------------------------                                                                  
+      * THIS PARA MAKES A CALL TO COBOL PROGRAM TO GET EMPLOYEE RECORDS.                                                                    
+      *-----------------------------------------------------------------                                                                  
+       400-READ-PROJ-RECORD.                                             
+           MOVE "N"        TO ADD-PRJ-FLAG                              
+           MOVE PROJMEMPI  TO  PROJ-NO.                                   
+           CALL "COBPRJDP" USING COMMAREA.                              
+           MOVE SPACES     TO ADD-PRJ-FLAG.                             
+                                                                        
+           MOVE SPACES         TO  PROJMO.                              
+           MOVE PROJ-NO        TO  PROJMEMPO.                           
+                                                                        
+           IF  RESPONSE = DFHRESP(NOTFND) THEN                          
+               MOVE "Y"                  TO ADD-PRJ-FLAG                
+               MOVE 7                    TO WORK-MSG-CODE               
+               MOVE SPACES               TO PROJMDEPO                   
+                                            PROJMNAMEO                  
+                                            PROJMADDR1O                 
+                                            PROJMJDATEO                 
+                                            PROJMBDATEO                 
+                                            PROJMTDATEO                 
+                                            PROJMSDATEO                 
+           ELSE                                                         
+               MOVE PROJ-DEPT-CODE       TO PROJMDEPO                   
+               MOVE PROJ-NAME            TO PROJMNAMEO                  
+               MOVE PROJ-EMP             TO PROJMADDR1O                 
+      *                                                                 
+               MOVE PROJ-DATE-STARTED    TO COBDATE-DATE                
+               MOVE "YYDDD"              TO COBDATE-INPUT-FORMAT        
+               MOVE "MM/DD/YY"           TO COBDATE-OUTPUT-FORMAT       
+               CALL "COBDTE3" USING COBDATE-DATE                        
+                                    COBDATE-INPUT-FORMAT                
+                                    COBDATE-OUTPUT-FORMAT               
+                                    COBDATE-MESSAGE                     
+               MOVE COBDATE-DATE         TO PROJMJDATEO                 
+      *                                                                 
+               MOVE "YYDDD"              TO COBDATE-INPUT-FORMAT        
+               MOVE "MM/DD/YY"           TO COBDATE-OUTPUT-FORMAT       
+               CALL "COBDTE3" USING COBDATE-DATE                        
+                                    COBDATE-INPUT-FORMAT                
+                                    COBDATE-OUTPUT-FORMAT               
+                                    COBDATE-MESSAGE                     
+               MOVE COBDATE-DATE         TO PROJMBDATEO                 
+      *                                                                 
+               IF  PROJ-DATE-ENDED > ZEROS THEN                     
+                   MOVE PROJ-DATE-ENDED  TO COBDATE-DATE            
+                   MOVE "YYMMDD"             TO COBDATE-INPUT-FORMAT    
+                   MOVE "MM/DD/YY"           TO COBDATE-OUTPUT-FORMAT   
+                   CALL "COBDTE3" USING COBDATE-DATE                    
+                                        COBDATE-INPUT-FORMAT            
+                                        COBDATE-OUTPUT-FORMAT           
+                                        COBDATE-MESSAGE                 
+                   MOVE COBDATE-DATE         TO PROJMTDATEO             
+               ELSE                                                     
+                   MOVE SPACES               TO PROJMTDATEO             
+               END-IF                                                   
+      *                                                                 
+               MOVE "YYDDD"              TO COBDATE-INPUT-FORMAT        
+               MOVE "MM/DD/YY"           TO COBDATE-OUTPUT-FORMAT       
+               CALL "COBDTE3" USING COBDATE-DATE                        
+                                    COBDATE-INPUT-FORMAT                
+                                    COBDATE-OUTPUT-FORMAT               
+                                    COBDATE-MESSAGE                     
+               MOVE COBDATE-DATE         TO PROJMSDATEO                 
+      *                                                                 
+               MOVE 8                    TO WORK-MSG-CODE               
+           END-IF.                                                      
+                                                                        
+      *-----------------------------------------------------------------                                                                  
+      * THIS PARA VALIDATES WHETHER THE USER HAS GIVEN PROPER INPUT.                                                                        
+      *-----------------------------------------------------------------                                                                  
+       500-VALIDATE-SCREEN.                                             
+                                                                        
+           MOVE SWITCH-OFF  TO  ERROR-SWITCH.                           
+                                                                        
+           IF  PROJMNAMEI IS NOT > SPACES   THEN                        
+               MOVE DFHBMASB  TO  PROJMNAMEA                            
+               IF  NOT ERRORS THEN                                      
+                   SET ERRORS TO TRUE                                   
+                   MOVE -1    TO PROJMNAMEL                             
+                   MOVE 10    TO WORK-MSG-CODE                          
+               END-IF                                                   
+           END-IF                                                       
+                                                                        
+           IF  PROJMADDR1I IS NOT > SPACES   THEN                       
+               MOVE DFHBMASB  TO  PROJMADDR1A                           
+               IF  NOT ERRORS THEN                                      
+                   SET ERRORS TO TRUE                                   
+                   MOVE -1    TO PROJMADDR1L                            
+                   MOVE 11    TO WORK-MSG-CODE                          
+               END-IF                                                   
+           END-IF                                                       
+                                                                        
+           IF  PROJMZIPI IS NOT NUMERIC THEN                            
+               MOVE DFHBMASB  TO  PROJMZIPA                             
+               IF  NOT ERRORS THEN                                      
+                   SET ERRORS TO TRUE                                   
+                   MOVE -1    TO PROJMZIPL                              
+                   MOVE 4     TO WORK-MSG-CODE                          
+               END-IF                                                   
+           END-IF                                                       
+                                                                        
+           IF  PROJMJDATEI > SPACES     THEN                            
+               MOVE PROJMJDATEI   TO COBDATE-DATE                       
+               MOVE "MM/DD/YY"      TO COBDATE-INPUT-FORMAT             
+               MOVE "YYDDD"         TO COBDATE-OUTPUT-FORMAT            
+               CALL "COBDTE3" USING COBDATE-DATE                        
+                                    COBDATE-INPUT-FORMAT                
+                                    COBDATE-OUTPUT-FORMAT               
+                                    COBDATE-MESSAGE                     
+               IF  COBDATE-MESSAGE NOT = SPACES THEN                    
+                   MOVE DFHBMASB  TO  PROJMJDATEA                       
+                   IF  NOT ERRORS THEN                                  
+                       SET ERRORS TO TRUE                               
+                       MOVE -1    TO  PROJMJDATEL                       
+                       MOVE 5     TO WORK-MSG-CODE                      
+                   END-IF                                               
+               ELSE                                                     
+                   MOVE COBDATE-DATE-YYDDD TO WORK-JOINED-YYDDD         
+                   MOVE PROJMJDATEI      TO WORK-JOINED-MMDDYY          
+               END-IF                                                   
+           ELSE                                                         
+               MOVE WORK-TODAYS-MMDDYY TO PROJMJDATEO                   
+                                          WORK-JOINED-MMDDYY            
+               MOVE WORK-EIB-YYDDD     TO WORK-JOINED-YYDDD             
+           END-IF                                                       
+                                                                        
+           IF  PROJMBDATEI > SPACES     THEN                            
+               MOVE PROJMBDATEI   TO COBDATE-DATE                       
+               MOVE "MM/DD/YY"      TO COBDATE-INPUT-FORMAT             
+               MOVE "YYDDD"         TO COBDATE-OUTPUT-FORMAT            
+               CALL "COBDTE3" USING COBDATE-DATE                        
+                                    COBDATE-INPUT-FORMAT                
+                                    COBDATE-OUTPUT-FORMAT               
+                                    COBDATE-MESSAGE                     
+               IF  COBDATE-MESSAGE NOT = SPACES THEN                    
+                   MOVE DFHBMASB  TO  PROJMBDATEA                       
+                   IF  NOT ERRORS THEN                                  
+                       SET ERRORS TO TRUE                               
+                       MOVE -1    TO  PROJMBDATEL                       
+                       MOVE 5     TO WORK-MSG-CODE                      
+                   END-IF                                               
+               END-IF                                                   
+           ELSE                                                         
+               MOVE DFHBMASB  TO  PROJMBDATEA                           
+               IF  NOT ERRORS THEN                                      
+                   SET ERRORS TO TRUE                                   
+                   MOVE -1    TO  PROJMBDATEL                           
+                   MOVE 13    TO WORK-MSG-CODE                          
+               END-IF                                                   
+           END-IF                                                       
+                                                                        
+           IF  PROJMTDATEI > SPACES THEN                                
+               MOVE PROJMTDATEI   TO COBDATE-DATE                       
+               MOVE "MM/DD/YY"      TO COBDATE-INPUT-FORMAT             
+               MOVE "YYDDD"         TO COBDATE-OUTPUT-FORMAT            
+               CALL "COBDTE3" USING COBDATE-DATE                        
+                                    COBDATE-INPUT-FORMAT                
+                                    COBDATE-OUTPUT-FORMAT               
+                                    COBDATE-MESSAGE                     
+               IF  COBDATE-MESSAGE NOT = SPACES THEN                    
+                   MOVE DFHBMASB  TO  PROJMTDATEA                       
+                   IF  NOT ERRORS THEN                                  
+                       SET ERRORS TO TRUE                               
+                       MOVE -1    TO  PROJMTDATEL                       
+                       MOVE 5     TO WORK-MSG-CODE                      
+                   END-IF                                               
+               ELSE                                                     
+                   MOVE PROJMTDATEO      TO PROJMSDATEO                 
+                   MOVE COBDATE-DATE-YYDDD TO WORK-TERMINATED-YYDDD     
+                   IF  WORK-TERMINATED-YYDDD < WORK-JOINED-YYDDD        
+                       MOVE DFHBMASB  TO  PROJMJDATEA                   
+                                          PROJMTDATEA                   
+                       IF  NOT ERRORS THEN                              
+                           SET ERRORS TO TRUE                           
+                           MOVE -1    TO  PROJMJDATEL                   
+                           MOVE 12    TO WORK-MSG-CODE                  
+                       END-IF                                           
+                   END-IF                                               
+               END-IF                                                   
+           END-IF.                                                      
+                                                                        
+           IF  PROJMSDATEI > SPACES     THEN                            
+               MOVE PROJMSDATEI   TO COBDATE-DATE                       
+               MOVE "MM/DD/YY"      TO COBDATE-INPUT-FORMAT             
+               MOVE "YYDDD"         TO COBDATE-OUTPUT-FORMAT            
+               CALL "COBDTE3" USING COBDATE-DATE                        
+                                    COBDATE-INPUT-FORMAT                
+                                    COBDATE-OUTPUT-FORMAT               
+                                    COBDATE-MESSAGE                     
+               IF  COBDATE-MESSAGE NOT = SPACES THEN                    
+                   MOVE DFHBMASB  TO  PROJMSDATEA                       
+                   IF  NOT ERRORS THEN                                  
+                       SET ERRORS TO TRUE                               
+                       MOVE -1    TO  PROJMSDATEL                       
+                       MOVE 5     TO WORK-MSG-CODE                      
+                   END-IF                                               
+               END-IF                                                   
+           ELSE                                                         
+               COMPUTE WORK-JOINED-YY = WORK-JOINED-YY + 1              
+               IF  WORK-JOINED-MMDD = "02/29/" THEN                     
+                   MOVE "02/28/"  TO WORK-JOINED-MMDD                   
+               END-IF                                                   
+               MOVE WORK-JOINED-MMDDYY TO PROJMSDATEO                   
+           END-IF.                                                      
+                                                                        
+      *-----------------------------------------------------------------                                                                  
+      * THIS PARA MAKES A CALL TO COBOL PROGRAM TO UPDATE EMPLOYEE DATA.                                                                    
+      *-----------------------------------------------------------------                                                                  
+       600-UPDATE-EMP-RECORD.                                           
+                                                                        
+           MOVE "N"                TO  ADD-PRJ-FLAG                     
+           MOVE PROJMEMPI          TO  PROJ-NO.                          
+           CALL "COBPRJDP"       USING COMMAREA.                        
+           MOVE SPACES             TO  ADD-PRJ-FLAG.                    
+                                                                        
+           MOVE SPACES             TO  PROJECT-MASTER-RECORD.          
+           MOVE PROJMEMPI        TO  PROJ-NO.                            
+           MOVE PROJMDEPI        TO  PROJ-DEPT-CODE.                     
+           MOVE PROJMNAMEI       TO  PROJ-NAME.                          
+           MOVE PROJMADDR1I      TO  PROJ-EMP.                        
+           MOVE PROJMJDATEI      TO  COBDATE-DATE                       
+           MOVE "MM/DD/YY"         TO  COBDATE-INPUT-FORMAT             
+           MOVE "YYDDD"            TO  COBDATE-OUTPUT-FORMAT            
+           CALL "COBDTE3" USING        COBDATE-DATE                     
+                                       COBDATE-INPUT-FORMAT             
+                                       COBDATE-OUTPUT-FORMAT            
+                                       COBDATE-MESSAGE.                 
+           MOVE COBDATE-DATE-YYDDD TO  PROJ-DATE-STARTED.                 
+           MOVE PROJMBDATEI      TO  COBDATE-DATE                       
+           MOVE "MM/DD/YY"         TO  COBDATE-INPUT-FORMAT             
+           MOVE "YYDDD"            TO  COBDATE-OUTPUT-FORMAT            
+           CALL "COBDTE3" USING        COBDATE-DATE                     
+                                       COBDATE-INPUT-FORMAT             
+                                       COBDATE-OUTPUT-FORMAT            
+                                       COBDATE-MESSAGE.                 
+                                                                        
+           IF  PROJMTDATEI > SPACES THEN                                
+               MOVE PROJMTDATEI   TO COBDATE-DATE                       
+               MOVE "MM/DD/YY"      TO COBDATE-INPUT-FORMAT             
+               MOVE "YYMMDD"        TO COBDATE-OUTPUT-FORMAT            
+               CALL "COBDTE3" USING    COBDATE-DATE                     
+                                       COBDATE-INPUT-FORMAT             
+                                       COBDATE-OUTPUT-FORMAT            
+                                       COBDATE-MESSAGE                  
+               MOVE COBDATE-DATE-YYMMDD TO  PROJ-DATE-ENDED         
+           ELSE                                                         
+               MOVE ZEROS           TO  PROJ-DATE-ENDED             
+           END-IF.                                                      
+           MOVE PROJMSDATEI        TO  COBDATE-DATE                       
+           MOVE "MM/DD/YY"         TO  COBDATE-INPUT-FORMAT             
+           MOVE "YYDDD"            TO  COBDATE-OUTPUT-FORMAT            
+           CALL "COBDTE3" USING        COBDATE-DATE                     
+                                       COBDATE-INPUT-FORMAT             
+                                       COBDATE-OUTPUT-FORMAT            
+                                       COBDATE-MESSAGE.                 
+                                                                        
+           IF  ADD-PRJ-FLAG = "Y"  THEN                                 
+               CALL "COBPRJDP"       USING COMMAREA                     
+               MOVE 1    TO  WORK-MSG-CODE                              
+               MOVE SPACES TO ADD-PRJ-FLAG                              
+           ELSE                                                         
+               CALL "COBPRJDP"       USING COMMAREA                     
+               MOVE 2    TO  WORK-MSG-CODE                              
+           END-IF.                                                      
+                                                                        
+       900-ERRORS.                                                      
+                                                                        
+           MOVE "TRANSACTION ABNORMALLY TERMINATED" TO PROJMMSGO.       
+           GO TO 999-EXIT.                                              
+                                                                        
+       910-EXIT.                                                        
+                                                                        
+           MOVE "PROCESSING COMPLETED"              TO PROJMMSGO.       
+           GO TO 999-EXIT.                                              
+                                                                        
+       999-EXIT.                                                        
+           MOVE DFHBMASB                 TO PROJMMSGA.                  
+           EXEC CICS SEND TEXT FROM(PROJMMSGO) LENGTH(57)               
+                               ERASE END-EXEC.                          
+           EXEC CICS RETURN END-EXEC.                                   
+                                                                        
+                                                                        
+      *END PROGRAM CAST.                                                

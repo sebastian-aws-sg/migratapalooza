@@ -1,0 +1,13 @@
+*********************************************************************** 
+*                                                                     *
+*          NAME:  COBIMSB1                                            * 
+*          PSB FOR COBIMSB1 PROGRAM                                   * 
+*                                                                     * 
+*********************************************************************** 
+
+         PCB  TYPE=DB,NAME=DBDCOMP1,KEYLEN=3,PROCOPT=A,PCBNAME=DEPTPCB
+         SENSEG  NAME=DEPT,PARENT=0                      
+            
+*-------------- PSBGEN ----------------------------------------------*  
+         PSBGEN  LANG=COBOL,PSBNAME=COBIMSB1,CMPAT=YES                    
+         END                                                            

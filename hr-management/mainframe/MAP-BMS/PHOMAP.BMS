@@ -1,0 +1,48 @@
+*              ********************************************************
+*              Map for Application : PART OF MYTELCO HR APPLICATION     
+*              Programmer Name : CAST SOFTWARE                         
+*              This Map accepts Employee ID and checks if Photo is there         
+*              ********************************************************
+PHOMAP  DFHMSD TYPE=&SYSPARM,                                          X
+               TIOAPFX=YES,                                            X
+               MODE=INOUT,                                             X
+               LANG=COBOL
+MAP     DFHMDI SIZE=(24,80),                                           X
+               LINE=01,                                                X
+               COLUMN=01,                                              X
+               DSATTS=(COLOR,HILIGHT),                                 X
+               MAPATTS=(COLOR,HILIGHT)
+TITLE   DFHMDF POS=(02,20),                                            X
+               INITIAL='CAST PHOTO SYSTEM',                            X
+               LENGTH=32,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=YELLOW,                                           X
+               HILIGHT=UNDERLINE
+EMPID   DFHMDF POS=(06,06),                                            X
+               INITIAL='Employee Id  :',                               X
+               LENGTH=14,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=DEFAULT
+EMPIDI  DFHMDF POS=(06,22),                                            X
+               LENGTH=6,                                               X
+               ATTRB=(UNPROT,NORM,IC),                                 X
+               PICIN='XXXXXX',                                         X
+               VALIDN=(MUSTENTER)
+CHK     DFHMDF POS=(08,06),                                            X
+               INITIAL='Photo Uploaded?  :',                           X
+               LENGTH=14,                                              X
+               ATTRB=(ASKIP,BRT)
+CHKI    DFHMDF POS=(08,22),                                            X
+               LENGTH=1,                                               X
+               ATTRB=(UNPROT,NORM)
+F1KEY   DFHMDF POS=(21,12),                                            X
+               INITIAL='F1 - To check if Photo is there',              X
+               LENGTH=37,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=PINK,                                             X
+               HILIGHT=UNDERLINE
+        DFHMDF POS=(24,79),                                            X
+               INITIAL=' ',                                            X
+               LENGTH=1
+        DFHMSD TYPE=FINAL                                               
+        END                                                             

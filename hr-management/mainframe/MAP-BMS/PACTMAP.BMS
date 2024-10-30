@@ -1,0 +1,62 @@
+*              ********************************************************
+*              Map for Application : PART OF MYTELCO HR APPLICATION     
+*              Programmer Name : CAST SOFTWARE                         
+*              This Map accepts Project ID and ACT no. to get start / end dates         
+*              ********************************************************
+PACTMAP  DFHMSD TYPE=&SYSPARM,                                          X
+               TIOAPFX=YES,                                            X
+               MODE=INOUT,                                             X
+               LANG=COBOL
+MAP     DFHMDI SIZE=(24,80),                                           X
+               LINE=01,                                                X
+               COLUMN=01,                                              X
+               DSATTS=(COLOR,HILIGHT),                                 X
+               MAPATTS=(COLOR,HILIGHT)
+TITLE   DFHMDF POS=(02,20),                                            X
+               INITIAL='CAST PROJECT ACT SYSTEM',                      X
+               LENGTH=32,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=YELLOW,                                           X
+               HILIGHT=UNDERLINE
+PROJID  DFHMDF POS=(06,06),                                            X
+               INITIAL='Project Id  :',                                X
+               LENGTH=14,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=DEFAULT
+PROJIDI DFHMDF POS=(06,22),                                            X
+               LENGTH=6,                                               X
+               ATTRB=(UNPROT,NORM,IC),                                 X
+               PICIN='XXXXXX',                                         X
+               VALIDN=(MUSTENTER)
+ACT     DFHMDF POS=(10,06),                                            X
+               INITIAL='Activity No     :',                            X
+               LENGTH=24,                                              X
+               ATTRB=(ASKIP,BRT)
+ACTI    DFHMDF POS=(10,22),                                            X
+               LENGTH=4,                                               X
+               ATTRB=(UNPROT,NORM)
+SDAT    DFHMDF POS=(08,06),                                            X
+               INITIAL='Start Date   :',                               X
+               LENGTH=14,                                              X
+               ATTRB=(ASKIP,BRT)
+SDATI   DFHMDF POS=(08,22),                                            X
+               LENGTH=10,                                              X
+               ATTRB=(UNPROT,NORM)
+EDAT    DFHMDF POS=(08,06),                                            X
+               INITIAL='End Date     :',                               X
+               LENGTH=14,                                              X
+               ATTRB=(ASKIP,BRT)
+EDATI   DFHMDF POS=(08,22),                                            X
+               LENGTH=10,                                              X
+               ATTRB=(UNPROT,NORM)
+F1KEY   DFHMDF POS=(21,12),                                            X
+               INITIAL='F1 - Fetch project activity details',          X
+               LENGTH=37,                                              X
+               ATTRB=(ASKIP,BRT),                                      X
+               COLOR=PINK,                                             X
+               HILIGHT=UNDERLINE
+        DFHMDF POS=(24,79),                                            X
+               INITIAL=' ',                                            X
+               LENGTH=1
+        DFHMSD TYPE=FINAL                                               
+        END                                                             

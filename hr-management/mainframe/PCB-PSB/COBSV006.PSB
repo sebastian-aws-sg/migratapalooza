@@ -1,0 +1,15 @@
+*********************************************************************** 
+*                                                                     *
+*          NAME:  COBSV006                                            * 
+*          PSB FOR COBSV006 PROGRAM                                   * 
+*                                                                     * 
+*********************************************************************** 
+
+         PCB  TYPE=DB,NAME=DBDCOMP1,KEYLEN=3,PROCOPT=A,PCBNAME=DEPTPCB
+         SENSEG  NAME=DEPT,PARENT=0                      
+         PCB  TYPE=DB,NAME=DBDCOMP1,KEYLEN=3,PROCOPT=A,PCBNAME=DUMMY
+         SENSEG  NAME=DUMMY,PARENT=0                      
+            
+*-------------- PSBGEN ----------------------------------------------*  
+         PSBGEN  LANG=COBOL,PSBNAME=COBSV006,CMPAT=YES                    
+         END                                                            
