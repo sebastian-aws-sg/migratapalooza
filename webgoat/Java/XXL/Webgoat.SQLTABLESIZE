@@ -1,0 +1,27 @@
+
+<config name="SQL Table Size" version="1.0.0.0" extraction-date="2012/07/04" >  
+
+<oracle castformat="7.0">                                                       
+
+<server name="CASTDB" >                                                        
+
+<schema name="WEBGOAT_GUEST">                                                          
+
+	<table  name="AUTH" rows="34000000"/>      
+	<table  name="EMPLOYEE" rows="80000000"/>    
+	<table  name="MESSAGES" rows="20000000"/>    
+	<table  name="OWNERSHIP" rows="60000000"/>    
+	<table  name="PRODUCT_SYSTEM_DATA" rows="80230000"/>    
+	<table  name="ROLES" rows="20000000"/>    
+	<table  name="USER_DATA" rows="80000000"/>    
+	<table  name="USER_LOGIN" rows="50000000"/>    
+	<table  name="USER_SYSTEM_DATA" rows="0"/>    
+	<table  name="WEATHER_DATA" rows="20000000"/>                                        
+
+</schema>                                                                       
+
+</server>                                                                       
+
+</oracle>                                                                       
+
+</config>                                                                       
