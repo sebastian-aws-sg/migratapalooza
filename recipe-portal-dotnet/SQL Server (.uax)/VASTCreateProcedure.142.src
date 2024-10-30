@@ -1,0 +1,21 @@
+
+--Returns password
+CREATE PROCEDURE [dbo].[spSelectRecoverLostPassword]
+
+@Email varchar(50)
+
+AS
+BEGIN
+
+IF Exists (SELECT Email FROM dbo.usersmain WHERE Email = @Email)
+	BEGIN
+		SELECT FirstName, UserName, [Password] FROM dbo.usersmain WHERE Email = @Email
+	END
+ELSE
+	BEGIN
+		SELECT 'NOTEXISTS' FirstName, 'NOTEXISTS' UserName, 'NOTEXISTS' [Password]
+	END
+
+END
+
+		

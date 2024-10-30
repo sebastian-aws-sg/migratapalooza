@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateTable.6" instanceOf="CAST_MSTSQL_RelationalTable">
+  <CAST_SQL_Object owner="dbo" objectId="267147997" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="Cooking_Article"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.217(1,1,20,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.217" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateTable.6.src"/>
+  <shell fullPath="VASTCreateTable.6.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_GenericColumnReference.4" instanceOf="CAST_AST_ANSISQL_GenericColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_WithParent parentAST="p_Constraint.4"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.28"/>
+</instance>
+<instance id="p_Constraint.4" instanceOf="CAST_MSTSQL_PrimaryKeyConstraint">
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_Resolution_Identification resolutionName="PK_Article"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_ANSISQL_Constraint nameIsDefinedByDBMS="0"/>
+ <CAST_TSQL_IsClustered isClustered="1"/>
+</instance>
+<instance id="p_ColumnOfTable.28" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="ID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.29" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="CAT_ID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.30" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="3"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Title"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="nvarchar" length="200" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.31" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="4"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Post_Date"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="datetime" length="8" precision="23" scale="3"/>
+</instance>
+<instance id="p_ColumnOfTable.32" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="5"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Content"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.33" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="6"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Hits"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.34" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="7"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Author"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="nvarchar" length="200" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.35" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="8"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Keyword"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="nvarchar" length="510" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.36" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="9"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Show"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.37" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="10"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="No_Rating"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.38" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="11"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="No_Rates"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.39" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="12"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Summary"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="nvarchar" length="1000" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.40" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="13"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Total_Comments"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.41" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="14"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="UID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.42" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="15"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Update_date"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.6"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="datetime" length="8" precision="23" scale="3"/>
+</instance>
+</instances>

@@ -1,0 +1,27 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/17/2008>
+-- Description:	<Get category for the homepage>
+-- =============================================
+CREATE PROCEDURE [dbo].[spSelectRecipeCategory]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT *,
+       (
+         SELECT COUNT (*)  
+		 FROM 
+			dbo.Recipes WITH (NOLOCK) 
+		 WHERE 
+            Recipes.CAT_ID = RECIPE_CAT.CAT_ID AND LINK_APPROVED = 1
+       ) AS REC_COUNT 
+    FROM 
+       dbo.RECIPE_CAT WITH (NOLOCK)
+	ORDER BY 
+	   CAT_TYPE ASC
+END
+
+		

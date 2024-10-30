@@ -1,0 +1,13 @@
+
+CREATE PROCEDURE spCountAllArticleComments
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Count(*) Col1 FROM dbo.COMMENTS_ARTICLE WITH (NOLOCK)
+
+END
+
+		

@@ -1,0 +1,23 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/3/2008>
+-- Description:	<Delete Comment>
+-- =============================================
+CREATE PROCEDURE [dbo].[AdminDeleteRecipeComments] 
+
+@COMID int,
+@RecipeID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    DELETE dbo.COMMENTS_RECIPE WHERE COM_ID = @COMID;
+
+    -- Decrement Total comments count in recipe tabale
+    UPDATE dbo.Recipes SET TOTAL_COMMENTS = TOTAL_COMMENTS - 1 WHERE ID = @RecipeID
+
+END
+
+		

@@ -1,0 +1,61 @@
+
+CREATE PROCEDURE [dbo].[spSelectSiteStatistics] 
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+DECLARE @TotalRecipe int
+DECLARE @TotalArticle int
+DECLARE @TotalMembers int
+DECLARE @TotalRecipeComments int
+DECLARE @TotalArticleComments int
+DECLARE @TotalSavedRecipesInCookBook int
+DECLARE @TotalUsersWhoUseCookBook int
+DECLARE @TotalFriendsList int
+DECLARE @TotalUsersWhoUseFriendsList int
+DECLARE @TotalPrivateMessage int
+DECLARE @TotalUsersJoinedToday int
+DECLARE @TotalUsersJoinedYesterday int
+DECLARE @TotalUsersJoinedInAWeek int
+DECLARE @TotalUsersJoinedInAMonth int
+DECLARE @TotalUnActivatedAccount int
+DECLARE @TotalSuspendedAccount int
+
+SELECT @TotalRecipe = Count(*) FROM dbo.Recipes WITH (NOLOCK) WHERE LINK_APPROVED = 1
+SELECT @TotalArticle = Count(*) FROM dbo.Cooking_Article WITH (NOLOCK) WHERE Show = 1
+SELECT @TotalMembers = Count(*) FROM dbo.usersmain WITH (NOLOCK)
+SELECT @TotalRecipeComments = Count(*) FROM dbo.COMMENTS_RECIPE WITH (NOLOCK)
+SELECT @TotalArticleComments = Count(*) FROM dbo.COMMENTS_ARTICLE WITH (NOLOCK)
+SELECT @TotalSavedRecipesInCookBook = COUNT(*) FROM dbo.userCookBook WITH (NOLOCK)
+SELECT @TotalUsersWhoUseCookBook = COUNT(DISTINCT [UID]) FROM dbo.userCookBook WITH (NOLOCK)
+SELECT @TotalUsersWhoUseFriendsList = Count(DISTINCT [UID]) FROM dbo.FriendsList WITH (NOLOCK)
+SELECT @TotalPrivateMessage = Count(*) FROM dbo.PrivateMessage WITH (NOLOCK)
+SELECT @TotalUsersJoinedToday = Count(*) FROM dbo.usersmain WITH (NOLOCK) WHERE DateJoined = DATEADD(dd,DATEDIFF(dd,0,GETDATE()),0)
+AND DateJoined < DATEADD(dd,DATEDIFF(dd,0,GETDATE()),1)
+SELECT @TotalUsersJoinedYesterday = Count(*) FROM dbo.usersmain WITH (NOLOCK) WHERE DateJoined = dateadd(day, datediff(day, 0, getdate()), -1)
+SELECT @TotalUsersJoinedInAWeek = Count(*) FROM dbo.usersmain WITH (NOLOCK) WHERE DateJoined >= DATEADD(day, - 7, GETDATE())
+SELECT @TotalUsersJoinedInAMonth = Count(*) FROM dbo.usersmain WITH (NOLOCK) WHERE DateJoined >= DATEADD(day, - 31, GETDATE())
+SELECT @TotalUnActivatedAccount = Count(*) FROM dbo.usersmain WITH (NOLOCK) WHERE Activation = 0
+SELECT @TotalSuspendedAccount = Count(*) FROM dbo.usersmain WITH (NOLOCK) WHERE isActive = 0
+
+SELECT @TotalRecipe TotalRecipe, 
+		@TotalArticle TotalArticle,
+		@TotalMembers TotalMembers,
+		@TotalRecipeComments TotalRecipeComments,
+        @TotalArticleComments TotalArticleComments,
+		@TotalSavedRecipesInCookBook TotalSavedRecipesInCookBook,
+		@TotalUsersWhoUseCookBook TotalUsersWhoUseCookBook,
+		@TotalUsersWhoUseFriendsList TotalUsersWhoUseFriendsList,
+		@TotalPrivateMessage TotalPrivateMessage,
+		@TotalUsersJoinedToday TotalUsersJoinedToday,
+        @TotalUsersJoinedYesterday TotalUsersJoinedYesterday,
+		@TotalUsersJoinedInAWeek TotalUsersJoinedInAWeek,
+		@TotalUsersJoinedInAMonth TotalUsersJoinedInAMonth,
+        @TotalUnActivatedAccount  TotalUnActivatedAccount,
+        @TotalSuspendedAccount TotalSuspendedAccount
+
+END
+
+		

@@ -1,0 +1,35 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/4/2008>
+-- Description:	<Add new article category>
+-- =============================================
+CREATE PROCEDURE [dbo].[AdminAddNewArticleCategory] 
+
+@CatName varchar(100)
+
+AS
+
+declare @ErrorCode int
+
+set @ErrorCode = @@error
+
+BEGIN TRANSACTION
+
+IF ( @ErrorCode = 0 )
+
+BEGIN
+
+	-- Insert
+	INSERT INTO Cooking_Article_Category (CAT_NAME)
+		VALUES(@CatName)
+
+END
+
+IF ( @ErrorCode = 0 )
+	COMMIT TRANSACTION
+ELSE
+	ROLLBACK TRANSACTION
+
+RETURN @ErrorCode
+
+		

@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE [dbo].[spSelectIsProfilePagePublicOrPrivate] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT PublicPrivateProfile 
+	FROM 
+		dbo.Configuration WITH (NOLOCK)
+
+END
+
+		

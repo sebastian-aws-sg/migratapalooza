@@ -1,0 +1,26 @@
+
+CREATE PROCEDURE [dbo].[spSelectViewUsersRecipeSavedPublishedByMe]
+
+@PublisherID int,
+@UserIDWhoSaved int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT TOP 25 ucb.RecipeID, 
+				ucb.RecipeName, 
+				ucb.Date 
+	FROM 
+		dbo.userCookBook ucb WITH (NOLOCK)
+	INNER JOIN
+		dbo.Recipes r WITH (NOLOCK)
+	ON
+		ucb.RecipeID = r.ID
+	WHERE 
+		r.UID = @PublisherID AND ucb.UID = @UserIDWhoSaved
+
+END
+
+		

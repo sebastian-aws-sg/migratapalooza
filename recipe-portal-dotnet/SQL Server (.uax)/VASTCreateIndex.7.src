@@ -1,0 +1,2 @@
+CREATE  NONCLUSTERED INDEX M_To ON dbo.tableName ( M_To ASC )
+

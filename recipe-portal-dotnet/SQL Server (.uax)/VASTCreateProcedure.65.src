@@ -1,0 +1,21 @@
+
+CREATE PROCEDURE spDeleteAFriendInFriendsList 
+
+@UserID int,
+@FriendID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+    
+    IF Exists (SELECT [UID], FriendID FROM dbo.FriendsList WHERE [UID] = @UserID AND FriendID = @FriendID)
+		BEGIN
+
+          DELETE dbo.FriendsList WHERE [UID] = @UserID AND FriendID = @FriendID
+
+		END
+
+END
+
+		

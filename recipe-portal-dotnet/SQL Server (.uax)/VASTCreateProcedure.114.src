@@ -1,0 +1,85 @@
+
+CREATE PROCEDURE [dbo].[spSelectGetAllRecipeCommentByUser] 
+
+@CommentsByAuthor varchar(50),
+@OrderBy int = '',
+@PageIndex int = 1,
+@PageSize int = 20
+
+AS
+BEGIN
+
+DECLARE @UserID int
+DECLARE @Counter int
+
+SELECT @UserID = [UID] FROM dbo.usersmain WITH (NOLOCK) WHERE UserName = @CommentsByAuthor
+
+SELECT @Counter = Count(DISTINCT ID) FROM dbo.COMMENTS_RECIPE WITH (NOLOCK) WHERE [UID] = @UserID
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+SET NOCOUNT ON;
+
+
+		WITH RecipeSearch AS
+		(
+			SELECT
+			   ROW_NUMBER() OVER 
+				 (
+				   -- Dynamic sorting
+					ORDER BY 
+						  CASE WHEN @OrderBy = 1 THEN r.HITS END DESC,
+						  CASE WHEN @OrderBy = 2 THEN r.NO_RATES END DESC,
+						  CASE WHEN @OrderBy = 3 THEN Name END,
+						  CASE WHEN @OrderBy = 4 OR @OrderBy = '' THEN r.Date END DESC
+				 ) AS RowNumber, 
+					  r.ID, 
+					  r.CAT_ID, 
+					  r.Category, 
+					  r.Name, 
+					  r.Author, 
+					  r.Date, 
+					  r.HITS, 
+					  r.RATING, 
+					  r.NO_RATES,
+                      r.UID,
+					  Cast((1.0 * r.RATING/r.NO_RATES) as decimal(2,1)) as Rates,
+                      COALESCE(NULLIF(r.RecipeImage, ''), 'noimageavailable.gif') as RecipeImage,
+					  @Counter As RCount  
+			   FROM 
+					Recipes r WITH (NOLOCK)
+               INNER JOIN 
+					dbo.COMMENTS_RECIPE c WITH (NOLOCK)
+			   ON 
+					r.ID = c.ID
+			   WHERE 
+					r.LINK_APPROVED = 1 AND c.UID = @UserID
+               GROUP BY
+					  r.ID, 
+					  r.CAT_ID, 
+					  r.Category, 
+					  r.Name, 
+					  r.Author, 
+					  r.Date, 
+					  r.HITS, 
+					  r.RATING, 
+					  r.NO_RATES,
+                      r.RecipeImage,
+                      r.UID
+		)
+		-- Statement that executes the CTE
+		SELECT a.*
+		FROM
+			  RecipeSearch a
+		WHERE
+			  a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+		ORDER BY
+			  a.RowNumber
+
+END
+
+		

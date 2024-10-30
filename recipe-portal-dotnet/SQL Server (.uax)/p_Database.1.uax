@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="p_Database.1" instanceOf="CAST_MSTSQL_Database">
+  <CAST_SQL_Object version="10.50.1600.1"/>
+  <CAST_AST_TSQL_WithSimpleCollator collatorName="Latin1_General_CI_AI" lcid="1033" codePage="1252" comparisonStyle="196611"/>
+  <CAST_SQL_WithCharacterSet compatibilityLevel="90"/>
+  <CAST_Resolution_Identification resolutionName="XDPortal"/>
+  <CAST_Symbol_WithParent parent="p_Instance.1"/>
+ </instance>
+</instances>

@@ -1,0 +1,65 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/23/2008>
+-- Description:	<Return recipe details>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGetRecipeDetail]
+
+@ID int,
+@Approved int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DECLARE @Approved_Val int
+
+	IF (@Approved = 1)
+		BEGIN
+		   SET @Approved_Val = 1
+		END
+	ELSE
+		BEGIN
+		   SET @Approved_Val = NULL
+		END
+
+	DECLARE @CountUserWhoSavedThisRecipeInCookBook int
+
+	SELECT @CountUserWhoSavedThisRecipeInCookBook = Count(*) FROM dbo.userCookBook WITH (NOLOCK) WHERE RecipeID = @ID
+
+	-- Get recipe
+	SELECT ID, 
+		   CAT_ID, 
+		   Category,
+		   Date,
+		   [Name],  
+		   HITS, 
+		   NO_RATES,
+		   Ingredients,
+		   Instructions,
+		   Author,
+		   TOTAL_COMMENTS,
+		   LINK_APPROVED,
+		   RecipeImage,
+		   [UID],
+		   HIT_DATE,
+		   CAST((1.0 * RATING/NO_RATES) as decimal(2,1)) as Rates,
+		   @CountUserWhoSavedThisRecipeInCookBook as CountSavedInCookBook
+		   FROM 
+			 dbo.Recipes WITH (NOLOCK) 
+		   WHERE
+		   (@Approved_Val IS NOT NULL AND (LINK_APPROVED = 1 AND ID = @ID)) OR
+		   (@Approved_Val IS NULL AND ID = @ID)
+
+		IF (@Approved_Val IS NOT NULL)
+			BEGIN
+			   --Update hits
+			   UPDATE Recipes set HITS = HITS + 1  WHERE ID = @ID;
+			   --Update hit_date - use display todays 100 viewed recipes and last 4 hours
+			   UPDATE Recipes SET HIT_DATE = getdate() WHERE ID = @ID
+			END
+
+END
+
+		

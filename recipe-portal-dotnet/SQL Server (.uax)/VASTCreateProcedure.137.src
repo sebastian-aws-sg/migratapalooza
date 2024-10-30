@@ -1,0 +1,153 @@
+
+CREATE PROCEDURE [dbo].[spSelectPrivateMessages]
+
+@folder varchar(20) = '',
+@UserID int,
+@OrderBy int = '',
+@SortBy int = '',
+@PageIndex int = 1,
+@PageSize int = 20
+
+AS
+BEGIN
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+DECLARE @Counter int
+DECLARE @CountUnRead int
+DECLARE @CounterSentPM int
+DECLARE @CountUnReadSentPM int
+DECLARE @CountTrash int
+
+SELECT @CountUnRead = Count(*) FROM dbo.PrivateMessage WITH (NOLOCK) WHERE M_To = @UserID AND M_Read = 0 
+SELECT @Counter = Count(*) FROM dbo.PrivateMessage WITH (NOLOCK) WHERE M_To = @UserID
+
+SELECT @CountUnReadSentPM = Count(*) FROM dbo.PrivateMessageSentMessages WITH (NOLOCK) WHERE M_From = @UserID AND M_Read = 0 
+SELECT @CounterSentPM = Count(*) FROM dbo.PrivateMessageSentMessages WITH (NOLOCK) WHERE M_From = @UserID
+
+SELECT @CountTrash = Count(*) FROM dbo.PrivateMessage WITH (NOLOCK) WHERE M_To = @UserID AND isTrash = 1
+
+DECLARE @folder_Val varchar(20)
+
+IF (@folder = 'inbox' OR @folder = '')
+   BEGIN
+	 SET @folder_Val = NULL
+   END
+ELSE
+   BEGIN
+	 SET @folder_Val = @folder
+   END
+
+SET NOCOUNT ON;
+
+IF (@folder = 'sentitems')
+	BEGIN
+
+		WITH PrivateMessage AS
+		(
+			SELECT
+			   ROW_NUMBER() OVER 
+				 (
+				   -- Dynamic bidirectional sorting
+					ORDER BY 
+						  CASE WHEN @OrderBy = 1 AND @SortBy = 1 THEN pm.M_Subject END DESC,
+						  CASE WHEN @OrderBy = 1 AND @SortBy = '' THEN pm.M_Subject END DESC,
+						  CASE WHEN @OrderBy = 1 AND @SortBy = 2 THEN pm.M_Subject END ASC,
+						  CASE WHEN @OrderBy = 2 AND @SortBy = 1 THEN u.UserName END DESC,
+						  CASE WHEN @OrderBy = 2 AND @SortBy = '' THEN u.UserName END DESC,
+						  CASE WHEN @OrderBy = 2 AND @SortBy = 2 THEN u.UserName END ASC,
+						  CASE WHEN @OrderBy = 3 AND @SortBy = 1 OR @OrderBy = '' THEN pm.M_Sent END DESC,
+						  CASE WHEN @OrderBy = 3 AND @SortBy = '' OR @OrderBy = '' THEN pm.M_Sent END DESC,
+						  CASE WHEN @OrderBy = 3 AND @SortBy = 2 THEN pm.M_Sent END ASC
+				 ) AS RowNumber, 
+					pm.M_ID,
+					pm.M_Subject,
+					pm.M_From,
+					pm.M_To,
+					u.UserName,
+					pm.M_Sent,
+					pm.M_Read,
+					pm.M_OutBox,
+					pm.PM_Message,
+					@CounterSentPM as TotalCount,
+					@CountUnReadSentPM as UnreadCount
+			FROM
+				dbo.PrivateMessageSentMessages pm WITH (NOLOCK) -- Use PM trash table
+			INNER JOIN
+				dbo.usersmain u WITH (NOLOCK)
+			ON
+				pm.M_To = u.UID
+			WHERE 
+				pm.M_From = @UserID AND pm.M_OutBox = 1
+		)
+		-- Statement that executes the CTE
+		SELECT a.*
+		FROM
+			  PrivateMessage a
+		WHERE
+			  a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+		ORDER BY
+			  a.RowNumber
+
+   END
+
+ELSE
+
+   BEGIN
+
+	WITH PrivateMessage AS
+	(
+		SELECT
+		   ROW_NUMBER() OVER 
+			 (
+			   -- Dynamic bidirectional sorting
+				ORDER BY 
+					  CASE WHEN @OrderBy = 1 AND @SortBy = 1 THEN pm.M_Subject END DESC,
+					  CASE WHEN @OrderBy = 1 AND @SortBy = '' THEN pm.M_Subject END DESC,
+					  CASE WHEN @OrderBy = 1 AND @SortBy = 2 THEN pm.M_Subject END ASC,
+					  CASE WHEN @OrderBy = 2 AND @SortBy = 1 THEN u.UserName END DESC,
+					  CASE WHEN @OrderBy = 2 AND @SortBy = '' THEN u.UserName END DESC,
+					  CASE WHEN @OrderBy = 2 AND @SortBy = 2 THEN u.UserName END ASC,
+					  CASE WHEN @OrderBy = 3 AND @SortBy = 1 OR @OrderBy = '' THEN pm.M_Sent END DESC,
+					  CASE WHEN @OrderBy = 3 AND @SortBy = '' OR @OrderBy = '' THEN pm.M_Sent END DESC,
+					  CASE WHEN @OrderBy = 3 AND @SortBy = 2 THEN pm.M_Sent END ASC
+			 ) AS RowNumber, 
+				pm.M_ID,
+				pm.M_Subject,
+				pm.M_From,
+				pm.M_To,
+				u.UserName,
+				pm.M_Sent,
+				pm.M_Read,
+				pm.M_OutBox,
+				pm.PM_Message,
+				@Counter as TotalCount,
+				@CountUnRead as UnreadCount
+		FROM
+			dbo.PrivateMessage pm WITH (NOLOCK) -- Use main PM Table
+		INNER JOIN
+			dbo.usersmain u WITH (NOLOCK)
+		ON
+			pm.M_From = u.UID
+		WHERE 
+			(@folder_Val IS NULL AND (pm.M_To = @UserID AND pm.isTrash = 0)) OR
+            (@folder_Val IS NOT NULL AND (pm.M_To = @UserID AND pm.isTrash = 1))
+	)
+	-- Statement that executes the CTE
+	SELECT a.*
+	FROM
+		  PrivateMessage a
+	WHERE
+		  a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+	ORDER BY
+		  a.RowNumber
+
+   END
+
+END
+
+		

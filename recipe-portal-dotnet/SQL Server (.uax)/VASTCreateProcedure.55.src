@@ -1,0 +1,26 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/28/2008>
+-- Description:	<Return Top 20 RSS>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetXMLToprecipe]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Top 20 ID, 
+			[Name], 
+			HITS, 
+			Date,
+			Category 
+	FROM 
+		dbo.Recipes WITH (NOLOCK)
+	WHERE 
+		LINK_APPROVED = 1 
+	ORDER BY Hits DESC
+
+END
+
+		

@@ -1,0 +1,19 @@
+-- =============================================
+-- Author:		<Dexter zafra>
+-- Create date: <6/5/2008>
+-- Description:	<Return article category name>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetArticleCategoryName] 
+
+@CAT_ID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+  
+	SELECT CAT_NAME From Cooking_Article_Category WITH (NOLOCK) Where CAT_ID = @CAT_ID
+
+END
+
+		

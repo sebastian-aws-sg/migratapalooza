@@ -1,0 +1,9 @@
+CREATE TABLE dbo.RecipeUpdateLog (
+  ID int NOT NULL,
+  RID int NOT NULL,
+  UID int NOT NULL,
+  DateUpdated datetime NOT NULL,
+  PRIMARY KEY CLUSTERED ( ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

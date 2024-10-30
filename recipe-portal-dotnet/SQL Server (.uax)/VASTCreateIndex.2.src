@@ -1,0 +1,2 @@
+CREATE  NONCLUSTERED INDEX UID ON dbo.tableName ( UID ASC )
+

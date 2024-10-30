@@ -1,0 +1,22 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/4/2008>
+-- Description:	<Delete Article Category>
+-- =============================================
+CREATE PROCEDURE [dbo].[AdminDeleteArticleCategory] 
+
+@CatId int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    DELETE dbo.Cooking_Article_Category WHERE CAT_ID = @CatId
+
+    -- Cscade Delete to Article table, delete all associated articles
+    DELETE dbo.Cooking_Article WHERE CAT_ID = @CatId
+
+END
+
+		

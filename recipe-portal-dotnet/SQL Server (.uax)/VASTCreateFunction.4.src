@@ -1,0 +1,24 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/22/2008>
+-- Description:	<Return recipe count>
+-- =============================================
+CREATE FUNCTION [dbo].[GetCategoryRecipeCount]
+(
+@CatId int
+)
+RETURNS int
+AS
+BEGIN
+	-- Declare the return variable here
+	DECLARE @GetCount int
+
+	Set @GetCount = (SELECT Count(*) As RecCount from Recipes
+    Where LINK_APPROVED = 1 AND CAT_ID = @CatId)
+
+	-- Return the result of the function
+	RETURN @GetCount
+
+END
+
+		

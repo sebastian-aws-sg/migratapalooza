@@ -1,0 +1,31 @@
+
+CREATE PROCEDURE [dbo].[spUpdateUserPreferredLayout]
+
+@UserID int,
+@PreferredLayout int
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+--Here we create a temp table variable to store our layout value for validation
+--We don't want layout value that does not exists.
+DECLARE @TemptableVar TABLE (Layout int)
+INSERT INTO @TemptableVar (Layout)
+SELECT 1
+UNION
+SELECT 2
+UNION
+SELECT 3
+
+--Check is the passed in layout value is exists before updating.
+IF Exists (SELECT Layout FROM @TemptableVar WHERE Layout = @PreferredLayout)
+   BEGIN
+	 UPDATE dbo.usersmain SET PreferredLayout = @PreferredLayout
+     WHERE [UID] = @UserID
+   END
+
+END
+
+		

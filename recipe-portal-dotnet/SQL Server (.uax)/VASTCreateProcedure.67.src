@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE [dbo].[spDeleteExceptionLog]
+
+@CsvID varchar(200)
+
+AS
+BEGIN
+
+	 SET NOCOUNT ON;
+
+	 DELETE dbo.ExceptionLog WHERE ID IN (SELECT * from dbo.fnConvertCSVToINT(@CsvID))
+
+END
+
+		

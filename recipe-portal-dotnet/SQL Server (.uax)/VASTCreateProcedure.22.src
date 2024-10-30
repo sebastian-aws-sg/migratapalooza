@@ -1,0 +1,20 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/20/2008>
+-- Description:	<Get recipe count in category>
+-- =============================================
+CREATE PROCEDURE [dbo].[CategoryPage_GetRecipesCount]
+
+@CatId int
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+SELECT COUNT(*) FROM Recipes WITH (NOLOCK) 
+WHERE LINK_APPROVED = 1 AND CAT_ID = @CatId
+
+END
+
+		

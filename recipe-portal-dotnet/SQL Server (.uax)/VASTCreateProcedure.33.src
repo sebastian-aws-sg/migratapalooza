@@ -1,0 +1,18 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/21/2008>
+-- Description:	<Count total recipes>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetCountTotalRecipes] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+     SELECT COUNT(*) FROM Recipes WITH (NOLOCK) 
+     WHERE LINK_APPROVED = 1
+
+END
+
+		

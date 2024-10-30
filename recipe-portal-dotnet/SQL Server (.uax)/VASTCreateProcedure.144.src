@@ -1,0 +1,66 @@
+
+CREATE PROCEDURE [dbo].[spSelectSearchUser]
+
+@Input varchar(50),
+@Condition int = 1,
+@PageIndex int = 1,
+@PageSize int = 20
+
+AS
+BEGIN
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+SET NOCOUNT ON;
+
+	WITH Users AS
+	(
+		SELECT
+		   ROW_NUMBER() OVER 
+			 (
+			   -- Dynamic bidirectional sorting
+				ORDER BY UserName
+			 ) AS RowNumber, 
+					[UID], 
+					UserName,
+					FirstName,
+					LastName,
+					City,
+					[State],
+					Country,
+					(SELECT Count(*) FROM dbo.usersmain WITH (NOLOCK) WHERE 
+					(@Condition = 1 AND UserName LIKE COALESCE(@Input, '%')) OR
+					(@Condition = 1 AND UserName LIKE COALESCE(@Input, UserName) + '%') OR
+					(@Condition = 2 AND FirstName LIKE COALESCE(@Input, '%')) OR
+					(@Condition = 3 AND LastName LIKE COALESCE(@Input, '%')) OR
+					(@Condition = 4 AND City LIKE COALESCE(@Input, '%')) OR
+					(@Condition = 5 AND [State] LIKE COALESCE(@Input, '%')) OR
+					(@Condition = 6 AND Country LIKE COALESCE(@Input, '%'))) as TotalCount,
+					COALESCE(NULLIF(Photo, ''), 'nophotoavailable.gif') as UserImage
+					FROM 
+						dbo.usersmain WITH (NOLOCK) WHERE
+					(@Condition = 1 AND UserName LIKE COALESCE(@Input, '%')) OR
+					(@Condition = 1 AND UserName LIKE COALESCE(@Input, UserName) + '%') OR --Alpha letter search
+					(@Condition = 2 AND FirstName LIKE COALESCE(@Input, '%')) OR
+					(@Condition = 3 AND LastName LIKE COALESCE(@Input, '%')) OR
+					(@Condition = 4 AND City LIKE COALESCE(@Input, '%')) OR
+					(@Condition = 5 AND [State] LIKE COALESCE(@Input, '%')) OR
+					(@Condition = 6 AND Country LIKE COALESCE(@Input, '%'))
+	)
+	-- Statement that executes the CTE
+	SELECT a.*
+	FROM
+		  Users a
+	WHERE
+		  a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+	ORDER BY
+		  a.RowNumber
+
+
+END
+
+		

@@ -1,0 +1,23 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/23/2008>
+-- Description:	<Insert rating>
+-- =============================================
+CREATE PROCEDURE [dbo].[AddRating]
+
+@ID int,
+@Rating int
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+	IF Exists (SELECT ID FROM dbo.Recipes WITH (NOLOCK) WHERE ID = @ID)
+	  BEGIN
+		 UPDATE dbo.Recipes SET RATING = RATING + dbo.fnValidateRatingValue(@Rating), NO_RATES = NO_RATES + 1 WHERE ID = @ID
+	  END
+
+END
+
+		

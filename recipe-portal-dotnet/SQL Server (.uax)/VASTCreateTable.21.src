@@ -1,0 +1,10 @@
+CREATE TABLE dbo.UserSuspenionLog (
+  ID int NOT NULL,
+  UID int NOT NULL,
+  Type varchar NOT NULL,
+  Note varchar NOT NULL,
+  Date datetime NOT NULL,
+  PRIMARY KEY CLUSTERED ( ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

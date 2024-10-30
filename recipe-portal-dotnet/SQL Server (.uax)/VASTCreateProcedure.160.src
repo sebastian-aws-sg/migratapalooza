@@ -1,0 +1,25 @@
+
+CREATE PROCEDURE [dbo].[spSelectUsersFeaturesConfiguration]
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT NumRecordsFriendsList, 
+		   NumRecordsCookBookQuickView,
+		   PreferredLayout, 
+		   PreferredPageSize, 
+		   IsUserChoosePreferredLayout,
+		   ReceivePM,
+		   PMEmailNotification
+	FROM 
+		dbo.usersmain WITH (NOLOCK) 
+	WHERE 
+		[UID] = @UserID
+
+END
+
+		

@@ -1,0 +1,2 @@
+CREATE  NONCLUSTERED INDEX pass ON dbo.tableName ( password ASC, Password ASC )
+

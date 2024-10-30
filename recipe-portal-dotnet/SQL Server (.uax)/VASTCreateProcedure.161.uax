@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.161" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="1810105489" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="spSelectUsersrecipeInCookBook"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.161(1,1,40,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.161"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.161" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.161.src"/>
+  <shell fullPath="VASTCreateProcedure.161.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.280" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@UserID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.161"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.281" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_Named nameAST="@NumRecords"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.161"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

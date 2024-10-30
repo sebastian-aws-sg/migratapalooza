@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE [dbo].[spDeleteUserRecipeInCookBook]
+
+@UserID int,
+@ID int
+
+AS
+BEGIN
+
+ IF Exists (SELECT * FROM dbo.userCookBook WITH (NOLOCK) WHERE [UID] = @UserID AND ID = @ID)
+    BEGIN
+       DELETE dbo.userCookBook WHERE ID = @ID AND [UID] = @UserID
+    END
+
+END
+
+		

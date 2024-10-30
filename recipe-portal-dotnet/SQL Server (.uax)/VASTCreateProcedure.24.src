@@ -1,0 +1,27 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/5/2008>
+-- Description:	<Returns article category list>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetArticleCategoryList] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+     SELECT *,
+		(
+		  SELECT COUNT (*)  
+		  FROM 
+			Cooking_Article WITH (NOLOCK) 
+		  WHERE 
+	        Cooking_Article.CAT_ID = Cooking_Article_Category.CAT_ID AND Show = 1
+		) AS REC_COUNT 
+     FROM 
+		Cooking_Article_Category WITH (NOLOCK)
+     ORDER BY 
+		CAT_NAME ASC
+
+END
+		

@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE [dbo].[spUpdateNumRecordsCookBookProfile] 
+
+@UserID int,
+@NewValue int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    UPDATE dbo.usersmain SET NumRecordsCookBookQuickView = @NewValue
+    WHERE [UID] = @UserID
+
+END
+
+		

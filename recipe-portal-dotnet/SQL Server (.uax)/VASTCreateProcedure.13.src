@@ -1,0 +1,39 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/3/2008>
+-- Description:	<Admin display comments in datagrid>
+-- =============================================
+CREATE PROCEDURE [dbo].[AdminGetRecipeComments]
+
+@FindByAuthor varchar(50) = ''
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+DECLARE @FindByAuthor_Val varchar(50)
+
+IF (@FindByAuthor = '')
+   BEGIN
+	 SET @FindByAuthor_Val = NULL
+   END
+ELSE
+   BEGIN
+	 SET @FindByAuthor_Val = @FindByAuthor
+   END
+
+	SELECT COM_ID, 
+			ID, 
+			AUTHOR, 
+			EMAIL, 
+			COMMENTS, 
+			DATE 
+	FROM 
+		dbo.COMMENTS_RECIPE WITH (NOLOCK)
+	WHERE (@FindByAuthor_Val IS NOT NULL AND AUTHOR = @FindByAuthor) OR (@FindByAuthor = '')
+	ORDER By DATE DESC
+
+END
+
+		

@@ -1,0 +1,2 @@
+CREATE  NONCLUSTERED INDEX uname ON dbo.tableName ( UserName ASC )
+

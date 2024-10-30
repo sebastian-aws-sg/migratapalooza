@@ -1,0 +1,31 @@
+
+CREATE PROCEDURE [dbo].[spInsertPrivateMessage]
+
+@Subject varchar(100),
+@FromUserID int,
+@ToUserName varchar(50),
+@Message varchar(4000)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DECLARE @ToUserID int
+
+	IF Exists (SELECT [UID] FROM dbo.usersmain WITH (NOLOCK) WHERE UserName = @ToUserName)
+		BEGIN
+
+			SELECT @ToUserID = [UID] FROM dbo.usersmain WITH (NOLOCK) WHERE UserName = @ToUserName;
+
+			INSERT INTO dbo.PrivateMessage (M_Subject, M_From, M_To, M_Sent, PM_Message)
+			VALUES(@Subject, @FromUserID, @ToUserID, GETDATE(), @Message);
+
+			INSERT INTO dbo.PrivateMessageSentMessages (M_Subject, M_From, M_To, M_Sent, PM_Message)
+			VALUES(@Subject, @FromUserID, @ToUserID, GETDATE(), @Message)
+
+		END
+
+END
+
+		

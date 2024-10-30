@@ -1,0 +1,16 @@
+
+CREATE PROCEDURE [dbo].[spVerifyUserLoginCredential]
+
+@Username varchar(50),
+@UserPassword varchar(50)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT COUNT(*) AS UCount FROM dbo.usersmain WITH (NOLOCK) WHERE UserName = @Username AND Password = @UserPassword
+
+END
+
+		

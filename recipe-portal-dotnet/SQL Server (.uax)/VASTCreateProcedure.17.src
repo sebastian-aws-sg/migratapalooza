@@ -1,0 +1,19 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/31/2008>
+-- Description:	<Update Last Viewed Hours Span>
+-- =============================================
+CREATE PROCEDURE AdminUpdateLastViewedHours
+ 
+@Minutes int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    UPDATE ConfigureLastViewedHours SET Hourspan = @Minutes
+
+END
+
+		

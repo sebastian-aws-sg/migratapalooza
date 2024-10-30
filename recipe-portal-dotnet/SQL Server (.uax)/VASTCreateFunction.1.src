@@ -1,0 +1,26 @@
+
+CREATE FUNCTION [dbo].[fnValidateRatingValue]
+(
+	@Rating int
+)
+RETURNS int
+AS
+BEGIN
+	
+    DECLARE @RatingValue int
+
+	IF (@Rating = '' OR @Rating <= 0 OR @Rating > 5)
+		BEGIN
+		 SET @RatingValue = 3
+		END
+	ELSE
+		BEGIN
+		 SET @RatingValue = @Rating
+		END
+
+	RETURN @RatingValue
+
+END
+
+
+		

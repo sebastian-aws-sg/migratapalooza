@@ -1,0 +1,34 @@
+
+CREATE PROCEDURE [dbo].[spSelectSiteConfigurationAdmin] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    DECLARE @LastViewedHours int
+
+    SELECT @LastViewedHours = (Hourspan / 60) FROM ConfigureLastViewedHours WITH (NOLOCK)
+
+	SELECT HideShowComment,
+			HideShowArticleComment,
+            NumberOfrecipeInCookBook,
+			NumberOfFriendsInFriendsList,
+			Email as AdminToEmail,
+			SmtpServer as AdminFromEmail,
+			PublicPrivateProfile,
+            @LastViewedHours as MinuteSpan
+	FROM dbo.Configuration WITH (NOLOCK)
+	
+	//edited for testing
+	Begin
+     If @@error !=0
+          Raiserror xxx
+
+    End
+      /*return the error value*/
+       Return @@error
+
+END
+
+		

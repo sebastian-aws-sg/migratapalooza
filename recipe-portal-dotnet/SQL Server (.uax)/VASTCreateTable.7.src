@@ -1,0 +1,7 @@
+CREATE TABLE dbo.Cooking_Article_Category (
+  CAT_ID int NOT NULL,
+  CAT_NAME nvarchar NOT NULL,
+  PRIMARY KEY CLUSTERED ( CAT_ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

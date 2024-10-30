@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateTable.4" instanceOf="CAST_MSTSQL_RelationalTable">
+  <CAST_SQL_Object owner="dbo" objectId="1595152728" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="Configuration"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.215(1,1,11,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.215" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateTable.4.src"/>
+  <shell fullPath="VASTCreateTable.4.src"/>
+ </instance>
+<instance id="p_ColumnOfTable.20" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="HideShowComment"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.4"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.21" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="HideShowArticleComment"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.4"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.22" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="3"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="NumberOfrecipeInCookBook"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.4"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.23" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="4"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="NumberOfFriendsInFriendsList"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.4"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.24" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="5"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Email"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.4"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.25" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="6"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="SmtpServer"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.4"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.26" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="7"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="PublicPrivateProfile"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.4"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

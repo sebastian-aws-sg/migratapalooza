@@ -1,0 +1,19 @@
+
+CREATE PROCEDURE [dbo].[spSelectCountUserWhoAddMeInFriendsList] 
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Count(*) col1 
+	FROM 
+		dbo.FriendsList WITH (NOLOCK) 
+	WHERE 
+		FriendID = @UserID
+
+END
+
+		

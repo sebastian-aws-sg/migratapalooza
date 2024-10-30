@@ -1,0 +1,56 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/21/2008>
+-- Description:	<Get the newest and top recipes for the sidemenu with count date difference.>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetNewestRecipesSideMenu] 
+
+@CatId int = '',
+@Top int
+
+AS
+BEGIN
+
+DECLARE @CatIdValue int
+DECLARE @CatID_Val int
+
+SET ROWCOUNT @Top
+
+If (@CatId <> '')
+   BEGIN
+	 IF NOT Exists (SELECT CAT_ID FROM dbo.RECIPE_CAT WITH (NOLOCK) WHERE CAT_ID = @CatId)
+		  BEGIN
+			SET @CatIdValue = (SELECT TOP 1 CAT_ID FROM dbo.RECIPE_CAT WITH (NOLOCK))
+		  END
+		ELSE
+		  BEGIN
+			SET @CatIdValue = @CatId
+		  END
+     SET @CatID_Val = 1
+   END
+ELSE
+   BEGIN
+     SET @CatID_Val = NULL
+   END
+
+
+   SELECT ID,
+         [Name],
+         HITS,
+         Category,
+         Date,
+         COALESCE(NULLIF(RecipeImage, ''), 'noimageavailable.gif') as RecipeImage
+   FROM 
+		Recipes WITH (NOLOCK)
+   WHERE
+   (@CatID_Val IS NOT NULL AND (LINK_APPROVED = 1 AND CAT_ID = @CatIdValue)) OR
+   (@CatID_Val IS NULL AND LINK_APPROVED = 1)
+   ORDER BY 
+		Date DESC
+
+   -- never forget to set it back to 0! 
+   SET ROWCOUNT 0 
+
+END
+
+		

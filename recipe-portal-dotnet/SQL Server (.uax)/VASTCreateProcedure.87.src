@@ -1,0 +1,162 @@
+
+CREATE PROCEDURE [dbo].[spInsertUser] 
+
+@Username varchar(50),
+@Password varchar(50),
+@Email    varchar(50),
+@Firstname varchar(50),
+@Lastname  varchar(50),
+@City	   varchar(50) = '',
+@State     varchar(50) = '',
+@Country   varchar(50),
+@DOB       varchar(50) = '',
+@FavoriteFoods1 varchar(50) = '',
+@FavoriteFoods2 varchar(50) = '',
+@FavoriteFoods3 varchar(50) = '',
+@Newsletter     int = 1,
+@ContactMe      int = 1,
+@Website        varchar(100) = '',
+@AboutMe        varchar(1000) = '',
+@Photo          varchar(50) = '',
+@Guid           varchar(100)
+
+
+AS
+
+DECLARE @ErrorCode int
+
+SET @ErrorCode = @@error
+
+BEGIN TRANSACTION
+
+IF ( @ErrorCode = 0 )
+
+BEGIN
+
+DECLARE @CityValue varchar(50)
+DECLARE @StateValue varchar(50)
+DECLARE @FavoriteFoods1Value varchar(50)
+DECLARE @FavoriteFoods2Value varchar(50)
+DECLARE @FavoriteFoods3Value varchar(50)
+DECLARE @WebsiteValue varchar(50)
+DECLARE @AboutMeValue varchar(50)
+
+--Instead of NULL, we use NA.
+IF (@City = '')
+  BEGIN
+    SET @CityValue = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @CityValue = @City
+  END
+
+IF (@State = '')
+  BEGIN
+    SET @StateValue = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @StateValue = @State
+  END
+
+IF (@FavoriteFoods1 = '')
+  BEGIN
+    SET @FavoriteFoods1Value = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @FavoriteFoods1Value = @FavoriteFoods1
+  END
+
+IF (@FavoriteFoods2 = '')
+  BEGIN
+    SET @FavoriteFoods2Value = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @FavoriteFoods2Value = @FavoriteFoods2
+  END
+
+IF (@FavoriteFoods3 = '')
+  BEGIN
+    SET @FavoriteFoods3Value = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @FavoriteFoods3Value = @FavoriteFoods3
+  END
+
+IF (@Website = '')
+  BEGIN
+    SET @WebsiteValue = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @WebsiteValue = @Website
+  END
+
+IF (@AboutMe = '')
+  BEGIN
+    SET @AboutMeValue = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @AboutMeValue = @AboutMe
+  END
+
+ INSERT INTO dbo.usersmain
+(
+	UserName,
+	[Password],
+	Email,
+	FirstName,
+	LastName,
+	City,
+	[State],
+	Country,
+	DOB,
+	FavoriteFoods1,
+	FavoriteFoods2,
+	FavoriteFoods3,
+	NewsLetter,
+	DateJoined,
+	ContactMe,
+	Website,
+	AboutMe,
+	Photo,
+    [GUID]
+)
+VALUES
+(
+	@Username,
+	@Password,
+	@Email,
+	@Firstname,
+	@Lastname,
+	@CityValue,
+	@StateValue,
+	@Country,
+	@DOB,
+	@FavoriteFoods1Value,
+	@FavoriteFoods2Value,
+	@FavoriteFoods3Value,
+	@Newsletter,
+    GETDATE(),
+	@ContactMe,
+	@WebsiteValue,
+	@AboutMeValue,
+	@Photo,
+    @Guid
+)
+
+END
+
+IF ( @ErrorCode = 0 )
+	COMMIT TRANSACTION
+ELSE
+	ROLLBACK TRANSACTION
+
+RETURN @ErrorCode
+
+		

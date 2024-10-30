@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE spUpdateArticleCommentConfiguration
+
+@Val int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	UPDATE dbo.Configuration SET HideShowArticleComment = @Val
+
+END
+
+		

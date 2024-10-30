@@ -1,0 +1,54 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/6/2008>
+-- Description:	<Returns Category Articles custom paging and bidirectional dynamic sorting>
+-- =============================================
+CREATE PROCEDURE [dbo].[CategoryPage_Article] 
+
+@CATID int,
+@OrderBy int = '',
+@SortBy int = ''
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT a.ID,
+       a.CAT_ID,
+       b.CAT_NAME, 
+       a.Title, 
+       a.Post_Date, 
+       a.Content, 
+       a.Hits, 
+       a.Author,
+       a.Keyword,
+       a.No_Rates, 
+       CAST((1.0 * a.No_Rating/a.No_Rates) as decimal(2,1)) as Rates,
+       dbo.GetCategoryArticleCount(@CATID) As RCount, 
+       a.Summary,
+       a.Total_Comments        
+       FROM 
+			Cooking_Article a WITH (NOLOCK) 
+	   INNER JOIN 
+			Cooking_Article_Category b WITH (NOLOCK)
+       ON 
+			a.CAT_ID = b.CAT_ID
+       WHERE Show = 1 AND a.CAT_ID = @CATID
+		ORDER BY
+		CASE WHEN @OrderBy = 1 AND @SortBy = 1 THEN a.Hits END DESC,
+		CASE WHEN @OrderBy = 1 AND @SortBy = '' THEN a.Hits END DESC,
+		CASE WHEN @OrderBy = 1 AND @SortBy = 2 THEN a.Hits END ASC,
+		CASE WHEN @OrderBy = 2 AND @SortBy = 1 THEN a.No_Rates END DESC,
+		CASE WHEN @OrderBy = 2 AND @SortBy = '' THEN a.No_Rates END DESC,
+		CASE WHEN @OrderBy = 2 AND @SortBy = 2 THEN a.No_Rates END ASC,
+		CASE WHEN @OrderBy = 3 AND @SortBy = 2 THEN a.Title END ASC,
+		CASE WHEN @OrderBy = 3 AND @SortBy = '' THEN a.Title END ASC,
+		CASE WHEN @OrderBy = 3 AND @SortBy = 1 THEN a.Title END DESC,
+		CASE WHEN @OrderBy = 4 AND @SortBy = 1 OR @OrderBy = '' THEN a.Post_Date END DESC,
+		CASE WHEN @OrderBy = 4 AND @SortBy = '' OR @OrderBy = '' THEN a.Post_Date END DESC,
+		CASE WHEN @OrderBy = 4 AND @SortBy = 2 THEN a.Post_Date END ASC
+
+END
+
+		

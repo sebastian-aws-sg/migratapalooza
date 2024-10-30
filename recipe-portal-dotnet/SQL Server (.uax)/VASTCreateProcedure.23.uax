@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.23" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="1957582012" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="FinalizeArticleSubmission"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.23(1,1,20,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.23"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.23" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.23.src"/>
+  <shell fullPath="VASTCreateProcedure.23.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.48" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@ID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.23"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE spUpdateUserReceivePMEmailAlert
+
+@UserID int,
+@NewVal int
+
+AS
+BEGIN
+
+	UPDATE dbo.usersmain SET PMEmailNotification = @NewVal
+	WHERE [UID] = @UserID
+
+END
+
+		

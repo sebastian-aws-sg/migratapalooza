@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.175" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="2059154381" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="spUpdateMarkedPMOldMsgViaAJAX"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.175(1,1,18,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.175"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.175" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.175.src"/>
+  <shell fullPath="VASTCreateProcedure.175.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.305" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@PMID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.175"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.306" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_Named nameAST="@UserID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.175"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

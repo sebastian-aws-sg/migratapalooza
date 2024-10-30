@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE spSelectCountPMBlocklistedUsers
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Count(*) Col1 FROM dbo.PrivateMessageBlockedUsers bu WITH (NOLOCK) WHERE [UID] = @UserID
+
+END
+
+		

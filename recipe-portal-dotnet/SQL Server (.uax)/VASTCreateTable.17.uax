@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateTable.17" instanceOf="CAST_MSTSQL_RelationalTable">
+  <CAST_SQL_Object owner="dbo" objectId="1838629593" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="RecipeUpdateLog"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.228(1,1,9,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.228" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateTable.17.src"/>
+  <shell fullPath="VASTCreateTable.17.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_GenericColumnReference.15" instanceOf="CAST_AST_ANSISQL_GenericColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_WithParent parentAST="p_Constraint.15"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.114"/>
+</instance>
+<instance id="p_Constraint.15" instanceOf="CAST_MSTSQL_PrimaryKeyConstraint">
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_Resolution_Identification resolutionName="PK_UpdatedRecipeLog"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.17"/>
+ <CAST_ANSISQL_Constraint nameIsDefinedByDBMS="0"/>
+ <CAST_TSQL_IsClustered isClustered="1"/>
+</instance>
+<instance id="p_ColumnOfTable.114" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="ID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.17"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.115" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="RID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.17"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.116" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="3"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="UID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.17"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.117" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="4"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="DateUpdated"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.17"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="datetime" length="8" precision="23" scale="3"/>
+</instance>
+</instances>

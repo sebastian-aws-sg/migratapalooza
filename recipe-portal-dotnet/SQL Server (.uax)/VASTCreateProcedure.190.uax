@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.190" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="226099846" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="UpdateArticleCategory"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.190(1,1,21,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.190"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.190" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.190.src"/>
+  <shell fullPath="VASTCreateProcedure.190.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.359" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@Catid"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.190"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.360" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_Named nameAST="@CatName"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.190"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="100" precision="0" scale="0"/>
+</instance>
+</instances>

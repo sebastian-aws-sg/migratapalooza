@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE [dbo].[spUpdateLastVisit]
+
+@UserID int
+
+AS
+BEGIN
+
+UPDATE dbo.usersmain
+SET LastVisit = GETDATE()
+WHERE [UID] = @UserID
+
+END
+
+		

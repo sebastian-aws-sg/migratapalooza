@@ -1,0 +1,11 @@
+1) Open SQL Management Studio. 
+
+2) Create a new Database name"XDPortal". 
+
+3) Right click on the new database "XDPortal" and click restore database.
+
+4) In the restore window. Navigate to the backup sql which is inside the "app_data" folder. 
+
+5) Check the database to restore and click the option in the left panel. This will open another window. There, select overwrite database. 
+
+Check MSDN tutorial: http://msdn.microsoft.com/en-us/library/ms177429.aspx

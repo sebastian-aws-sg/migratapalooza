@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateFunction.5" instanceOf="CAST_MSTSQL_Function">
+  <CAST_SQL_Object objectId="306100131" owner="dbo" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="GetSearchResultArticleCount"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.198(1,1,44,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.198"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.198" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateFunction.5.src"/>
+  <shell fullPath="VASTCreateFunction.5.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.371" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@Search"/>
+ <CAST_AST_WithParent parentAST="VASTCreateFunction.5"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.372" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_Named nameAST="@CATID"/>
+ <CAST_AST_WithParent parentAST="VASTCreateFunction.5"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_ReturnParameter.5" instanceOf="CAST_AST_ANSISQL_ReturnParameter">
+ <CAST_AST_ANSISQL_WithOrder order="-1"/>
+ <CAST_Named nameAST="&lt;return value&gt;"/>
+ <CAST_AST_WithParent parentAST="VASTCreateFunction.5"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

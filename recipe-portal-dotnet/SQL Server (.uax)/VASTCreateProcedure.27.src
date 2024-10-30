@@ -1,0 +1,59 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/5/2008>
+-- Description:	<Returns article details>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetArticleDetails] 
+
+@AID int,
+@Show int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DECLARE @Show_Val int
+
+	IF (@Show = 1)
+		BEGIN
+		   SET @Show_Val = 1
+		END
+	ELSE
+		BEGIN
+		   SET @Show_Val = NULL
+		END
+
+	SELECT a.ID,
+		   a.CAT_ID,
+		   b.CAT_NAME, 
+		   a.Title, 
+		   a.Post_Date, 
+		   a.Content, 
+		   a.Hits, 
+		   a.Author,
+		   a.Keyword,
+		   a.No_Rates, 
+		   CAST((1.0 * a.No_Rating/a.No_Rates) as decimal(2,1)) as Rates,
+		   a.Summary,
+		   a.Total_Comments,
+		   a.UID       
+		   FROM 
+				dbo.Cooking_Article a WITH (NOLOCK) 
+		   INNER JOIN 
+				dbo.Cooking_Article_Category b WITH (NOLOCK)
+		   ON 
+				a.CAT_ID = b.CAT_ID
+		   WHERE
+		   (@Show_Val IS NOT NULL AND (a.Show = 1 AND a.ID = @AID)) OR
+		   (@Show_Val IS NULL AND a.ID = @AID)
+
+	IF (@Show_Val IS NOT NULL)
+		BEGIN
+		   -- Update article hit counter
+		   UPDATE dbo.Cooking_Article set Hits = Hits + 1 WHERE ID = @AID
+		END
+
+END
+
+		

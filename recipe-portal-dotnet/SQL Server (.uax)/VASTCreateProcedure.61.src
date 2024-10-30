@@ -1,0 +1,20 @@
+
+CREATE PROCEDURE [dbo].[spCheckIfFrienExistsInFriendsList] 
+
+@UserID int,
+@FriendID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT COUNT(*) Col1 
+	FROM 
+		dbo.FriendsList WITH (NOLOCK) 
+	WHERE 
+		[UID] = @UserID AND FriendID = @FriendID
+
+END
+
+		

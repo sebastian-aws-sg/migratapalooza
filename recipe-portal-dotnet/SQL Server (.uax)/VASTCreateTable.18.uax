@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateTable.18" instanceOf="CAST_MSTSQL_RelationalTable">
+  <CAST_SQL_Object owner="dbo" objectId="818101955" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="userCookBook"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.229(1,1,11,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.229" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateTable.18.src"/>
+  <shell fullPath="VASTCreateTable.18.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_GenericColumnReference.16" instanceOf="CAST_AST_ANSISQL_GenericColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_WithParent parentAST="p_Constraint.16"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.118"/>
+</instance>
+<instance id="p_Constraint.16" instanceOf="CAST_MSTSQL_PrimaryKeyConstraint">
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_Resolution_Identification resolutionName="PK_userCookBook"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.18"/>
+ <CAST_ANSISQL_Constraint nameIsDefinedByDBMS="0"/>
+ <CAST_TSQL_IsClustered isClustered="1"/>
+</instance>
+<instance id="p_ColumnOfTable.118" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="ID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.18"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.119" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="UID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.18"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.120" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="3"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="RecipeID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.18"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.121" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="4"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="RecipeName"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.18"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="100" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.122" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="5"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="1"/>
+ <CAST_Resolution_Identification resolutionName="Hits"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.18"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.123" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="6"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="1"/>
+ <CAST_Resolution_Identification resolutionName="Date"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.18"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="datetime" length="8" precision="23" scale="3"/>
+</instance>
+</instances>

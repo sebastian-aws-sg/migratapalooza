@@ -1,0 +1,43 @@
+
+CREATE PROCEDURE [dbo].[spSelectEventWeekView]
+
+@StartDate datetime,
+@EventType varchar(50) = 'All' 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DECLARE @EventType_Val varchar(50)
+
+	IF (@EventType = 'All')
+		 BEGIN
+			SET @EventType_Val = NULL
+		 END
+	ELSE
+		 BEGIN
+			SET @EventType_Val = @EventType
+		 END
+
+	SELECT EVENT_ID, 
+		   DATE_ADDED, 
+		   [START_DATE], 
+		   END_DATE,
+		   CATEGORY,
+		   EVENT_TITLE, 
+		   EVENT_DETAILS,
+		   APPMEETING_STARTTIME,
+		   APPMEETING_ENDTIME,
+		   [UID], 
+		   [PRIVATE]
+	FROM 
+		 dbo.Events WITH (NOLOCK)
+	WHERE 
+	(@EventType_Val IS NULL AND ([PRIVATE] = 0 AND [START_DATE] = @StartDate))
+	 OR
+	(@EventType_Val IS NOT NULL AND ([PRIVATE] = 0 AND CATEGORY = @EventType AND [START_DATE] = @StartDate))
+
+END
+
+		

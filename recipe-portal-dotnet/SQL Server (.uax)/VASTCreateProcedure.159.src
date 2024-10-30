@@ -1,0 +1,77 @@
+
+CREATE PROCEDURE [dbo].[spSelectUsersCookBookMain]
+
+@UserID int,
+@OrderBy int = '',
+@SortBy int = '',
+@PageIndex int = 1,
+@PageSize int = 20
+
+AS
+BEGIN
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+DECLARE @Counter int
+SELECT @Counter = Count(*) FROM dbo.userCookBook WITH (NOLOCK) WHERE [UID] = @UserID
+
+SET NOCOUNT ON;
+
+WITH CookBook AS
+	(
+		SELECT
+		   ROW_NUMBER() OVER 
+			 (
+       -- Dynamic bidirectional sorting
+        ORDER BY 
+              CASE WHEN @OrderBy = 1 AND @SortBy = 1 THEN r.Hits END DESC,
+              CASE WHEN @OrderBy = 1 AND @SortBy = '' THEN r.Hits END DESC,
+              CASE WHEN @OrderBy = 1 AND @SortBy = 2 THEN r.Hits END ASC,
+              CASE WHEN @OrderBy = 2 AND @SortBy = 2 THEN r.NO_RATES END ASC,
+              CASE WHEN @OrderBy = 2 AND @SortBy = '' THEN r.NO_RATES END ASC,
+              CASE WHEN @OrderBy = 2 AND @SortBy = 1 THEN r.NO_RATES END DESC,
+              CASE WHEN @OrderBy = 3 AND @SortBy = 2 THEN ucb.RecipeName END ASC,
+              CASE WHEN @OrderBy = 3 AND @SortBy = '' THEN ucb.RecipeName END ASC,
+              CASE WHEN @OrderBy = 3 AND @SortBy = 1 THEN ucb.RecipeName END DESC,
+              CASE WHEN @OrderBy = 4 AND @SortBy = 1 OR @OrderBy = '' THEN ucb.Date END DESC,
+              CASE WHEN @OrderBy = 4 AND @SortBy = '' OR @OrderBy = '' THEN ucb.Date END DESC,
+              CASE WHEN @OrderBy = 4 AND @SortBy = 2 THEN ucb.Date END ASC
+			 ) AS RowNumber, 
+				   ucb.ID, 
+				   ucb.[UID], 
+				   ucb.RecipeID, 
+				   ucb.RecipeName, 
+				   r.Hits, 
+				   ucb.Date, 
+				   @Counter as TotalCount,
+				   r.Author,
+				   r.Category,
+				   r.TOTAL_COMMENTS,
+				   CAST((1.0 * r.RATING/r.NO_RATES) as decimal(2,1)) as Rates,
+				   COALESCE(NULLIF(r.RecipeImage, ''), 'noimageavailable.gif') as RecipeImage
+			FROM 
+			   dbo.userCookBook ucb WITH (NOLOCK) 
+			INNER JOIN
+			   dbo.Recipes r WITH (NOLOCK)
+			ON
+			   ucb.RecipeID = r.ID
+			WHERE 
+			   ucb.[UID] = @UserID
+	)
+	-- Statement that executes the CTE
+	SELECT a.*
+	FROM
+		  CookBook a
+	WHERE
+		  a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+	ORDER BY
+		  a.RowNumber
+
+
+END
+
+		

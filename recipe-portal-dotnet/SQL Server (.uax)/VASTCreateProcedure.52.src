@@ -1,0 +1,17 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/29/2008>
+-- Description:	<Returns total comments count>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetTotalCommentsCount]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT Count(*) FROM dbo.COMMENTS_RECIPE WITH (NOLOCK)
+
+END
+
+		

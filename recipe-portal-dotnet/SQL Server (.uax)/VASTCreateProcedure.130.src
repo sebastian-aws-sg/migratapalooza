@@ -1,0 +1,28 @@
+
+CREATE PROCEDURE [dbo].[spSelectLast5UsersWhoSavedMyRecipeInCookBook]
+
+@UserID int 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT TOP 5 ucb.UID, u.UserName, max(ucb.Date) Date FROM dbo.userCookBook ucb WITH (NOLOCK)
+	INNER JOIN
+		dbo.Recipes r WITH (NOLOCK)
+	ON
+		ucb.RecipeID = r.ID
+	INNER JOIN
+		dbo.usersmain u WITH (NOLOCK)
+	ON
+		ucb.UID = u.UID
+	WHERE 
+		r.UID = @UserID
+	GROUP BY
+	ucb.UID,
+	u.UserName
+
+END
+
+		

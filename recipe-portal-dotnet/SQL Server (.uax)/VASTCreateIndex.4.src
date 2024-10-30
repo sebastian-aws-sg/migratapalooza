@@ -1,0 +1,2 @@
+CREATE  NONCLUSTERED INDEX startdate ON dbo.tableName ( START_DATE ASC )
+

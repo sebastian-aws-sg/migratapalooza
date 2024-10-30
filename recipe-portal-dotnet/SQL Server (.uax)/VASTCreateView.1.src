@@ -1,0 +1,87 @@
+CREATE VIEW [dbo].[usersview]
+AS
+
+SELECT 	u.[UID], 
+		u.UserName,
+		u.[Password],
+		u.Email,
+		u.FirstName,
+		u.LastName,
+		u.City,
+		u.[State],
+		u.Country,
+		u.isActive,
+		u.DateJoined,
+		u.Activation,
+		u.LastVisit,
+		u.Hits,
+        u.LastUpdated,
+		u.ShowFriendsListinProfile,
+		u.ShowCookBookinProfile,
+        u.NumRecordsCookBookQuickView,
+        u.NumRecordsFriendsList,
+		u.PreferredLayout,
+		u.PreferredPageSize,
+		u.IsUserChoosePreferredLayout,
+		u.ReceivePM,
+		u.PMEmailNotification,
+		CASE u.UserLevel
+		WHEN '1' THEN 'Regular Member'
+		WHEN '2' THEN 'Editor'
+		WHEN '3' THEN 'Administrator'
+		END AS UserLevel,
+		ISNULL(tsr.TotalSavedRecipe, 0) TotalSavedRecipe,
+		ISNULL(tf.TotalFriends, 0) TotalFriends,
+		ISNULL(tr.TotalSubmittedRecipe, 0) TotalSubmittedRecipe,
+		ISNULL(tsa.TotalSubmittedArticle, 0) TotalSubmittedArticle,
+        ISNULL(tcr.TotalCount, 0) TotalCommentRecipe,
+        ISNULL(tca.TotalCount, 0) TotalCommentArticle,
+		COALESCE(NULLIF(u.Photo, ''), 'nophotoavailable.gif') as UserImage
+		FROM 
+			dbo.usersmain u WITH (NOLOCK)
+		LEFT OUTER JOIN
+		(
+			SELECT [UID], Count(*) as TotalSavedRecipe FROM dbo.userCookBook WITH (NOLOCK)
+			GROUP BY [UID]
+		) tsr
+		ON
+			u.[UID] = tsr.[UID]
+		LEFT OUTER JOIN
+        (
+			SELECT [UID], Count(*) as TotalFriends FROM dbo.FriendsList WITH (NOLOCK)
+			WHERE IsApproved = 1
+			GROUP BY [UID]
+         ) tf
+		ON
+			u.[UID] = tf.UID
+		LEFT OUTER JOIN
+		(
+			SELECT [UID], Count(*) as TotalSubmittedRecipe FROM dbo.Recipes WITH (NOLOCK)
+			GROUP BY [UID]
+		) tr
+		ON
+			u.[UID] = tr.UID
+		LEFT OUTER JOIN
+		(
+			SELECT [UID], Count(*) as TotalSubmittedArticle FROM dbo.Cooking_Article WITH (NOLOCK)
+			GROUP BY [UID]
+		) tsa
+		ON
+			u.[UID] = tsa.UID
+		LEFT OUTER JOIN
+		(
+			SELECT [UID], Count(*) as TotalCount FROM dbo.COMMENTS_RECIPE WITH (NOLOCK)
+			GROUP BY [UID]
+		) tcr
+		ON
+			u.UID = tcr.UID
+        LEFT OUTER JOIN
+		(
+			SELECT [UID], Count(*) as TotalCount FROM dbo.COMMENTS_ARTICLE WITH (NOLOCK)
+			GROUP BY [UID]
+		) tca
+		ON
+			u.UID = tca.UID
+
+              
+              

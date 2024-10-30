@@ -1,0 +1,18 @@
+
+CREATE PROCEDURE [dbo].[spSelectUserStatus]
+
+@Username varchar(50),
+@UserPassword varchar(50) 
+
+AS
+BEGIN
+
+	SELECT isActive 
+	FROM 
+		dbo.usersmain WITH (NOLOCK) 
+	WHERE 
+		UserName = @Username AND [Password] = @UserPassword 
+
+END
+
+		

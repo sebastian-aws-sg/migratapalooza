@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.3" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="789577851" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="AddRating"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.3(1,1,23,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.3"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.3" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.3.src"/>
+  <shell fullPath="VASTCreateProcedure.3.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.8" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@ID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.3"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.9" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_Named nameAST="@Rating"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.3"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

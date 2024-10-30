@@ -1,0 +1,29 @@
+
+CREATE PROCEDURE [dbo].[spSelectLast25UsersWhoAddedRecipeInCookBook] 
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+	SELECT TOP 25 max(ucb.UID) [UID],
+				  max(t1.UserName) UserName,
+				  max(ucb.RecipeID) RecipeID, 
+				  max(ucb.RecipeName) RecipeName, 
+				  max(ucb.Date) Date 
+    FROM 
+		dbo.userCookBook ucb WITH (nOLOCK)
+	INNER JOIN
+		(
+		   SELECT [UID], 
+				  UserName 
+		   FROM 
+              dbo.usersmain WITH (NOLOCK)
+		) t1
+	ON
+		ucb.UID = t1.UID
+	GROUP BY ucb.UID
+
+END
+
+		

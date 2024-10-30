@@ -1,0 +1,33 @@
+
+CREATE PROCEDURE [dbo].[spSelectGetPublicEventDetails]
+
+@ID int 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT e.DATE_ADDED,
+			e.START_DATE,
+			e.END_DATE,
+			e.CATEGORY,
+			e.EVENT_TITLE,
+			e.EVENT_DETAILS,
+			e.UID,
+			u.UserName,
+            e.START_DATE,
+            e.APPMEETING_STARTTIME,
+            e.APPMEETING_ENDTIME
+	FROM
+		dbo.Events e WITH (NOLOCK)
+	INNER JOIN
+		dbo.usersmain u WITH (NOLOCK)
+	ON
+		e.UID = u.UID
+	WHERE 
+		e.EVENT_ID = @ID AND e.PRIVATE = 0
+
+END
+
+		

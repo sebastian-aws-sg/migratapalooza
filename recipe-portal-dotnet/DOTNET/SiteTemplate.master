@@ -1,0 +1,85 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SiteTemplate.master.cs" Inherits="SiteTemplate" %>
+<%@ Register TagPrefix="ucl" TagName="newesttoprecipes" Src="Control/newesttoprecipes.ascx" %>
+<%@ Register TagPrefix="ucl" TagName="Login" Src="Control/Login.ascx" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>XD World Recipe</title>
+    <script type="text/javascript" src="js/rcipejs.js"></script>
+    <script type="text/javascript" src="js/popupAjax.js"></script>   
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="js/alertbox.js"></script>
+    <script type="text/javascript" src="js/thickbox-compressed.js"></script>
+    <link href="CSS/cssreciaspx.css" rel="stylesheet" type="text/css" />
+    <link href="CSS/thickbox.css" rel="stylesheet" type="text/css" />
+<!--[if gte IE 5]>
+<style>
+.textboxsearch {height: 17px;}
+.contrememberme {margin-top: 0px;}
+.headerrightdatetime {line-height: 0px; margin-top: 25px;}
+.loginerrmsgwrapper {margin-bottom: 18px;}
+.contrememberme {margin-top: 0px;}
+.loginboxlabelwrapper {margin-left: 215px;}
+.MainCourseCat {margin-left: 0;}
+.EthnicCat {margin-left: 0;}
+#b2 ul a {height: 1.2em;}
+#b2 li {float: left; clear: both; width: 100%;}
+fieldset {background: #ffffff;}
+</style>
+<![endif]-->
+</head>
+<body>
+    <script type="text/javascript" src="js/wz_tooltip.js"></script>
+    <form id="form1" runat="server">
+    <div id="header">
+        <!--Begin Header-->
+        <a name="Top"></a>
+        <div class="headerwrap">
+        <div class="headerlogoleft"><a name="Top"></a><a title="Myasp-net.com" href="default.aspx"><img src="images/recipelogo.gif" width="357" height="70" border="0" alt="Myasp-net.com" /></a></div>
+        <div class="headerright">
+        <div class="headerrightdatetime">
+        <ucl:Login id="loginbox" runat="server"></ucl:Login>
+        </div>
+        </div>
+        </div>
+        <div style="clear:both;"></div>
+        <!--End Header-->   
+    </div>
+    
+<table border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
+ <tr>
+    <td width="15%" valign="top" align="left">
+    <asp:contentplaceholder id="LeftPanel" runat="server"></asp:contentplaceholder>
+    </td>
+    <td width="70%" valign="top">   
+        <div id="middlecontent">
+            <asp:contentplaceholder id="MainContent" runat="server"></asp:contentplaceholder>
+        </div>    
+  </td>
+<td width="15%" valign="top" align="left">
+<br />
+    <ucl:newesttoprecipes id="newcont" runat="server"></ucl:newesttoprecipes>
+</td>
+  </tr>
+</table>  
+<div style="margin-top: 20px;"></div>
+  <div id="footer">
+        <!--Begin Footer-->
+        <div class="footerwrap">
+        <br />
+        <img src="images/returntop.gif" alt="return to top" align="absmiddle" border="0" /><a class="dt2" title="Return to top of the page" href="#Top">Return to top</a>
+        <br />
+        <span class="content2">
+        Copyright © 2000 - 2009 Ex-designz.net. All rights reserved. Developed By <a class="dt2" title="Website" href="http://www.ex-designz.net">Dexter Zafra - Ex-designz.net</a></span>
+        <br />
+         <asp:HyperLink id="Powered" cssClass="dt2" ToolTip="Visit myasp-net.com" NavigateURL="http://www.myasp-net.com" runat="server">Powered By Myasp-net XD Portal V3</asp:HyperLink>
+         <br /><br />
+         </div>
+        <!--End Footer--> 
+  </div>
+ </form>
+</body>
+</html>

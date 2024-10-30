@@ -1,0 +1,71 @@
+
+CREATE PROCEDURE [dbo].[spSelectDisplayAllMembers]
+
+@OrderBy int = '',
+@SortBy int = '',
+@PageIndex int = 1,
+@PageSize int = 20
+
+AS
+BEGIN
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+DECLARE @TotalUsersCount int
+
+SELECT @TotalUsersCount = Count(*) FROM dbo.usersmain WITH (NOLOCK)
+
+SET NOCOUNT ON;
+
+	WITH Users AS
+	(
+		SELECT
+		   ROW_NUMBER() OVER 
+			 (
+       -- Dynamic bidirectional sorting
+        ORDER BY 
+              CASE WHEN @OrderBy = 1 AND @SortBy = 1 THEN Hits END DESC,
+              CASE WHEN @OrderBy = 1 AND @SortBy = '' THEN Hits END DESC,
+              CASE WHEN @OrderBy = 1 AND @SortBy = 2 THEN Hits END ASC,
+              CASE WHEN @OrderBy = 2 AND @SortBy = 2 THEN LastVisit END ASC,
+              CASE WHEN @OrderBy = 2 AND @SortBy = '' THEN LastVisit END ASC,
+              CASE WHEN @OrderBy = 2 AND @SortBy = 1 THEN LastVisit END DESC,
+              CASE WHEN @OrderBy = 3 AND @SortBy = 2 THEN UserName END ASC,
+              CASE WHEN @OrderBy = 3 AND @SortBy = '' THEN UserName END ASC,
+              CASE WHEN @OrderBy = 3 AND @SortBy = 1 THEN UserName END DESC,
+              CASE WHEN @OrderBy = 4 AND @SortBy = 1 OR @OrderBy = '' THEN DateJoined END DESC,
+              CASE WHEN @OrderBy = 4 AND @SortBy = '' OR @OrderBy = '' THEN DateJoined END DESC,
+              CASE WHEN @OrderBy = 4 AND @SortBy = 2 THEN DateJoined END ASC
+			 ) AS RowNumber, 
+				[UID], 
+				UserName,	
+				FirstName,
+				LastName,
+				City,
+				[State],
+				Country,
+				DateJoined,
+				LastVisit,
+				Hits,
+				@TotalUsersCount as TotalCount,
+				COALESCE(NULLIF(Photo, ''), 'nophotoavailable.gif') as UserImage
+				FROM 
+					dbo.usersmain WITH (NOLOCK)
+	)
+	-- Statement that executes the CTE
+	SELECT a.*
+	FROM
+		  Users a
+	WHERE
+		  a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+	ORDER BY
+		  a.RowNumber
+
+END
+
+
+		

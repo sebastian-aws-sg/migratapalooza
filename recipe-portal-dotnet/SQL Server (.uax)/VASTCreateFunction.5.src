@@ -1,0 +1,44 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/25/2008>
+-- Description:	<Returns article search result count>
+-- =============================================
+CREATE FUNCTION GetSearchResultArticleCount 
+(
+@Search varchar(50),
+@CATID int
+)
+RETURNS int
+AS
+BEGIN
+
+	-- Declare the return variable here
+	DECLARE @GetCountSearchResult int
+
+if (@CATID <> 0)
+ 
+ Begin
+
+    -- Specific category search result count
+	Set @GetCountSearchResult = (SELECT Count(*) As RecCount from Cooking_Article
+    Where Show = 1 AND CAT_ID = @CATID AND Title Like '%' + @Search + '%')
+
+End
+
+Else
+
+Begin
+
+    -- All category search result count
+	Set @GetCountSearchResult = (SELECT Count(*) As RecCount from Cooking_Article
+    Where Show = 1 AND Title Like '%' + @Search + '%')
+
+End
+
+	-- Return the result of the function
+	RETURN @GetCountSearchResult
+
+END
+
+
+		

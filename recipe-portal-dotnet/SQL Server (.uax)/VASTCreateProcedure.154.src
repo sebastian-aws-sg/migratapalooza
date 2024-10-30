@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE [dbo].[spSelectUserCookBookConfig] 
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+   SELECT ShowCookBookinProfile FROM dbo.usersmain WITH (NOLOCK) WHERE [UID] = @UserID
+
+END
+
+		

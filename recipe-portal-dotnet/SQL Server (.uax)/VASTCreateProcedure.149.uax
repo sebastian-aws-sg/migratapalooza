@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.149" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="1627152842" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="spSelectTop25UsersWhoCommentARecipe"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.149(1,1,17,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.149"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.149" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.149.src"/>
+  <shell fullPath="VASTCreateProcedure.149.src"/>
+ </instance>
+</instances>

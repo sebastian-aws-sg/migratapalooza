@@ -1,0 +1,43 @@
+
+CREATE PROCEDURE [dbo].[spSelectLast25UsersWhoAddedAFriend]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT	max(t1.UserName) UserName, 
+			max(t1.UID) [UID], 
+			max(t2.UserName) FUserName, 
+			max(t2.FriendID) FriendID, max(t1.Date) Date
+	FROM 
+		(
+			SELECT TOP 25 fl.ID, u.UserName, fl.UID, fl.Date
+			FROM 
+				dbo.FriendsList fl WITH (NOLOCK)
+			INNER JOIN 
+				dbo.usersmain u WITH (NOLOCK)
+			ON
+			   fl.UID = u.UID
+			GROUP BY fl.ID, fl.UID, fl.Date, u.UserName
+			ORDER BY fl.Date DESC
+		) t1
+	INNER JOIN 
+		(
+			SELECT TOP 25 fl.ID, u.UserName, fl.FriendID, fl.Date
+			FROM 
+				dbo.FriendsList fl WITH (NOLOCK)
+			INNER JOIN 
+				dbo.usersmain u WITH (NOLOCK)
+			ON
+			   fl.FriendID = u.UID
+			GROUP BY fl.ID, fl.FriendID, fl.Date, u.UserName
+			ORDER BY fl.Date DESC
+		) t2
+	ON 
+		t1.ID = t2.ID
+    GROUP BY t1.UserName
+
+END
+
+		

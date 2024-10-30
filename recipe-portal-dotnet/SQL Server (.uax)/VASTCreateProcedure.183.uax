@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.183" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="590625147" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="spUpdateUser"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.183(1,1,178,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.183"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.183" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.183.src"/>
+  <shell fullPath="VASTCreateProcedure.183.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.330" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@UserID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.331" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_Named nameAST="@Password"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.332" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="3"/>
+ <CAST_Named nameAST="@Email"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.333" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="4"/>
+ <CAST_Named nameAST="@Firstname"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.334" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="5"/>
+ <CAST_Named nameAST="@Lastname"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.335" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="6"/>
+ <CAST_Named nameAST="@City"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.336" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="7"/>
+ <CAST_Named nameAST="@State"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.337" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="8"/>
+ <CAST_Named nameAST="@Country"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.338" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="9"/>
+ <CAST_Named nameAST="@DOB"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.339" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="10"/>
+ <CAST_Named nameAST="@FavoriteFoods1"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.340" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="11"/>
+ <CAST_Named nameAST="@FavoriteFoods2"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.341" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="12"/>
+ <CAST_Named nameAST="@FavoriteFoods3"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.342" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="13"/>
+ <CAST_Named nameAST="@Newsletter"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.343" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="14"/>
+ <CAST_Named nameAST="@ContactMe"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.344" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="15"/>
+ <CAST_Named nameAST="@Website"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="100" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.345" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="16"/>
+ <CAST_Named nameAST="@AboutMe"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="1000" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.346" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="17"/>
+ <CAST_Named nameAST="@Photo"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.183"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+</instances>

@@ -1,0 +1,16 @@
+
+CREATE PROCEDURE spRemovedUserFromPMBlockedList
+
+@ID int,
+@UserID int 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DELETE dbo.PrivateMessageBlockedUsers WHERE ID = @ID AND [UID] = @UserID
+
+END
+
+		

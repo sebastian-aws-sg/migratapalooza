@@ -1,0 +1,47 @@
+-- =============================================
+-- Author:		Dexter Zafra
+-- Create date: 5/15/2009
+-- Description:	Convert a CSV value to INT - This is use when performing batch/multiple delete.
+-- =============================================
+
+/***********************************************
+* Samplae usage:
+* DECLARE @CSV varchar(100)
+* SET @CSV = '1,2,3,4,5,6,7,8,9,10'
+* SELECT * from dbo.fnConvertCSVToINT(@CSV)
+***********************************************/
+
+CREATE FUNCTION [dbo].[fnConvertCSVToINT] 
+( 
+	@CSVArray varchar(5000)
+) 
+	RETURNS @Table Table (ID int)
+AS
+
+BEGIN
+
+	DECLARE @separator char(1)
+	SET @separator = ','
+
+	DECLARE @pos int 
+	DECLARE @arrvalue varchar(1000) 
+	
+	SET @CSVArray = @CSVArray + ','
+	
+	WHILE PATINDEX('%,%' , @CSVArray) <> 0 
+	BEGIN
+	  	SELECT @pos =  PATINDEX('%,%' , @CSVArray)
+	  	SELECT @arrvalue = LEFT(@CSVArray, @pos - 1)
+	
+		INSERT @Table
+		VALUES (CAST(@arrvalue AS int))
+
+	  	SELECT @CSVArray = STUFF(@CSVArray, 1, @pos, '')
+	END
+
+	RETURN
+
+END
+
+
+		

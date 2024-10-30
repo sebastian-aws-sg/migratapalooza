@@ -1,0 +1,47 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/29/2008>
+-- Description:	<Returns last viewed>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetLastViewedRecipe]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	-- Use sub-query to get the datediff
+	DECLARE @HourSpan int
+
+	SELECT @HourSpan = HourSpan FROM ConfigureLastViewedHours WITH (NOLOCK)
+
+	SELECT Top 15 ID, 
+		   [Name], 
+		   Category, 
+		   HITS, 
+		   HIT_DATE,
+		   COALESCE(NULLIF(RecipeImage, ''), 'noimageavailable.gif') as RecipeImage,
+		   TotalTime / 3600 as Hours, 
+		   (TotalTime % 3600) / 60 as Minutes, 
+		   TotalTime % 60 as Seconds,
+		   (@HourSpan / 60) as MinuteSpan
+	FROM
+		  (
+			SELECT ID, 
+				   [Name], 
+				   Category, 
+				   HITS, 
+				   HIT_DATE,
+				   COALESCE(NULLIF(RecipeImage, ''), 'noimageavailable.gif') as RecipeImage,
+				   DateDiff(second, HIT_DATE, GetDate()) As TotalTime 
+				   FROM 
+					 Recipes WITH (NOLOCK)  
+				   WHERE 
+					 DateDiff(minute, HIT_DATE, GetDate()) <= @HourSpan
+	            
+	) a
+	ORDER BY HIT_DATE DESC
+          
+END
+
+		

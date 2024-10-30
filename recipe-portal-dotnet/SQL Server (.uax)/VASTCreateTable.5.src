@@ -1,0 +1,5 @@
+CREATE TABLE dbo.ConfigureLastViewedHours (
+  Hourspan int NOT NULL
+)
+go
+  

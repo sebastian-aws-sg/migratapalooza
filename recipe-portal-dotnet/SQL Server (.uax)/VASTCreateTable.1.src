@@ -1,0 +1,9 @@
+CREATE TABLE dbo.ArticleUpdateLog (
+  ID int NOT NULL,
+  AID int NOT NULL,
+  UID int NOT NULL,
+  DateUpdated datetime NULL,
+  PRIMARY KEY CLUSTERED ( ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

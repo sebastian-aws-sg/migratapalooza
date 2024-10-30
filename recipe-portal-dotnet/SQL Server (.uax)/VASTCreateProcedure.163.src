@@ -1,0 +1,33 @@
+
+--Get top 5 users who saved this recipe in their Cookbook
+CREATE PROCEDURE [dbo].[spSelectUsersWhoSavedThisRecipeInCookBook] 
+
+@RecipeID int
+
+AS
+BEGIN
+
+SELECT TOP 5 u.UID, 
+            u.UserName,
+			(
+			   SELECT COUNT(Distinct [UID]) 
+               FROM 
+                  dbo.userCookBook ucb WITH (NOLOCK) 
+               WHERE 
+                  RecipeID = @RecipeID) TotalCount
+		FROM  
+			dbo.usersmain u WITH (NOLOCK)
+        INNER JOIN 
+		(
+		   SELECT Distinct [UID] 
+           FROM 
+              dbo.userCookBook ucb WITH (NOLOCK) 
+           WHERE 
+           RecipeID = @RecipeID
+        ) b
+       ON 
+		  u.UID = b.UID
+
+END
+
+		

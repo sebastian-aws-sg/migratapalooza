@@ -1,0 +1,23 @@
+
+CREATE PROCEDURE [dbo].[UpdateArticleComments]
+
+@ID int,
+@Comment varchar(255)
+
+AS
+
+DECLARE @ErrorCode int
+
+BEGIN
+
+UPDATE dbo.COMMENTS_ARTICLE SET 
+                       Comments = @Comment
+                       WHERE COM_ID = @ID
+
+SET @ErrorCode = @@error
+		
+END
+
+RETURN @ErrorCode
+
+		

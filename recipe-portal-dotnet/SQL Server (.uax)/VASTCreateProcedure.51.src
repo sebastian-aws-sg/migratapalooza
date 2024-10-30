@@ -1,0 +1,17 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/21/2008>
+-- Description:	<Return total category count>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetTotalCategoryCount]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+SELECT COUNT(*) FROM dbo.Recipes WITH (NOLOCK)
+
+END
+
+		

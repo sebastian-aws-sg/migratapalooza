@@ -1,0 +1,28 @@
+
+CREATE PROCEDURE [dbo].[spSelectLast5ArticleByUser]
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT TOP 5 a.ID,
+			c.CAT_NAME,
+            a.Title,
+			ShortTitle = (Substring(a.Title, 1, 32) + '...')
+	FROM
+		dbo.Cooking_Article a WITH (NOLOCK)
+	INNER JOIN
+		dbo.Cooking_Article_Category c WITH (NOLOCK)
+	ON
+		a.CAT_ID = c.CAT_ID
+	WHERE 
+		a.Show = 1 AND a.UID = @UserID
+	ORDER BY 
+		Post_Date DESC
+
+END
+
+		

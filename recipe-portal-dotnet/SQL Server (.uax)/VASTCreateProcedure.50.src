@@ -1,0 +1,45 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/18/2008>
+-- Description:	<Get the most popular recipes for the homepage and category page side menu.>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetTopRecipesSideMenu] 
+
+@CatId int = '',
+@Top int
+
+AS
+BEGIN
+
+DECLARE @CatID_Val int
+
+SET ROWCOUNT @Top
+
+If (@CatId <> '')
+   BEGIN
+     SET @CatID_Val = 1
+   END
+ELSE
+   BEGIN
+     SET @CatID_Val = NULL
+   END
+
+   SELECT ID,
+         [Name],
+         HITS,
+         Category,
+         COALESCE(NULLIF(RecipeImage, ''), 'noimageavailable.gif') as RecipeImage
+   FROM 
+       dbo.Recipes WITH (NOLOCK)
+   WHERE
+   (@CatID_Val IS NOT NULL AND (LINK_APPROVED = 1 AND CAT_ID = @CatId)) OR
+   (@CatID_Val IS NULL AND LINK_APPROVED = 1)
+   ORDER BY 
+       HITS DESC
+
+   -- never forget to set it back to 0! 
+   SET ROWCOUNT 0 
+
+END
+
+		

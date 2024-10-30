@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE spUpdateNumberOfRecordsInCookBookAdmin
+
+@NumRecords int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	UPDATE dbo.Configuration SET NumberOfrecipeInCookBook = @NumRecords
+
+END
+
+		

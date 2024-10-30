@@ -1,0 +1,40 @@
+
+CREATE PROCEDURE [dbo].[spSelectUsersrecipeInCookBook]
+
+@UserID int,
+@NumRecords int
+
+AS
+BEGIN
+
+	SET ROWCOUNT @NumRecords
+
+	DECLARE @Counter int
+	SELECT @Counter = Count(*) FROM dbo.userCookBook WITH (NOLOCK) WHERE [UID] = @UserID
+
+	SELECT ucb.ID, 
+		   ucb.[UID], 
+		   ucb.RecipeID, 
+		   ucb.RecipeName, 
+		   r.Hits, 
+		   ucb.Date, 
+		   @Counter as TotalCount,
+		   r.Author,
+		   r.Category,
+		   r.TOTAL_COMMENTS,
+		   CAST((1.0 * r.RATING/r.NO_RATES) as decimal(2,1)) as Rates,
+		   COALESCE(NULLIF(r.RecipeImage, ''), 'noimageavailable.gif') as RecipeImage
+	FROM 
+	   dbo.userCookBook ucb WITH (NOLOCK) 
+	INNER JOIN
+	   dbo.Recipes r WITH (NOLOCK)
+	ON
+	   ucb.RecipeID = r.ID
+	WHERE 
+		ucb.[UID] = @UserID
+	ORDER BY ucb.Date DESC
+
+END
+
+
+		

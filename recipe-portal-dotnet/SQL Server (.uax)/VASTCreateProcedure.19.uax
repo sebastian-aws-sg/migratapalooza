@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.19" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="274100017" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="ArticleCountAll"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.19(1,1,17,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.19"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.19" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.19.src"/>
+  <shell fullPath="VASTCreateProcedure.19.src"/>
+ </instance>
+</instances>

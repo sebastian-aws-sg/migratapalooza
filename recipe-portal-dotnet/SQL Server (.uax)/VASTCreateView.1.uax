@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateView.1" instanceOf="CAST_MSTSQL_View">
+  <CAST_SQL_Object owner="dbo" objectId="1575676661" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="usersview"/>
+  <CAST_TSQL_Executable execIsQuotedIdentOn="0"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.234(1,1,87,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.234"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.234" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateView.1.src"/>
+  <shell fullPath="VASTCreateView.1.src"/>
+ </instance>
+<instance id="p_ColumnOfView.1" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="UID"/>
+ <CAST_Resolution_Identification resolutionName="UID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.2" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_ANSISQL_Column columnSize="8000"/>
+ <CAST_AST_ANSISQL_WithAlias alias="UserName"/>
+ <CAST_Resolution_Identification resolutionName="UserName"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="8000" scale=""/>
+</instance>
+<instance id="p_ColumnOfView.3" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="3"/>
+ <CAST_ANSISQL_Column columnSize="8000"/>
+ <CAST_AST_ANSISQL_WithAlias alias="Password"/>
+ <CAST_Resolution_Identification resolutionName="Password"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="8000" scale=""/>
+</instance>
+<instance id="p_ColumnOfView.4" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="4"/>
+ <CAST_ANSISQL_Column columnSize="8000"/>
+ <CAST_AST_ANSISQL_WithAlias alias="Email"/>
+ <CAST_Resolution_Identification resolutionName="Email"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="8000" scale=""/>
+</instance>
+<instance id="p_ColumnOfView.5" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="5"/>
+ <CAST_ANSISQL_Column columnSize="8000"/>
+ <CAST_AST_ANSISQL_WithAlias alias="FirstName"/>
+ <CAST_Resolution_Identification resolutionName="FirstName"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="8000" scale=""/>
+</instance>
+<instance id="p_ColumnOfView.6" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="6"/>
+ <CAST_ANSISQL_Column columnSize="8000"/>
+ <CAST_AST_ANSISQL_WithAlias alias="LastName"/>
+ <CAST_Resolution_Identification resolutionName="LastName"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="8000" scale=""/>
+</instance>
+<instance id="p_ColumnOfView.7" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="7"/>
+ <CAST_ANSISQL_Column columnSize="8000"/>
+ <CAST_AST_ANSISQL_WithAlias alias="City"/>
+ <CAST_Resolution_Identification resolutionName="City"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="8000" scale=""/>
+</instance>
+<instance id="p_ColumnOfView.8" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="8"/>
+ <CAST_ANSISQL_Column columnSize="8000"/>
+ <CAST_AST_ANSISQL_WithAlias alias="State"/>
+ <CAST_Resolution_Identification resolutionName="State"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="8000" scale=""/>
+</instance>
+<instance id="p_ColumnOfView.9" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="9"/>
+ <CAST_ANSISQL_Column columnSize="8000"/>
+ <CAST_AST_ANSISQL_WithAlias alias="Country"/>
+ <CAST_Resolution_Identification resolutionName="Country"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="8000" scale=""/>
+</instance>
+<instance id="p_ColumnOfView.10" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="10"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="isActive"/>
+ <CAST_Resolution_Identification resolutionName="isActive"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.11" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="11"/>
+ <CAST_ANSISQL_Column columnSize="8"/>
+ <CAST_AST_ANSISQL_WithAlias alias="DateJoined"/>
+ <CAST_Resolution_Identification resolutionName="DateJoined"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="datetime" length="8" precision="23" scale="3"/>
+</instance>
+<instance id="p_ColumnOfView.12" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="12"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="Activation"/>
+ <CAST_Resolution_Identification resolutionName="Activation"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.13" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="13"/>
+ <CAST_ANSISQL_Column columnSize="8"/>
+ <CAST_AST_ANSISQL_WithAlias alias="LastVisit"/>
+ <CAST_Resolution_Identification resolutionName="LastVisit"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="datetime" length="8" precision="23" scale="3"/>
+</instance>
+<instance id="p_ColumnOfView.14" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="14"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="Hits"/>
+ <CAST_Resolution_Identification resolutionName="Hits"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.15" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="15"/>
+ <CAST_ANSISQL_Column columnSize="8"/>
+ <CAST_AST_ANSISQL_WithAlias alias="LastUpdated"/>
+ <CAST_Resolution_Identification resolutionName="LastUpdated"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="datetime" length="8" precision="23" scale="3"/>
+</instance>
+<instance id="p_ColumnOfView.16" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="16"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="ShowFriendsListinProfile"/>
+ <CAST_Resolution_Identification resolutionName="ShowFriendsListinProfile"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.17" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="17"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="ShowCookBookinProfile"/>
+ <CAST_Resolution_Identification resolutionName="ShowCookBookinProfile"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.18" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="18"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="NumRecordsCookBookQuickView"/>
+ <CAST_Resolution_Identification resolutionName="NumRecordsCookBookQuickView"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.19" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="19"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="NumRecordsFriendsList"/>
+ <CAST_Resolution_Identification resolutionName="NumRecordsFriendsList"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.20" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="20"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="PreferredLayout"/>
+ <CAST_Resolution_Identification resolutionName="PreferredLayout"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.21" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="21"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="PreferredPageSize"/>
+ <CAST_Resolution_Identification resolutionName="PreferredPageSize"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.22" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="22"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="IsUserChoosePreferredLayout"/>
+ <CAST_Resolution_Identification resolutionName="IsUserChoosePreferredLayout"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.23" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="23"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="ReceivePM"/>
+ <CAST_Resolution_Identification resolutionName="ReceivePM"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.24" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="24"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="PMEmailNotification"/>
+ <CAST_Resolution_Identification resolutionName="PMEmailNotification"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.25" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="25"/>
+ <CAST_ANSISQL_Column columnSize="8000"/>
+ <CAST_AST_ANSISQL_WithAlias alias="UserLevel"/>
+ <CAST_Resolution_Identification resolutionName="UserLevel"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="8000" scale=""/>
+</instance>
+<instance id="p_ColumnOfView.26" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="26"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="TotalSavedRecipe"/>
+ <CAST_Resolution_Identification resolutionName="TotalSavedRecipe"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.27" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="27"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="TotalFriends"/>
+ <CAST_Resolution_Identification resolutionName="TotalFriends"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.28" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="28"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="TotalSubmittedRecipe"/>
+ <CAST_Resolution_Identification resolutionName="TotalSubmittedRecipe"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.29" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="29"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="TotalSubmittedArticle"/>
+ <CAST_Resolution_Identification resolutionName="TotalSubmittedArticle"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.30" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="30"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="TotalCommentRecipe"/>
+ <CAST_Resolution_Identification resolutionName="TotalCommentRecipe"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.31" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="31"/>
+ <CAST_ANSISQL_Column columnSize="4"/>
+ <CAST_AST_ANSISQL_WithAlias alias="TotalCommentArticle"/>
+ <CAST_Resolution_Identification resolutionName="TotalCommentArticle"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfView.32" instanceOf="CAST_MSTSQL_ViewColumn">
+ <CAST_AST_ANSISQL_WithOrder order="32"/>
+ <CAST_ANSISQL_Column columnSize="8000"/>
+ <CAST_AST_ANSISQL_WithAlias alias="UserImage"/>
+ <CAST_Resolution_Identification resolutionName="UserImage"/>
+ <CAST_Symbol_WithParent parent="VASTCreateView.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="8000" scale=""/>
+</instance>
+</instances>

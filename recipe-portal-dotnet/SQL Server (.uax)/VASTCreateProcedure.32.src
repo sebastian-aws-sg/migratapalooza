@@ -1,0 +1,17 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/21/2008>
+-- Description:	<Show hide comments>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetConfiguration]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+Select HideShowComment, HideShowArticleComment, Email, SmtpServer from Configuration WITH (NOLOCK)
+
+END
+
+		

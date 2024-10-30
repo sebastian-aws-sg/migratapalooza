@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateTable.7" instanceOf="CAST_MSTSQL_RelationalTable">
+  <CAST_SQL_Object owner="dbo" objectId="194099732" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="Cooking_Article_Category"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.218(1,1,7,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.218" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateTable.7.src"/>
+  <shell fullPath="VASTCreateTable.7.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_GenericColumnReference.5" instanceOf="CAST_AST_ANSISQL_GenericColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_WithParent parentAST="p_Constraint.5"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.43"/>
+</instance>
+<instance id="p_Constraint.5" instanceOf="CAST_MSTSQL_PrimaryKeyConstraint">
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_Resolution_Identification resolutionName="PK_Article_Category"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.7"/>
+ <CAST_ANSISQL_Constraint nameIsDefinedByDBMS="0"/>
+ <CAST_TSQL_IsClustered isClustered="1"/>
+</instance>
+<instance id="p_ColumnOfTable.43" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="CAT_ID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.7"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.44" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="CAT_NAME"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.7"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="nvarchar" length="200" precision="0" scale="0"/>
+</instance>
+</instances>

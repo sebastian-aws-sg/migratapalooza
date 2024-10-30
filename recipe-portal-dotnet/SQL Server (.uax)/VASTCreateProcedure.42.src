@@ -1,0 +1,74 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <8/9/08>
+-- Description:	<Returns Category Recipes with custom paging and dynamic sorting using CTE>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetRecipeCategory] 
+
+@CatId int,
+@OrderBy int = '',
+@SortBy int = '',
+@PageIndex int = 1,
+@PageSize int = 20
+
+AS
+BEGIN
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+SET NOCOUNT ON;
+
+WITH Recipe AS
+(
+    SELECT
+       ROW_NUMBER() OVER 
+         (
+           -- Dynamic bidirectional sorting
+            ORDER BY 
+                  CASE WHEN @OrderBy = 1 AND @SortBy = 1 THEN HITS END DESC,
+                  CASE WHEN @OrderBy = 1 AND @SortBy = '' THEN HITS END DESC,
+                  CASE WHEN @OrderBy = 1 AND @SortBy = 2 THEN HITS END ASC,
+                  CASE WHEN @OrderBy = 2 AND @SortBy = 1 THEN NO_RATES END DESC,
+                  CASE WHEN @OrderBy = 2 AND @SortBy = '' THEN NO_RATES END DESC,
+                  CASE WHEN @OrderBy = 2 AND @SortBy = 2 THEN NO_RATES END ASC,
+                  CASE WHEN @OrderBy = 3 AND @SortBy = 2 THEN Name END ASC,
+                  CASE WHEN @OrderBy = 3 AND @SortBy = '' THEN Name END ASC,
+                  CASE WHEN @OrderBy = 3 AND @SortBy = 1 THEN Name END DESC,
+                  CASE WHEN @OrderBy = 4 AND @SortBy = 1 OR @OrderBy = '' THEN Date END DESC,
+                  CASE WHEN @OrderBy = 4 AND @SortBy = '' OR @OrderBy = '' THEN Date END DESC,
+                  CASE WHEN @OrderBy = 4 AND @SortBy = 2 THEN Date END ASC
+         ) AS RowNumber, 
+              ID, 
+              CAT_ID, 
+              Category, 
+              Name, 
+              Author, 
+              Date, 
+              HITS, 
+              RATING, 
+              NO_RATES,
+              [UID],
+              CAST((1.0 * RATING/NO_RATES) AS DECIMAL(2,1)) AS Rates,
+              COALESCE(NULLIF(RecipeImage, ''), 'noimageavailable.gif') as RecipeImage,
+              dbo.GetCategoryRecipeCount(@CatId) AS RCount
+    FROM
+         dbo.Recipes WITH (NOLOCK)
+    WHERE 
+		 LINK_APPROVED = 1 AND CAT_ID = @CatId
+)
+-- Statement that executes the CTE
+SELECT a.*
+FROM
+      Recipe a
+WHERE
+      a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+ORDER BY
+      a.RowNumber
+
+END
+
+		

@@ -1,0 +1,13 @@
+CREATE TABLE dbo.COMMENTS_RECIPE (
+  COM_ID int NOT NULL,
+  ID int NOT NULL,
+  AUTHOR nvarchar NOT NULL,
+  EMAIL nvarchar NOT NULL,
+  COMMENTS nvarchar NOT NULL,
+  DATE datetime NOT NULL,
+  UID int NOT NULL,
+  upsize_ts timestamp NULL,
+  PRIMARY KEY CLUSTERED ( COM_ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

@@ -1,0 +1,22 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/29/2008>
+-- Description:	<Perform delete from Admin recipe manager>
+-- =============================================
+CREATE PROCEDURE [dbo].[AdminManagerDeleteRecipe]
+
+@ID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+   DELETE dbo.Recipes WHERE ID = @ID;
+
+   -- Cascade delete to CookBook table. Delete all recipe saved in cookbook.
+   DELETE dbo.userCookBook WHERE RecipeID = @ID
+
+END
+
+		

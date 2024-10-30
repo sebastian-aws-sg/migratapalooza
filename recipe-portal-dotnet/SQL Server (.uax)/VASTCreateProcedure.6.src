@@ -1,0 +1,36 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/4/2008>
+-- Description:	<Add new recipe category>
+-- =============================================
+CREATE PROCEDURE [dbo].[AdminAddNewRecipeCategory] 
+
+@CatName varchar(100),
+@Group int
+
+AS
+
+declare @ErrorCode int
+
+set @ErrorCode = @@error
+
+BEGIN TRANSACTION
+
+if ( @ErrorCode = 0 )
+
+Begin
+
+-- Insert
+INSERT INTO RECIPE_CAT (CAT_TYPE, GROUPCAT)
+	VALUES(@CatName, @Group)
+
+End
+
+if ( @ErrorCode = 0 )
+	COMMIT TRANSACTION
+else
+	ROLLBACK TRANSACTION
+
+return @ErrorCode
+
+		

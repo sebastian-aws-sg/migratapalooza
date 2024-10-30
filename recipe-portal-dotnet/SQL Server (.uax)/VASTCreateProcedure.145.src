@@ -1,0 +1,26 @@
+
+CREATE PROCEDURE [dbo].[spSelectShowAllPMBlockedUsersByUserID]
+
+ @UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT bu.ID,
+		   u.UID, 
+		   u.UserName,
+		   bu.Date
+	FROM 
+		dbo.PrivateMessageBlockedUsers bu WITH (NOLOCK)
+	INNER JOIN
+		dbo.usersmain u WITH (NOLOCK)
+	ON
+		bu.BlockedUID = u.UID
+	WHERE 
+		bu.UID = @UserID
+
+END
+
+		

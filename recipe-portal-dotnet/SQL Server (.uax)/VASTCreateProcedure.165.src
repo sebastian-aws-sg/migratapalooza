@@ -1,0 +1,21 @@
+
+CREATE PROCEDURE [dbo].[spSelectViewSuspenionNoteByuserID]
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT [Type], 
+			Note, 
+			Date 
+	FROM 
+		dbo.UserSuspenionLog WITH (NOLOCK) 
+	WHERE 
+		[UID] = @UserID
+
+END
+
+		

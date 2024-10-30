@@ -1,0 +1,19 @@
+
+CREATE PROCEDURE spDeleteMultipleRecipeComment
+
+@CsvID varchar(1000),
+@CsvItemID varchar(1000)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    DELETE dbo.COMMENTS_RECIPE WHERE COM_ID IN (SELECT * from dbo.fnConvertCSVToINT(@CsvID));
+
+    -- Decrement Total comments count in recipe tabale
+    UPDATE dbo.Recipes SET TOTAL_COMMENTS = TOTAL_COMMENTS - 1 WHERE ID IN (SELECT * from dbo.fnConvertCSVToINT(@CsvItemID))
+
+END
+
+		

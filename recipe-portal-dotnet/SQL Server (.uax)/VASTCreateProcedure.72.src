@@ -1,0 +1,36 @@
+
+CREATE PROCEDURE spDeleteUser 
+
+@UserID int
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+--Cascade delete
+
+	--Delete user
+	DELETE dbo.usersmain WHERE [UID] = @UserID;
+
+	--Delete all recipe entry
+	DELETE dbo.Recipes WHERE [UID] = @UserID;
+
+	--Delete article entry
+	DELETE dbo.Cooking_Article WHERE [UID] = @UserID;
+
+	--Delete cookbook entry
+	DELETE dbo.userCookBook WHERE [UID] = @UserID;
+
+	--Delete Friendslist entry
+	DELETE dbo.FriendsList WHERE [UID] = @UserID;
+
+	--Delete Friendslist entry
+	DELETE dbo.FriendsList WHERE FriendID = @UserID;
+
+	--Delete recipe comments entry
+	DELETE dbo.COMMENTS_RECIPE WHERE [UID] = @UserID
+
+END
+
+		

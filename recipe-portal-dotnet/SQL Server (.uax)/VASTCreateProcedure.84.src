@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE spInsertIsProfilePagePublicOrPrivate
+
+@Value int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	UPDATE dbo.Configuration SET PublicPrivateProfile = @Value
+
+END
+
+		

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.191" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="1355151873" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="UpdateArticleComments"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.191(1,1,23,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.191"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.191" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.191.src"/>
+  <shell fullPath="VASTCreateProcedure.191.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.361" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@ID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.191"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.362" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_Named nameAST="@Comment"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.191"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="255" precision="0" scale="0"/>
+</instance>
+</instances>

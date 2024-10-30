@@ -1,0 +1,178 @@
+
+CREATE PROCEDURE [dbo].[spUpdateUser] 
+
+@UserID int,
+@Password varchar(50) = '',
+@Email    varchar(50) = '',
+@Firstname varchar(50) = '',
+@Lastname  varchar(50) = '',
+@City	   varchar(50) = '',
+@State     varchar(50) = '',
+@Country   varchar(50) = '',
+@DOB       varchar(50),
+@FavoriteFoods1 varchar(50) = '',
+@FavoriteFoods2 varchar(50) = '',
+@FavoriteFoods3 varchar(50) = '',
+@Newsletter     int,
+@ContactMe      int,
+@Website        varchar(100) = '',
+@AboutMe        varchar(1000) = '',
+@Photo          varchar(50) = ''
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+DECLARE @CityValue varchar(50)
+DECLARE @PasswordValue varchar(50)
+DECLARE @FirstnameValue varchar(50)
+DECLARE @LastnameValue varchar(50)
+DECLARE @EmailValue varchar(50)
+DECLARE @StateValue varchar(50)
+DECLARE @FavoriteFoods1Value varchar(50)
+DECLARE @FavoriteFoods2Value varchar(50)
+DECLARE @FavoriteFoods3Value varchar(50)
+DECLARE @WebsiteValue varchar(50)
+DECLARE @AboutMeValue varchar(50)
+DECLARE @PhotoValue varchar(50)
+
+IF (@City = '')
+  BEGIN
+    SET @CityValue = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @CityValue = @City
+  END
+
+IF (@State = '')
+  BEGIN
+    SET @StateValue = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @StateValue = @State
+  END
+
+IF (@FavoriteFoods1 = '')
+  BEGIN
+    SET @FavoriteFoods1Value = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @FavoriteFoods1Value = @FavoriteFoods1
+  END
+
+IF (@FavoriteFoods2 = '')
+  BEGIN
+    SET @FavoriteFoods2Value = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @FavoriteFoods2Value = @FavoriteFoods2
+  END
+
+IF (@FavoriteFoods3 = '')
+  BEGIN
+    SET @FavoriteFoods3Value = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @FavoriteFoods3Value = @FavoriteFoods3
+  END
+
+IF (@Website = '')
+  BEGIN
+    SET @WebsiteValue = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @WebsiteValue = @Website
+  END
+
+IF (@AboutMe = '')
+  BEGIN
+    SET @AboutMeValue = 'NA'
+  END
+ELSE
+  BEGIN
+    SET @AboutMeValue = @AboutMe
+  END
+
+IF (@Password = '')
+  BEGIN
+    SET @PasswordValue = (SELECT [Password] FROM dbo.usersmain WHERE [UID] = @UserID)
+  END
+ELSE
+  BEGIN
+    SET @PasswordValue = @Password
+  END
+
+IF (@Email = '')
+  BEGIN
+    SET @EmailValue = (SELECT Email FROM dbo.usersmain WHERE [UID] = @UserID)
+  END
+ELSE
+  BEGIN
+    SET @EmailValue = @Email
+  END
+
+IF (@Firstname = '')
+  BEGIN
+    SET @FirstnameValue = (SELECT FirstName FROM dbo.usersmain WHERE [UID] = @UserID)
+  END
+ELSE
+  BEGIN
+    SET @FirstnameValue = @Firstname
+  END
+
+IF (@Lastname = '')
+  BEGIN
+    SET @LastnameValue = (SELECT LastName FROM dbo.usersmain WHERE [UID] = @UserID)
+  END
+ELSE
+  BEGIN
+    SET @LastnameValue = @Lastname
+  END
+
+IF (@Photo = '')
+  BEGIN
+    SET @PhotoValue = (SELECT Photo FROM dbo.usersmain WHERE [UID] = @UserID)
+  END
+ELSE
+  BEGIN
+    SET @PhotoValue = @Photo
+  END
+
+
+IF Exists (SELECT [UID] FROM dbo.usersmain WHERE [UID] = @UserID)
+   BEGIN
+
+	UPDATE dbo.usersmain
+	SET [Password]			= @PasswordValue,
+		Email				= @EmailValue,
+		FirstName			= @FirstnameValue,			
+		LastName			= @LastnameValue,
+		City				= @CityValue,
+		[State]				= @StateValue,
+		Country				= @Country,
+		DOB					= @DOB,
+		FavoriteFoods1		= @FavoriteFoods1Value,
+		FavoriteFoods2		= @FavoriteFoods2Value,
+		FavoriteFoods3		= @FavoriteFoods3Value,
+		NewsLetter			= @Newsletter,
+		ContactMe			= @ContactMe,
+		Website				= @WebsiteValue,
+		AboutMe				= @AboutMeValue,
+		Photo				= @PhotoValue,
+        LastUpdated			= GETDATE()
+
+   WHERE [UID] = @UserID
+
+   END
+
+
+END
+
+		

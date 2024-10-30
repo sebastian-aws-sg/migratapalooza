@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateFunction.1" instanceOf="CAST_MSTSQL_Function">
+  <CAST_SQL_Object objectId="1559676604" owner="dbo" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="fnValidateRatingValue"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.194(1,1,26,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.194"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.194" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateFunction.1.src"/>
+  <shell fullPath="VASTCreateFunction.1.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.367" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@Rating"/>
+ <CAST_AST_WithParent parentAST="VASTCreateFunction.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_ReturnParameter.1" instanceOf="CAST_AST_ANSISQL_ReturnParameter">
+ <CAST_AST_ANSISQL_WithOrder order="-1"/>
+ <CAST_Named nameAST="&lt;return value&gt;"/>
+ <CAST_AST_WithParent parentAST="VASTCreateFunction.1"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

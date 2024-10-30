@@ -1,0 +1,30 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/23/2008>
+-- Description:	<Returns homepage ethnic category>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetHomepageEthnicRegionalCategory]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+     SELECT *,
+        (
+          SELECT COUNT (*)  
+          FROM 
+             Recipes WITH (NOLOCK) 
+          WHERE 
+             Recipes.CAT_ID = RECIPE_CAT.CAT_ID AND LINK_APPROVED = 1
+        ) AS REC_COUNT 
+     FROM 
+          RECIPE_CAT WITH (NOLOCK) 
+     WHERE 
+          GROUPCAT = 2
+     ORDER BY 
+          CAT_TYPE ASC
+
+END
+
+		

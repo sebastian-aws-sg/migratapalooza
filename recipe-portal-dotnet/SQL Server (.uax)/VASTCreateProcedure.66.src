@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE spDeleteAllPMInTrash
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DELETE dbo.PrivateMessage WHERE M_To = @UserID AND isTrash = 1
+
+END
+
+		

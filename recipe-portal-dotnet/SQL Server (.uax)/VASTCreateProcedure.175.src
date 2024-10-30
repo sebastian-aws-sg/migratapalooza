@@ -1,0 +1,18 @@
+
+CREATE PROCEDURE [dbo].[spUpdateMarkedPMOldMsgViaAJAX] 
+
+@PMID int,
+@UserID int 
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+UPDATE dbo.PrivateMessage SET M_Read = 1 WHERE M_ID = @PMID AND M_To = @UserID;
+
+UPDATE dbo.PrivateMessageSentMessages SET M_Read = 1 WHERE M_ID = @PMID AND M_To = @UserID
+
+END
+
+		

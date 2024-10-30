@@ -1,0 +1,31 @@
+
+CREATE PROCEDURE [dbo].[spSelectLast5RecipeByUser] 
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT TOP 5 ID,
+			  CAT_ID, 
+			  Category, 
+			  Name, 
+			  Author, 
+			  Date, 
+			  HITS, 
+			  RATING, 
+			  NO_RATES,
+			  [UID],
+			  COALESCE(NULLIF(RecipeImage, ''), 'noimageavailable.gif') as RecipeImage,
+			  Cast((1.0 * RATING/NO_RATES) as decimal(2,1)) as Rates
+	FROM
+		dbo.Recipes WITH (NOLOCK)
+	WHERE 
+		LINK_APPROVED = 1 AND [UID] = @UserID
+	ORDER BY Date DESC
+
+END
+
+		

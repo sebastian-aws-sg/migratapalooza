@@ -1,0 +1,18 @@
+
+CREATE PROCEDURE spInsertDeletedUserLog 
+
+@UserID int,
+@UserName varchar(50),
+@Reason varchar(250)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	INSERT INTO dbo.DeletedUserLog ([UID], UserName, Reason, CreatedDate)
+    VALUES (@UserID, @UserName, @Reason, GETDATE())
+
+END
+
+		

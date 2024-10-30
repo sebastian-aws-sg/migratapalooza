@@ -1,0 +1,17 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/5/2008>
+-- Description:	<Return article category for the dropdown list.>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetArticleForDropdownlist]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+  
+	SELECT CAT_ID, CAT_NAME From Cooking_Article_Category WITH (NOLOCK)
+
+END
+
+		

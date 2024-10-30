@@ -1,0 +1,27 @@
+
+CREATE PROCEDURE [dbo].[spReinstateUserAccount]
+ 
+@UserID int
+
+AS
+BEGIN
+
+
+SET NOCOUNT ON;
+
+IF Exists (SELECT [UID] FROM dbo.usersmain WITH (NOLOCK) WHERE [UID] = @UserID)
+
+	BEGIN
+
+		--Update status
+		UPDATE dbo.usersmain SET isActive = 1 WHERE [UID] = @UserID;
+
+	   --Insert suspension note
+		INSERT INTO dbo.UserSuspenionLog ([UID], [Type], Note, Date)
+		VALUES (@UserID, 'Reinstate Account',  'Account reinstated.', GETDATE())
+
+	END
+
+END
+
+		

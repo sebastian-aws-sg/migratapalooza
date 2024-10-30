@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE spUpdateUserReceivePM
+
+@UserID int,
+@NewVal int
+
+AS
+BEGIN
+
+	UPDATE dbo.usersmain SET ReceivePM = @NewVal 
+	WHERE [UID] = @UserID
+
+END
+
+		

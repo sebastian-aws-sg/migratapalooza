@@ -1,0 +1,35 @@
+
+CREATE PROCEDURE [dbo].[spSelectArticleCommentAdmin]
+
+@FindByAuthor varchar(50) = ''
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+DECLARE @FindByAuthor_Val varchar(50)
+
+IF (@FindByAuthor = '')
+   BEGIN
+	 SET @FindByAuthor_Val = NULL
+   END
+ELSE
+   BEGIN
+	 SET @FindByAuthor_Val = @FindByAuthor
+   END
+
+	SELECT COM_ID, 
+			ID, 
+			Author, 
+			Email, 
+			Date, 
+			Comments  
+	FROM 
+		dbo.COMMENTS_ARTICLE WITH (NOLOCK)
+	WHERE (@FindByAuthor_Val IS NOT NULL AND Author = @FindByAuthor) OR (@FindByAuthor = '')
+	ORDER By DATE DESC
+
+END
+
+		

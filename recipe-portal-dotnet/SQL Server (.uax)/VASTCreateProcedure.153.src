@@ -1,0 +1,68 @@
+
+CREATE PROCEDURE [dbo].[spSelectUser] 
+
+@UserID int
+
+AS
+
+SET NOCOUNT ON
+
+DECLARE @PostedRecipeCount int
+DECLARE @PostedArticleCount int
+DECLARE @SavedRecipeCount int
+DECLARE @CommentsRecipeCount int
+DECLARE @CommentsArticleCount int
+DECLARE @FriendsCount int
+
+SELECT @PostedRecipeCount = Count(*) FROM dbo.Recipes WITH (NOLOCK) WHERE LINK_APPROVED = 1 AND [UID] = @UserID
+SELECT @PostedArticleCount = COUNT(*) FROM dbo.Cooking_Article WITH (NOLOCK) WHERE Show = 1 AND [UID] = @UserID
+SELECT @SavedRecipeCount = Count(*) FROM dbo.userCookBook WITH (NOLOCK) WHERE [UID] = @UserID
+SELECT @CommentsRecipeCount = Count(DISTINCT ID) FROM dbo.COMMENTS_RECIPE WITH (NOLOCK) WHERE [UID] = @UserID
+SELECT @CommentsArticleCount = Count(DISTINCT ID) FROM dbo.COMMENTS_ARTICLE WITH (NOLOCK) WHERE [UID] = @UserID
+SELECT @FriendsCount = Count(*) FROM dbo.FriendsList WITH (NOLOCK) WHERE IsApproved = 1 AND [UID] = @UserID
+
+	SELECT  [UID], 
+		    UserLevel,
+            UserName,
+		    [Password],
+			FirstName,
+			LastName,
+			City,
+			[State],
+			Country,
+			Email,
+			DOB,
+			AboutMe,
+			FavoriteFoods1,
+			FavoriteFoods2,
+			FavoriteFoods3,
+			NewsLetter,
+			DateJoined,
+			Photo,
+			Website,
+			Hits,
+			@PostedRecipeCount PostedRecipeCount,
+            @PostedArticleCount PostedArticleCount,
+			@SavedRecipeCount SavedRecipeCount,
+			@CommentsRecipeCount CommentsRecipeCount,
+			@CommentsArticleCount CommentsArticleCount,
+			@FriendsCount FriendsCount,
+			LastVisit,
+			LastUpdated,
+			ContactMe,
+			isActive,
+            [GUID],
+            Activation
+
+	FROM 
+		dbo.usersmain WITH (NOLOCK) 
+	WHERE 
+		[UID] = @UserID;
+
+    --Update hits
+    UPDATE dbo.usersmain SET Hits = Hits + 1 WHERE [UID] = @UserID
+
+RETURN 0
+
+
+		

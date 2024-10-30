@@ -1,0 +1,15 @@
+CREATE TABLE dbo.PrivateMessage (
+  M_ID int NOT NULL,
+  M_Subject nvarchar NOT NULL,
+  M_From int NOT NULL,
+  M_To int NOT NULL,
+  M_Sent datetime NOT NULL,
+  PM_Message varchar NOT NULL,
+  M_Read int NOT NULL,
+  M_OutBox int NOT NULL,
+  M_mail int NOT NULL,
+  isTrash int NOT NULL,
+  PRIMARY KEY CLUSTERED ( M_ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

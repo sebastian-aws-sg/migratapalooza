@@ -1,0 +1,35 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/23/2008>
+-- Description:	<Return related recipes in the recipedetail page.>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetRelatedRecipe]
+
+@CatId int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT TOP 15 ID,
+				  CAT_ID, 
+				  Category, 
+				  [Name], 
+				  Author, 
+				  Date, 
+				  HITS, 
+				  RATING, 
+				  NO_RATES,
+                  [UID],
+				  COALESCE(NULLIF(RecipeImage, ''), 'noimageavailable.gif') as RecipeImage,
+				  Cast((1.0 * RATING/NO_RATES) as decimal(2,1)) as Rates
+           FROM 
+               dbo.Recipes WITH (NOLOCK)
+           WHERE 
+               LINK_APPROVED = 1 AND CAT_ID = @CatId
+           ORDER BY
+	           HITS DESC
+END
+
+		

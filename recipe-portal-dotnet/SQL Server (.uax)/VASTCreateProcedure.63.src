@@ -1,0 +1,19 @@
+
+CREATE PROCEDURE [dbo].[spCheckValidateProfileUserIDQuerystring]
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT COUNT(*) Col1 
+	FROM 
+		dbo.usersmain WITH (NOLOCK) 
+	WHERE 
+		[UID] = @UserID
+
+END
+
+		
