@@ -1,0 +1,46 @@
+<pipeline-definitions>
+
+  <pipeline match="/include/*.dox">
+    <transform type="html">
+        <param name="path" value="/{1}.xsl" />
+        <param name="render" value="server" />
+    </transform>
+  </pipeline>
+  <pipeline match="/pages/*.dox">
+    <transform type="html">
+        <param name="path" value="/pages/{1}.xsl" />
+        <param name="render" value="server" />
+    </transform>
+  </pipeline>
+  <pipeline match="/layouts/*.dox">
+    <transform type="html">
+        <param name="path" value="/{1}.xsl" />
+        <param name="render" value="server" />
+    </transform>
+  </pipeline>
+
+  <pipeline match="browser/*.dox">
+    <transform type="html">
+        <param name="path" value="/{1}.xsl" />
+        <param name="render" value="server" />
+    </transform>
+    <transform type="html" when="MSIE">
+        <param name="path" value="/{1}_IE.xsl" />
+        <param name="render" value="server" />
+    </transform>
+  </pipeline>
+
+  <pipeline match="multiple/*.dox">
+    <transform type="html">
+        <param name="path" value="/{1}.xsl" />
+        <param name="path" value="common/insertBanner.xsl" />
+    </transform>
+  </pipeline>
+
+  <pipeline match="pdf/*.dox">
+    <transform type="pdf">
+        <param name="path" value="/{1}.xsl" />
+    </transform>
+  </pipeline>
+
+</pipeline-definitions>

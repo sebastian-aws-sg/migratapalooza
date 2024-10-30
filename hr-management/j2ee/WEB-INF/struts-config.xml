@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+  <data-sources />
+  <!-- ========== Form Bean Definitions =================================== -->
+  <form-beans>
+    <form-bean name="logonform" type="com.mytelco.client.LogonForm" />
+    <form-bean name="employeedetailform" type="com.mytelco.client.EmployeeDetailForm" />
+    <form-bean name="activitydetailform" type="com.mytelco.client.ActivityDetailForm" />
+    <form-bean name="projectactivitydetailform" type="com.mytelco.client.ProjectActivityDetailForm" />
+    <form-bean name="empdetailCMform" type="com.mytelco.client.EmpDetailCMForm" />
+    <form-bean name="deptdetailCMform" type="com.mytelco.client.DeptDetailCMForm" />
+    <form-bean name="actdetailCMform" type="com.mytelco.client.ActDetailCMForm" />
+    <form-bean name="empphotoCMform" type="com.mytelco.client.EmpPhotoCMForm" />
+    <form-bean name="empresumeCMform" type="com.mytelco.client.EmpResumeCMForm" />
+    <form-bean name="msgintrayCMform" type="com.mytelco.client.MsgInTrayCMForm" />
+    <form-bean name="projectCMform" type="com.mytelco.client.ProjectCMForm" />
+    <form-bean name="pactivityCMform" type="com.mytelco.client.PActivityCMForm" />
+    <form-bean name="empprjactCMform" type="com.mytelco.client.EmpPrjActCMForm" />
+    <form-bean name="developerCMform" type="com.mytelco.client.DeveloperCMForm" />
+    <form-bean name="hardwareCMform" type="com.mytelco.client.HardwareCMForm" />
+  </form-beans>
+  <global-exceptions />
+  <!-- ========== Global Forward Definitions ============================== -->
+  <global-forwards>
+    <forward name="welcome" path="page.welcome" />
+    <forward name="fatalerror" path="/pages/error.html" />
+  </global-forwards>
+
+  <!-- ========== Action Mapping Definitions ============================== -->
+  <action-mappings>
+    <action path="/logon" forward="page.login" scope="request" />
+    <action path="/logout" forward="/logon.do" scope="request" />
+    <action path="/taskschedule" forward="page.taskschedule" scope="request" />
+    <action path="/employeedetail" forward="page.employeeDetail" scope="request" />
+    <action path="/empdetail" forward="page.empDetailCM" scope="request" />
+    <action path="/deptdetail" forward="page.deptDetailCM" scope="request" />
+    <action path="/actdetail" forward="page.actDetailCM" scope="request" />
+    <action path="/empphoto" forward="page.empPhotoCM" scope="request" />
+    <action path="/empresume" forward="page.empResumeCM" scope="request" />
+    <action path="/msgintray" forward="page.msgInTrayCM" scope="request" />
+    <action path="/project" forward="page.projectCM" scope="request" />
+    <action path="/pactivity" forward="page.pActivityCM" scope="request" />
+    <action path="/empprjact" forward="page.empPrjActCM" scope="request" />
+    <action path="/developer" forward="page.developerCM" scope="request" />
+    <action path="/hardware" forward="page.hardwareCM" scope="request" />
+    <action path="/activitydetail" forward="page.activityDetail" scope="request" />
+    <action path="/projectactivitydetail" forward="page.projectActivityDetail" scope="request" />
+
+    <action path="/submitLogon" type="com.mytelco.client.LogonAction" name="logonform" scope="request"
+      input="/pages/login.jsp">
+      <forward name="logonfail" path="/logon.do" />
+      <forward name="logonsuccess" path="/taskschedule.do" />
+    </action>
+    <action path="/submitTaskschedule" type="com.mytelco.client.TaskScheduleDetailAction" name="taskscheduleform"
+      scope="request" input="/pages/taskscheduledetail.jsp">
+      <forward name="taskschedulesuccess" path="/taskschedule.do" />
+      <forward name="logoutscheduleaction" path="/logout.do" />
+      <forward name="employeedetailaction" path="/employeedetail.do" />
+    </action>
+
+    <action path="/submitEmployeedetail" type="com.mytelco.client.EmployeeDetailAction" name="employeedetailform"
+      scope="request" input="/pages/employeedetail.jsp">
+      <forward name="employeedetailsuccess" path="/pages/employeedetail.dox" />
+      <forward name="logoutemployeedetailaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitActivitydetail" type="com.mytelco.client.ActivityDetailAction" name="activitydetailform"
+      scope="request" input="/pages/activitydetail.jsp">
+      <forward name="activitydetailsuccess" path="/submitActivitydetail.do" />
+      <forward name="logoutactivitydetailaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitProjectactivitydetail" type="com.mytelco.client.ProjectActivityDetailAction" name="projectactivitydetailform"
+      scope="request" input="/pages/projectactivitydetail.jsp">
+      <forward name="projectactivitydetailsuccess" path="/submitProjectactivitydetail.do" />
+      <forward name="logoutprojectactivitydetailaction" path="/logout.do" />
+    </action>
+
+	<!-- == Action mappings for pages accessing CM Beans == -->
+	
+    <action path="/submitEmpDetailCM" type="com.mytelco.client.EmpDetailCMAction" name="empdetailCMform"
+      scope="request" input="/pages/empdetailsCM.jsp">
+      <forward name="empdetailCMsuccess" path="/empDetailsCM.do" />
+      <forward name="logoutempdetailCMaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitDeptDetailCM" type="com.mytelco.client.DeptDetailCMAction" name="deptdetailCMform"
+      scope="request" input="/pages/deptdetailsCM.jsp">
+      <forward name="deptdetailCMsuccess" path="/deptDetailsCM.do" />
+      <forward name="logoutdeptdetailsCMaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitActDetailCM" type="com.mytelco.client.ActDetailCMAction" name="actdetailCMform"
+      scope="request" input="/pages/actdetailsCM.jsp">
+      <forward name="actdetailCMsuccess" path="/actDetailsCM.do" />
+      <forward name="logoutactdetailsCMaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitEmpPhotoCM" type="com.mytelco.client.EmpPhotoCMAction" name="empphotoCMform"
+      scope="request" input="/pages/empphotoCM.jsp">
+      <forward name="empphotoCMsuccess" path="/empPhotoCM.do" />
+      <forward name="logoutempphotoCMaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitEmpResumeCM" type="com.mytelco.client.EmpResumeCMAction" name="empresumeCMform"
+      scope="request" input="/pages/empresumeCM.jsp">
+      <forward name="empresumeCMsuccess" path="/empResumeCM.do" />
+      <forward name="logoutempresumeCMaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitMsgInTrayCM" type="com.mytelco.client.MsgInTrayCMAction" name="msgintrayCMform"
+      scope="request" input="/pages/msgintrayCM.jsp">
+      <forward name="msgintrayCMsuccess" path="/msgInTrayCM.do" />
+      <forward name="logoutmsgintrayCMaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitProjectCM" type="com.mytelco.client.ProjectCMAction" name="projectCMform"
+      scope="request" input="/pages/projectCM.jsp">
+      <forward name="projectCMsuccess" path="/projectCM.do" />
+      <forward name="logoutprojectCMaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitPActivityCM" type="com.mytelco.client.PActivityCMAction" name="pactivityCMform"
+      scope="request" input="/pages/pactivityCM.jsp">
+      <forward name="pactivityCMsuccess" path="/pactivityCM.do" />
+      <forward name="logoutpactivityCMaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitEmpPrjActCM" type="com.mytelco.client.EmpPrjActCMAction" name="empprjactCMform"
+      scope="request" input="/pages/empprjactCM.jsp">
+      <forward name="empprjactCMsuccess" path="/empprjactCM.do" />
+      <forward name="logoutempprjactCMaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitDeveloperCM" type="com.mytelco.client.DeveloperCMAction" name="developerCMform"
+      scope="request" input="/pages/developerCM.jsp">
+      <forward name="developerCMsuccess" path="/developerCM.do" />
+      
+      <forward name="logoutdeveloperCMaction" path="/logout.do" />
+    </action>
+
+    <action path="/submitHardwareCM" type="com.mytelco.client.HardwareCMAction" name="hardwareCMform"
+      scope="request" input="/pages/hardwareCM.jsp">
+      <forward name="hardwareCMsuccess" path="/hardwareCM.do" />
+      <forward name="logouthardwareCMaction" path="/logout.do" />
+    </action>
+  </action-mappings>
+
+  <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" bufferSize="4096" debug="0" />
+  <!-- ========= Struts Tile Plugin Setup ================================== -->
+  <plug-in className="org.apache.struts.tiles.TilesPlugin">
+    <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+    <set-property property="definitions-parser-validate" value="true" />
+    <set-property property="moduleAware" value="true" />
+  </plug-in>
+  <!-- ============ Stxx plugin ================================== -->
+    <plug-in className="com.oroad.stxx.plugin.StxxPlugin">
+    <set-property property="pipeline-config" value="/WEB-INF/stxx-transforms.xml" />
+    </plug-in>
+</struts-config>

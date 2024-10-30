@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar>
+	<enterprise-beans>
+		<entity>
+			<ejb-name>EmployeeDataCM</ejb-name>
+            <local-home>com.mytelco.server.EmployeeDataCMLocalHome</local-home>
+			<local>com.mytelco.server.EmployeeDataCMLocalObject</local>
+            <home>com.mytelco.server.EmployeeDataCMHome</home>
+			<remote>com.mytelco.server.EmployeeDataCMObject</remote>
+			<ejb-class>com.mytelco.server.EmployeeDataCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>EMP</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>empNo</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>firstName</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>job</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>salary</field-name>
+			</cmp-field>
+			
+			<primkey-field>empNo</primkey-field>
+			
+			<query>
+			    <query-method>
+			        <method-name>findByEmpNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(e) FROM EMP e where e.empNo = ?1
+			    </ejb-ql>
+            </query>			
+
+			<query>
+			    <query-method>
+			        <method-name>findByFirstName</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(e) FROM EMP e where e.firstName = ?1
+			    </ejb-ql>
+            </query>			
+			
+			<query>
+			    <query-method>
+			        <method-name>findByJob</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(e) FROM EMP e where e.job = ?1
+			    </ejb-ql>
+            </query>			
+			
+			<query>
+			    <query-method>
+			        <method-name>findBySalary</method-name>
+			            <method-params>
+			                <method-param>double</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(e) FROM EMP e where e.salary = ?1
+			    </ejb-ql>
+            </query>			
+		</entity>
+		
+		<entity>
+			<ejb-name>DepartmentCM</ejb-name>
+            <local-home>com.mytelco.server.DepartmentCMLocalHome</local-home>
+			<local>com.mytelco.server.DepartmentCMLocalObject</local>
+            <home>com.mytelco.server.DepartmentCMHome</home>
+			<remote>com.mytelco.server.DepartmentCMObject</remote>
+			<ejb-class>com.mytelco.server.DepartmentCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>DEPT</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>DeptNo</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>DeptName</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>ManagerNo</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>ADMRDept</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>Location</field-name>
+			</cmp-field>
+
+			<primkey-field>DeptNo</primkey-field>
+			
+			<query>
+			    <query-method>
+			        <method-name>findByDeptNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(d) FROM DEPT d where d.DeptNo = ?1
+			    </ejb-ql>
+            </query>			
+
+			<query>
+			    <query-method>
+			        <method-name>findByDeptName</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(d) FROM DEPT d where d.DeptName = ?1
+			    </ejb-ql>
+            </query>			
+			
+			<query>
+			    <query-method>
+			        <method-name>findByADMRDept</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(d) FROM DEPT d where d.ADMRDept = ?1
+			    </ejb-ql>
+            </query>			
+			
+			<query>
+			    <query-method>
+			        <method-name>findByLocation</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(d) FROM DEPT d where d.location = ?1
+			    </ejb-ql>
+            </query>			
+		</entity>
+
+		<entity>
+			<ejb-name>ActivityCM</ejb-name>
+            <local-home>com.mytelco.server.ActivityCMLocalHome</local-home>
+			<local>com.mytelco.server.ActivityCMLocalObject</local>
+            <home>com.mytelco.server.ActivityCMHome</home>
+			<remote>com.mytelco.server.ActivityCMObject</remote>
+			<ejb-class>com.mytelco.server.ActivityCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>ACTIVITY</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>Act_No</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>act_keyword</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>act_desc</field-name>
+			</cmp-field>
+			
+			<primkey-field>act_no</primkey-field>
+			
+			<query>
+			    <query-method>
+			        <method-name>findByActNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(a) FROM ACTIVITY a where a.Act_No = ?1
+			    </ejb-ql>
+            </query>			
+
+			<query>
+			    <query-method>
+			        <method-name>findByActivityKeyword</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(a) FROM ACTIVITY a where a.Act_keyword = ?1
+			    </ejb-ql>
+            </query>			
+			
+		</entity>
+
+		<entity>
+			<ejb-name>EmpPhotoCM</ejb-name>
+            <local-home>com.mytelco.server.EmpPhotoCMLocalHome</local-home>
+			<local>com.mytelco.server.EmpPhotoCMLocalObject</local>
+            <home>com.mytelco.server.EmpPhotoCMHome</home>
+			<remote>com.mytelco.server.EmpPhotoCMObject</remote>
+			<ejb-class>com.mytelco.server.EmpPhotoCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>EMP_PHOTO</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>EmpNo</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>emp_photo</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>photo_format</field-name>
+			</cmp-field>
+			
+			<primkey-field>empno</primkey-field>
+			
+			<query>
+			    <query-method>
+			        <method-name>findByEmpNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(ep) FROM EMP_PHOTO ep where ep.empNo = ?1
+			    </ejb-ql>
+            </query>			
+
+		</entity>
+
+		<entity>
+			<ejb-name>EmpResumeCM</ejb-name>
+            <local-home>com.mytelco.server.EmpResumeCMLocalHome</local-home>
+			<local>com.mytelco.server.EmpResumeCMLocalObject</local>
+            <home>com.mytelco.server.EmpResumeCMHome</home>
+			<remote>com.mytelco.server.EmpResumeCMObject</remote>
+			<ejb-class>com.mytelco.server.EmpResumeCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>EMP_RESUME</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>EmpNo</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>emp_resume</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>resume_format</field-name>
+			</cmp-field>
+			
+			<primkey-field>empno</primkey-field>
+			
+			<query>
+			    <query-method>
+			        <method-name>findByEmpNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(er) FROM EMP_RESUME er where er.empNo = ?1
+			    </ejb-ql>
+            </query>			
+
+		</entity>
+
+		<entity>
+			<ejb-name>MsgInTrayCM</ejb-name>
+            <local-home>com.mytelco.server.MsgInTrayCMLocalHome</local-home>
+			<local>com.mytelco.server.MsgInTrayCMLocalObject</local>
+            <home>com.mytelco.server.MsgInTrayCMHome</home>
+			<remote>com.mytelco.server.MsgInTrayCMObject</remote>
+			<ejb-class>com.mytelco.server.MsgInTrayCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>MSG_IN_TRAY</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>EmpNo</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>receivedDate</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>source</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>subject</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>noteText</field-name>
+			</cmp-field>
+
+			<primkey-field>empno</primkey-field>
+			
+			<query>
+			    <query-method>
+			        <method-name>findByEmpNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(msg) FROM MSG_IN_TRAY msg where msg.empNo = ?1
+			    </ejb-ql>
+            </query>			
+
+			<query>
+			    <query-method>
+			        <method-name>findBySource</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(msg) FROM MSG_IN_TRAY msg where msg.source = ?1
+			    </ejb-ql>
+            </query>			
+
+		</entity>
+		<entity>
+			<ejb-name>ProjectCM</ejb-name>
+            <local-home>com.mytelco.server.ProjectCMLocalHome</local-home>
+			<local>com.mytelco.server.ProjectCMLocalObject</local>
+            <home>com.mytelco.server.ProjectCMHome</home>
+			<remote>com.mytelco.server.ProjectCMObject</remote>
+			<ejb-class>com.mytelco.server.ProjectCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>PROJECT</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>Proj_No</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>PROJ_NAME</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>DEPT_NO</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>PROJ_EMP</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>PROJ_STAFF</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>PROJ_STARTDATE</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>PROJ_ENDDATE</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>CTRLPROJ</field-name>
+			</cmp-field>
+
+			<primkey-field>proj_no</primkey-field>
+			
+			<query>
+			    <query-method>
+			        <method-name>findByProjNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(proj) FROM PROJECT proj where proj.proj_no = ?1
+			    </ejb-ql>
+            </query>			
+
+			<query>
+			    <query-method>
+			        <method-name>findByProjectName</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(proj) FROM PROJECT proj where proj.proj_name = ?1
+			    </ejb-ql>
+            </query>			
+		</entity>
+		<entity>
+			<ejb-name>PActivityCM</ejb-name>
+            <local-home>com.mytelco.server.PActivityCMLocalHome</local-home>
+			<local>com.mytelco.server.PActivityCMLocalObject</local>
+            <home>com.mytelco.server.PActivityCMHome</home>
+			<remote>com.mytelco.server.ProjectCMObject</remote>
+			<ejb-class>com.mytelco.server.PActivityCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>PACTIVITY</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>Proj_No</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>ACT_NO</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>ACT_STAFF</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>ACT_STARTDATE</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>ACT_ENDDATE</field-name>
+			</cmp-field>
+
+			<primkey-field>proj_no</primkey-field>
+			
+			<query>
+			    <query-method>
+			        <method-name>findByProjNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(pact) FROM PACTIVITY pact where pact.proj_no = ?1
+			    </ejb-ql>
+            </query>			
+
+			<query>
+			    <query-method>
+			        <method-name>findByActNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(pact) FROM PACTIVITY pact where pact.act_no = ?1
+			    </ejb-ql>
+            </query>			
+		</entity>
+		<entity>
+			<ejb-name>DeveloperCM</ejb-name>
+            <local-home>com.mytelco.server.DeveloperCMLocalHome</local-home>
+			<local>com.mytelco.server.DeveloperCMLocalObject</local>
+            <home>com.mytelco.server.DeveloperCMHome</home>
+			<remote>com.mytelco.server.DeveloperCMObject</remote>
+			<ejb-class>com.mytelco.server.DeveloperCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>Developer</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>DeveloperId</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>hardwareId</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>SkillLevel</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>Salary</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>Experience</field-name>
+			</cmp-field>
+
+			<primkey-field>DeveloperId</primkey-field>
+			
+			<query>
+			    <query-method>
+			        <method-name>findByDeveloperId</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(dvplr) FROM Developer dvplr where dvplr.developerId = ?1
+			    </ejb-ql>
+            </query>			
+
+			<query>
+			    <query-method>
+			        <method-name>findByHardwareId</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(dvplr) FROM Developer dvplr where dvplr.hardwareId = ?1
+			    </ejb-ql>
+            </query>			
+		</entity>
+		<entity>
+			<ejb-name>HardwareCM</ejb-name>
+            <local-home>com.mytelco.server.HardwareCMLocalHome</local-home>
+			<local>com.mytelco.server.HardwareCMLocalObject</local>
+            <home>com.mytelco.server.HardwareCMHome</home>
+			<remote>com.mytelco.server.HardwareCMObject</remote>
+			<ejb-class>com.mytelco.server.HardwareCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>Hardware</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>HardwareId</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>MouseId</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>KeyboardId</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>CPUId</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>MonitorID</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>MouseInsValue</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>KeyboardInsValue</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>CPUInsValue</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>MonitorInsValue</field-name>
+			</cmp-field>
+
+			<primkey-field>HardwareId</primkey-field>
+			
+			<query>
+			    <query-method>
+			        <method-name>findByHardwareId</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(hw) FROM Hardware hw where hw.hardwareId = ?1
+			    </ejb-ql>
+            </query>			
+
+		</entity>
+		<entity>
+			<ejb-name>EmpPrjActCM</ejb-name>
+            <local-home>com.mytelco.server.EmpPrjActCMLocalHome</local-home>
+			<local>com.mytelco.server.EmpPrjActCMLocalObject</local>
+            <home>com.mytelco.server.EmpPrjActCMHome</home>
+			<remote>com.mytelco.server.EmpPrjActCMObject</remote>
+			<ejb-class>com.mytelco.server.EmpPrjActCMBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.Object</prim-key-class>
+			
+			<reentrant>false</reentrant>
+			
+			<cmp-version>2.x</cmp-version>
+			
+			<abstract-schema-name>Emp_Proj_Act</abstract-schema-name>
+			
+			<cmp-field>
+			    <field-name>EmpNo</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>ProjectNo</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>ActivityNo</field-name>
+			</cmp-field>
+			
+			<cmp-field>
+			    <field-name>EmpTime</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>EStartDate</field-name>
+			</cmp-field>
+
+			<cmp-field>
+			    <field-name>EEndDate</field-name>
+			</cmp-field>
+
+			<query>
+			    <query-method>
+			        <method-name>findByPrimaryKey</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			                <method-param>java.lang.String</method-param>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(epa) FROM EMP_PROJ_ACT epa where epa.empno = ?1 and epa.proj_no = ?2 and epa.act_no = ?3
+			    </ejb-ql>
+            </query>			
+			<query>
+			    <query-method>
+			        <method-name>findByEmployeeNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(epa) FROM EMP_PROJ_ACT epa where epa.empno = ?1
+			    </ejb-ql>
+            </query>			
+			<query>
+			    <query-method>
+			        <method-name>findByProjectNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(epa) FROM EMP_PROJ_ACT epa where epa.proj_no = ?1 
+			    </ejb-ql>
+            </query>			
+			<query>
+			    <query-method>
+			        <method-name>findByActivityNo</method-name>
+			            <method-params>
+			                <method-param>java.lang.String</method-param>
+			            </method-params>
+			    </query-method>
+			    <ejb-ql>SELECT DISTINCT OBJECT(epa) FROM EMP_PROJ_ACT epa where epa.act_no = ?1
+			    </ejb-ql>
+            </query>			
+
+		</entity>
+	</enterprise-beans>
+</ejb-jar>
