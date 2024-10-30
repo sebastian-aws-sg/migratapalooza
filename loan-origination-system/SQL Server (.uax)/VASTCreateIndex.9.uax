@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateIndex.9" instanceOf="CAST_MSTSQL_Index">
+  <CAST_SQL_Object owner="dbo" objectId="9" version="10.50.1600.1"/>
+  <CAST_AST_ANSISQL_WithUniqueness unique="0"/>
+  <CAST_Resolution_Identification resolutionName="pass"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <CAST_TSQL_IsClustered isClustered="0"/>
+  <CAST_ANSISQL_Index indexedObject="VASTCreateTable.19"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.209(1,1,2,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.209" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateIndex.9.src"/>
+  <shell fullPath="VASTCreateIndex.9.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.20" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.9"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.19"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.22" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.9"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.20"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_SortedColumnReference.11" instanceOf="CAST_AST_ANSISQL_SortedColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_ANSISQL_SortOrder ordering="1"/>
+ <CAST_Named nameAST="password"/>
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.9"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.126"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_SortedColumnReference.13" instanceOf="CAST_AST_ANSISQL_SortedColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_ANSISQL_SortOrder ordering="1"/>
+ <CAST_Named nameAST="Password"/>
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.9"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.133"/>
+</instance>
+</instances>

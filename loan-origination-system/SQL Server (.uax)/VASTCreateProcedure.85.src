@@ -1,0 +1,25 @@
+
+CREATE PROCEDURE [dbo].[spInsertPMBlockedUser]
+
+@UserID int,
+@BlockedUID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    IF NOT Exists
+		(
+			SELECT * FROM dbo.PrivateMessageBlockedUsers WITH (NOLOCK) 
+			WHERE [UID] = @UserID AND BlockedUID = @BlockedUID
+         )
+
+		 BEGIN
+			INSERT INTO dbo.PrivateMessageBlockedUsers ([UID], BlockedUID, Date)
+			VALUES(@UserID, @BlockedUID, GETDATE())
+         END
+
+END
+
+		

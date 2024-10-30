@@ -1,0 +1,22 @@
+
+CREATE PROCEDURE [dbo].[spActivateAccount]
+
+@GUID varchar(100)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    IF Exists (SELECT [GUID] FROM dbo.usersmain WITH (NOLOCK) WHERE [GUID] = @GUID)
+       BEGIN
+         
+          UPDATE dbo.usersmain
+          SET Activation = 1
+          WHERE [GUID] = @GUID
+
+       END
+
+END
+
+		

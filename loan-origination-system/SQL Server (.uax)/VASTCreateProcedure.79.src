@@ -1,0 +1,48 @@
+
+CREATE PROCEDURE [dbo].[spInsertArticle]
+
+@UserID int,
+@Title varchar(200),
+@Content varchar(8000),
+@Author varchar(50),
+@CAT_ID int,
+@Keyword varchar(100),
+@Summary varchar(500)
+
+AS
+
+DECLARE @ErrorCode int
+
+SET @ErrorCode = @@error
+
+BEGIN TRANSACTION
+
+IF ( @ErrorCode = 0 )
+
+BEGIN
+
+	IF Exists (SELECT CAT_ID FROM dbo.Cooking_Article_Category WITH (NOLOCK) WHERE CAT_ID = @CAT_ID)
+	BEGIN
+
+		INSERT INTO Cooking_Article ([UID],Title,[Content],Author,CAT_ID,Keyword,Summary)
+			VALUES(
+				@UserID,
+				@Title,
+				@Content,
+				@Author,
+				@CAT_ID,
+				@Keyword,
+				@Summary
+				)
+	END
+
+END
+
+IF ( @ErrorCode = 0 )
+	COMMIT TRANSACTION
+ELSE
+	ROLLBACK TRANSACTION
+
+RETURN @ErrorCode
+
+		

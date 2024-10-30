@@ -1,0 +1,49 @@
+
+CREATE PROCEDURE [dbo].[spInsertArticleComment]
+
+@ID int,
+@Author varchar(20),
+@Email varchar(50),
+@Comments varchar(200),
+@UserID int
+
+AS
+
+DECLARE @ErrorCode int
+
+SET @ErrorCode = @@error
+
+BEGIN TRANSACTION
+
+IF ( @ErrorCode = 0 )
+
+Begin
+
+	IF Exists (SELECT ID FROM dbo.Cooking_Article WITH (NOLOCK) WHERE ID = @ID)
+	  BEGIN
+		-- Insert
+		INSERT INTO dbo.COMMENTS_ARTICLE (ID,Author,Email,Comments, [UID])
+			VALUES(
+				@ID,
+				@Author,
+				@Email,
+				@Comments,
+				@UserID
+				);
+
+		-- Update comment count
+		UPDATE dbo.Cooking_Article SET Total_Comments = Total_Comments + 1 WHERE ID = @ID
+	END
+
+End
+
+IF ( @ErrorCode = 0 )
+	COMMIT TRANSACTION
+ELSE
+	ROLLBACK TRANSACTION
+
+RETURN @ErrorCode
+
+
+
+		

@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE [dbo].[spSelectCountUnApprovedFriends]
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Count(*) col1 FROM dbo.FriendsList WITH (NOLOCK) WHERE FriendID = @UserID AND IsApproved = 0
+
+END
+
+		

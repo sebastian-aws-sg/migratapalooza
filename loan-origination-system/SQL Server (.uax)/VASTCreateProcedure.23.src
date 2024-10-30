@@ -1,0 +1,20 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/6/2008>
+-- Description:	<Finlize article submission>
+-- =============================================
+CREATE PROCEDURE [dbo].[FinalizeArticleSubmission]
+
+@ID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	UPDATE Cooking_Article SET Show = 1, Post_Date = GETDATE()
+    Where ID = @ID
+
+END
+
+		

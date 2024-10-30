@@ -1,0 +1,31 @@
+
+CREATE PROCEDURE [dbo].[spSelectLast25UsersWhoCommentedARecipe] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT t1.*, r.Name 
+	FROM 
+		(
+		  SELECT TOP 25 max(c.ID) as ID, 
+					   max(c.UID) [UID], 
+					   c.AUTHOR as UserName, 
+					   max(c.Date) Date 
+			FROM 
+				dbo.COMMENTS_RECIPE c WITH (NOLOCK)
+			INNER JOIN 
+				dbo.Recipes r WITH (NOLOCK)
+			ON
+				c.ID = r.ID
+			GROUP BY c.AUTHOR
+		) t1
+	INNER JOIN
+		dbo.Recipes r WITH (NOLOCK)
+	ON
+		t1.ID = r.ID
+
+END
+
+		

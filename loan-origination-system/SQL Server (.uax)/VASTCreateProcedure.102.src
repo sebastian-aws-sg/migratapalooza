@@ -1,0 +1,19 @@
+
+CREATE PROCEDURE [dbo].[spSelectCountSentPM]
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Count(*) SentPMCount 
+	FROM 
+		dbo.PrivateMessageSentMessages WITH (NOLOCK) 
+	WHERE 
+		M_From = @UserID AND M_OutBox = 1
+
+END
+
+		

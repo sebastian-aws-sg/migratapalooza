@@ -1,0 +1,17 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/6/2005>
+-- Description:	<Return last submitted article ID>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetLastArticleID] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT IDENT_CURRENT('Cooking_Article') As Col
+
+END
+
+		

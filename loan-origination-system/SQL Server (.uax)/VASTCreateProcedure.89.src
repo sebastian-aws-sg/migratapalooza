@@ -1,0 +1,16 @@
+
+CREATE PROCEDURE spMovePMToTrash
+
+@UserID int,
+@ID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    UPDATE dbo.PrivateMessage SET isTrash = 1 WHERE M_ID = @ID AND M_To = @UserID
+
+END
+
+		

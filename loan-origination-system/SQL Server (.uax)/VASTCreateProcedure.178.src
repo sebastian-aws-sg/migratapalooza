@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE spUpdateNumRecordsFriendsListProfile 
+
+@UserID int,
+@NewValue int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    UPDATE dbo.usersmain SET NumRecordsFriendsList = @NewValue
+    WHERE [UID] = @UserID
+
+END
+
+		

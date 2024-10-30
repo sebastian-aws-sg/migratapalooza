@@ -1,0 +1,67 @@
+
+CREATE PROCEDURE [dbo].[spSelectGetAllRecipeByUser] 
+
+@FindByAuthor varchar(50),
+@OrderBy int = '',
+@PageIndex int = 1,
+@PageSize int = 20
+
+AS
+BEGIN
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+DECLARE @UserID int
+DECLARE @Counter int
+
+SELECT @UserID = [UID] FROM dbo.usersmain WITH (NOLOCK) WHERE UserName = @FindByAuthor
+
+SELECT @Counter = Count(*) FROM dbo.Recipes WITH (NOLOCK) WHERE [UID] = @UserID
+
+SET NOCOUNT ON;
+
+		WITH RecipeSearch AS
+		(
+			SELECT
+			   ROW_NUMBER() OVER 
+				 (
+				   -- Dynamic sorting
+					ORDER BY 
+						  CASE WHEN @OrderBy = 1 THEN HITS END DESC,
+						  CASE WHEN @OrderBy = 2 THEN NO_RATES END DESC,
+						  CASE WHEN @OrderBy = 3 THEN Name END,
+						  CASE WHEN @OrderBy = 4 OR @OrderBy = '' THEN Date END DESC
+				 ) AS RowNumber, 
+					  ID, 
+					  CAT_ID, 
+					  Category, 
+					  Name, 
+					  Author, 
+					  Date, 
+					  HITS, 
+					  RATING, 
+					  NO_RATES,
+					  Cast((1.0 * RATING/NO_RATES) as decimal(2,1)) as Rates,
+                      COALESCE(NULLIF(RecipeImage, ''), 'noimageavailable.gif') as RecipeImage,
+					  @Counter As RCount,
+                      [UID]  
+			   FROM 
+					dbo.Recipes WITH (NOLOCK) 
+			   WHERE 
+					LINK_APPROVED = 1 AND [UID] = @UserID
+		)
+		-- Statement that executes the CTE
+		SELECT a.*
+		FROM
+			  RecipeSearch a
+		WHERE
+			  a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+		ORDER BY
+			  a.RowNumber
+
+END
+		

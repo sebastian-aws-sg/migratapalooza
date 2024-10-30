@@ -1,0 +1,19 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/31/2008>
+-- Description:	<Show or hide comment>
+-- =============================================
+CREATE PROCEDURE AdminUpdateShowHideComment 
+
+@Showhide int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    UPDATE Configuration SET HideShowComment = @Showhide
+
+END
+
+		

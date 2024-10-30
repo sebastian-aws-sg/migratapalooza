@@ -1,0 +1,11 @@
+CREATE TABLE dbo.usersadmin (
+  id int NOT NULL,
+  uname nvarchar NOT NULL,
+  password nvarchar NOT NULL,
+  Email nvarchar NULL,
+  Role nvarchar NULL,
+  CreatedDate datetime NULL,
+  PRIMARY KEY CLUSTERED ( id ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

@@ -1,0 +1,17 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/28/2008>
+-- Description:	<Delete article>
+-- =============================================
+CREATE PROCEDURE [dbo].[ArticleDelete] 
+
+@ID int
+
+AS
+BEGIN
+    
+DELETE dbo.Cooking_Article WHERE ID = @ID
+
+END
+
+		

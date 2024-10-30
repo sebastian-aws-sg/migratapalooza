@@ -1,0 +1,22 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/13/2008>
+-- Description:	<Update Email and SMTP server address.>
+-- =============================================
+CREATE PROCEDURE AdminUpdateEmailAndSMTPAddress 
+
+@Email varchar(100),
+@SMTP varchar(50)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+Update Configuration SET
+                        Email = @Email,
+                        SmtpServer = @SMTP
+
+END
+
+		

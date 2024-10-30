@@ -1,0 +1,65 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/5/2008>
+-- Description:	<Update article>
+-- =============================================
+CREATE PROCEDURE [dbo].[spUpdateArticle]
+
+@UserID int,
+@AID int,
+@Title varchar(200),
+@Content varchar(8000),
+@CAT_ID int,
+@Keyword varchar(100),
+@Summary varchar(500)
+
+AS
+
+DECLARE @ErrorCode int
+
+BEGIN
+
+--Make sure it belongs to the right owner.
+IF Exists (SELECT ID FROM dbo.Cooking_Article WHERE [UID] = @UserID AND ID = @AID)
+
+BEGIN
+
+	IF (@Cat_Id = 0)
+
+		BEGIN
+
+			UPDATE Cooking_Article SET 
+								   Title = @Title,
+								   [Content] = @Content,
+								   Keyword = @Keyword,
+								   Summary = @Summary,
+								   Update_date = getdate()
+								   WHERE [UID] = @UserID AND ID = @AID
+		END
+
+	ELSE
+
+		BEGIN
+
+			UPDATE Cooking_Article SET 
+								   Title = @Title,
+								   [Content] = @Content,
+								   CAT_ID = @CAT_ID,
+								   Keyword = @Keyword,
+								   Summary = @Summary,
+								   Update_date = getdate()
+								   WHERE [UID] = @UserID AND ID = @AID
+
+		END
+
+--Insert Article Update Log
+INSERT INTO dbo.ArticleUpdateLog(AID, [UID], DateUpdated) VALUES(@AID, @UserID, GETDATE())
+
+END
+
+SET @ErrorCode = @@error
+		
+END
+
+RETURN @ErrorCode
+		

@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE [dbo].[spInsertExceptionError]
+
+@URL varchar(100),
+@Exception varchar(1000)
+
+AS
+
+SET NOCOUNT ON;
+
+INSERT INTO dbo.ExceptionLog (URL, Exception, Date)
+VALUES (@URL, @Exception, GETDATE())
+
+Return 0
+
+
+		

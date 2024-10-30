@@ -1,0 +1,17 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/4/2008>
+-- Description:	<Count All Article>
+-- =============================================
+CREATE PROCEDURE ArticleCountAll 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    Select Count(*) From Cooking_Article Where Show = 1
+
+END
+
+		

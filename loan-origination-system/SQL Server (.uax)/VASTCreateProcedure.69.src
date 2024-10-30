@@ -1,0 +1,16 @@
+
+CREATE PROCEDURE [dbo].[spDeletePrivateMessage]
+
+@UserID int,
+@ID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DELETE dbo.PrivateMessage WHERE M_ID = @ID AND M_To = @UserID
+
+END
+
+		

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateFunction.4" instanceOf="CAST_MSTSQL_Function">
+  <CAST_SQL_Object objectId="581577110" owner="dbo" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="GetCategoryRecipeCount"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.197(1,1,24,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.197"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.197" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateFunction.4.src"/>
+  <shell fullPath="VASTCreateFunction.4.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.370" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@CatId"/>
+ <CAST_AST_WithParent parentAST="VASTCreateFunction.4"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_ReturnParameter.4" instanceOf="CAST_AST_ANSISQL_ReturnParameter">
+ <CAST_AST_ANSISQL_WithOrder order="-1"/>
+ <CAST_Named nameAST="&lt;return value&gt;"/>
+ <CAST_AST_WithParent parentAST="VASTCreateFunction.4"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

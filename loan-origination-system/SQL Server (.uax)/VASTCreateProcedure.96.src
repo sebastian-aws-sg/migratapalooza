@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE spSelectCheckIfUserAlreadyBlocked
+
+@UserID int,
+@BlockedUID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Count(*) Col1 FROM dbo.PrivateMessageBlockedUsers WITH (NOLOCK) 
+	WHERE [UID] = @UserID AND BlockedUID = @BlockedUID
+
+END
+
+		

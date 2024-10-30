@@ -1,0 +1,16 @@
+
+CREATE PROCEDURE [dbo].[spDeleteUnApprovedFriends]
+
+@UserID int,
+@ID int  
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DELETE dbo.FriendsList WHERE ID = @ID AND FriendID = @UserID AND IsApproved = 0
+
+END
+
+		

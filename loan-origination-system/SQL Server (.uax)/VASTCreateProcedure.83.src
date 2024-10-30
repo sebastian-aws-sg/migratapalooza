@@ -1,0 +1,42 @@
+
+CREATE PROCEDURE [dbo].[spInsertFavoriteRecipeToCookBook]
+
+@UserID int,
+@RecipeID int
+
+AS
+BEGIN
+
+--Check if the recipe exists in the database.
+IF Exists(SELECT ID FROM dbo.Recipes WHERE ID = @RecipeID)
+   BEGIN
+
+		DECLARE @RecipeName varchar(50)
+		DECLARE @Hits int
+
+		SELECT @RecipeName = [Name] FROM dbo.Recipes WHERE ID = @RecipeID
+		SELECT @Hits = HITS FROM dbo.Recipes WHERE ID = @RecipeID
+
+        --Check if the recipe already exists in the user cookbook.
+        --If exists, then just update the hits.
+		IF Exists(SELECT [UID], RecipeID FROM dbo.userCookBook WHERE [UID] = @UserID AND RecipeID = @RecipeID)
+		   BEGIN
+
+			  UPDATE dbo.userCookBook SET
+			  Hits = @Hits
+			  WHERE [UID] = @UserID AND RecipeID = @RecipeID
+
+		   END
+		ELSE
+		   BEGIN
+
+			  INSERT INTO dbo.userCookBook([UID], RecipeID, RecipeName, Hits)
+			  VALUES(@UserID, @RecipeID, @RecipeName, @Hits)
+
+		   END
+
+   END
+
+END
+
+		

@@ -1,0 +1,76 @@
+
+CREATE PROCEDURE [dbo].[spSelectPastPublicEvents]
+
+@EventType varchar(50) = 'All'
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    DECLARE @Counter int
+
+    IF (@EventType = 'All')
+       BEGIN
+			SELECT @Counter = Count(*)
+			FROM Events WITH (NOLOCK)
+			WHERE [PRIVATE] = 0 AND [START_DATE] < GETDATE() And [START_DATE] > DateAdd(day,-30,GETDATE())
+
+			IF (@Counter > 0)
+				 BEGIN
+					SELECT EVENT_ID, 
+						   EVENT_TITLE,
+						   CATEGORY,
+                           [START_DATE],
+                           APPMEETING_STARTTIME,
+                           APPMEETING_ENDTIME,
+						   @Counter as RCount
+					FROM Events WITH (NOLOCK)
+					WHERE [PRIVATE] = 0 AND [START_DATE] < GETDATE() And [START_DATE] > DateAdd(day,-30,GETDATE())
+					ORDER BY [START_DATE], EVENT_ID ASC
+				 END
+			ELSE
+				 BEGIN
+					SELECT 1 as EVENT_ID, 
+						   'NA' as EVENT_TITLE,
+						   'NA' as CATEGORY,
+                           NULL as [START_DATE],
+                           NULL as APPMEETING_STARTTIME,
+                           NULL as APPMEETING_ENDTIME,
+						   0 as RCount
+				 END
+	   END
+   ELSE
+       BEGIN
+			SELECT @Counter = Count(*)
+			FROM Events WITH (NOLOCK)
+			WHERE [PRIVATE] = 0 AND CATEGORY = @EventType AND [START_DATE] < GETDATE() And [START_DATE] > DateAdd(day,-30,GETDATE())
+
+			IF (@Counter > 0)
+				 BEGIN
+					SELECT EVENT_ID, 
+						   EVENT_TITLE,
+						   CATEGORY,
+                           [START_DATE],
+                           APPMEETING_STARTTIME,
+                           APPMEETING_ENDTIME,
+						   @Counter as RCount
+					FROM Events WITH (NOLOCK)
+					WHERE [PRIVATE] = 0 AND CATEGORY = @EventType AND [START_DATE] < GETDATE() And [START_DATE] > DateAdd(day,-30,GETDATE())
+					ORDER BY [START_DATE], EVENT_ID ASC
+				 END
+			ELSE
+				 BEGIN
+					SELECT 1 as EVENT_ID, 
+						   'NA' as EVENT_TITLE,
+						   'NA' as CATEGORY,
+                           NULL as [START_DATE],
+                           NULL as APPMEETING_STARTTIME,
+                           NULL as APPMEETING_ENDTIME,
+						   0 as RCount
+				 END
+	   END
+
+END
+
+		

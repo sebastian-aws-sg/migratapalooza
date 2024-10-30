@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateTable.9" instanceOf="CAST_MSTSQL_RelationalTable">
+  <CAST_SQL_Object owner="dbo" objectId="1399676034" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="Events"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.220(1,1,16,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.220" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateTable.9.src"/>
+  <shell fullPath="VASTCreateTable.9.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_GenericColumnReference.7" instanceOf="CAST_AST_ANSISQL_GenericColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_WithParent parentAST="p_Constraint.7"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.50"/>
+</instance>
+<instance id="p_Constraint.7" instanceOf="CAST_MSTSQL_PrimaryKeyConstraint">
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_Resolution_Identification resolutionName="PK_Events"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_ANSISQL_Constraint nameIsDefinedByDBMS="0"/>
+ <CAST_TSQL_IsClustered isClustered="1"/>
+</instance>
+<instance id="p_ColumnOfTable.50" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="EVENT_ID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.51" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="DATE_ADDED"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="datetime" length="8" precision="23" scale="3"/>
+</instance>
+<instance id="p_ColumnOfTable.52" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="3"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="START_DATE"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="datetime" length="8" precision="23" scale="3"/>
+</instance>
+<instance id="p_ColumnOfTable.53" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="4"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="1"/>
+ <CAST_Resolution_Identification resolutionName="CATEGORY"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.54" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="5"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="END_DATE"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="datetime" length="8" precision="23" scale="3"/>
+</instance>
+<instance id="p_ColumnOfTable.55" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="6"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="EVENT_TITLE"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="nvarchar" length="200" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.56" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="7"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="1"/>
+ <CAST_Resolution_Identification resolutionName="EVENT_DETAILS"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="nvarchar" length="2000" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.57" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="8"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="1"/>
+ <CAST_Resolution_Identification resolutionName="APPMEETING_STARTTIME"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="20" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.58" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="9"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="1"/>
+ <CAST_Resolution_Identification resolutionName="APPMEETING_ENDTIME"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="20" precision="0" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.59" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="10"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="UID"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="p_ColumnOfTable.60" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="11"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="PRIVATE"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.9"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

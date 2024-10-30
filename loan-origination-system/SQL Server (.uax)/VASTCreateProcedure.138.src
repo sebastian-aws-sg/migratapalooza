@@ -1,0 +1,20 @@
+
+CREATE PROCEDURE [dbo].[spSelectPrivateMessageStatistic]
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+DECLARE @CountAllPM int
+DECLARE	@CountSentPMToday int
+
+SELECT @CountAllPM = Count(*) FROM dbo.PrivateMessage WITH (NOLOCK)
+
+SELECT @CountSentPMToday = Count(*) FROM dbo.PrivateMessage WITH (NOLOCK) WHERE M_Sent >= DATEADD(day, - 1, GETDATE())
+
+SELECT @CountAllPM as TotalPMCount, @CountSentPMToday as SentTodayCount
+
+END
+
+		

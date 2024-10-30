@@ -1,0 +1,9 @@
+CREATE TABLE dbo.PrivateMessageBlockedUsers (
+  ID int NOT NULL,
+  UID int NOT NULL,
+  BlockedUID int NOT NULL,
+  Date datetime NOT NULL,
+  PRIMARY KEY CLUSTERED ( ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

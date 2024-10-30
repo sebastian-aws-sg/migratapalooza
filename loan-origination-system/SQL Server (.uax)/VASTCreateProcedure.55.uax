@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.55" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="853578079" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="GetXMLToprecipe"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.55(1,1,26,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.55"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.55" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.55.src"/>
+  <shell fullPath="VASTCreateProcedure.55.src"/>
+ </instance>
+</instances>

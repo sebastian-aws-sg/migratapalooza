@@ -1,0 +1,12 @@
+CREATE TABLE dbo.COMMENTS_ARTICLE (
+  COM_ID int NOT NULL,
+  ID int NOT NULL,
+  Author nvarchar NOT NULL,
+  Email nvarchar NOT NULL,
+  Comments nvarchar NOT NULL,
+  Date datetime NOT NULL,
+  UID int NOT NULL,
+  PRIMARY KEY CLUSTERED ( COM_ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

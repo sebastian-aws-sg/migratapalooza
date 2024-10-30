@@ -1,0 +1,37 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/6/2008>
+-- Description:	<Returns 10 newest cooking articles in the right side panel.>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetNewestArticleSidePanel] 
+
+@Top int
+
+AS
+BEGIN
+
+	SET ROWCOUNT @Top
+
+    SELECT a.ID, 
+           a.CAT_ID,
+           a.Title,
+           a.Hits,
+           a.Post_Date,
+           b.CAT_NAME
+       FROM 
+           dbo.Cooking_Article a WITH (NOLOCK) 
+	   INNER JOIN 
+           dbo.Cooking_Article_Category b WITH (NOLOCK)
+       ON 
+           a.CAT_ID = b.CAT_ID
+       WHERE 
+           a.Show = 1
+       ORDER BY 
+           a.Post_Date DESC
+
+    -- never forget to set it back to 0! 
+    SET ROWCOUNT 0 
+
+END
+
+		

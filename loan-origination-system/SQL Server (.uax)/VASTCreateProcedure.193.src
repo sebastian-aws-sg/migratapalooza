@@ -1,0 +1,27 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/3/2008>
+-- Description:	<Update recipe comment>
+-- =============================================
+CREATE PROCEDURE [dbo].[UpdateRecipeComments] 
+
+@ID int,
+@Comment varchar(255)
+
+AS
+
+declare @ErrorCode int
+
+Begin
+
+Update COMMENTS_RECIPE Set 
+                       COMMENTS = @Comment
+                       Where COM_ID = @ID
+
+set @ErrorCode = @@error
+		
+End
+
+return @ErrorCode
+
+		

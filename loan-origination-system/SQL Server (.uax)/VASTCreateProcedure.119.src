@@ -1,0 +1,24 @@
+
+CREATE PROCEDURE [dbo].[spSelectIsUserBlockedFromSendingPM]
+
+@ToUsername varchar(50),
+@FromUserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DECLARE @ToUserID int
+
+	SELECT @ToUserID = [UID] FROM dbo.usersmain WITH (NOLOCK) WHERE UserName = @ToUsername
+
+	SELECT Count(*) Col1 
+	FROM 
+		dbo.PrivateMessageBlockedUsers WITH (NOLOCK) 
+	WHERE 
+		BlockedUID = @FromUserID AND [UID] = @ToUserID
+
+END
+
+		

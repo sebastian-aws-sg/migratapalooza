@@ -1,0 +1,102 @@
+
+CREATE PROCEDURE [dbo].[spSelectGetUserArticleCommentByUser] 
+
+@FindByAuthor varchar(50),
+@OrderBy int,
+@SortBy int,
+@PageIndex int,
+@PageSize int
+
+AS
+BEGIN
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+DECLARE @UserID int
+DECLARE @Counter int
+
+SELECT @UserID = [UID] FROM dbo.usersmain WITH (NOLOCK) WHERE UserName = @FindByAuthor
+
+SELECT @Counter = Count(DISTINCT ID) FROM dbo.COMMENTS_ARTICLE WITH (NOLOCK) WHERE [UID] = @UserID
+
+SET NOCOUNT ON;
+
+	WITH Article AS
+	(
+		SELECT
+		   ROW_NUMBER() OVER 
+			 (
+				-- Dynamic sorting
+				ORDER BY 
+					  CASE WHEN @OrderBy = 1 AND @SortBy = 1 THEN a.Hits END DESC,
+					  CASE WHEN @OrderBy = 1 AND @SortBy = '' THEN a.Hits END DESC,
+					  CASE WHEN @OrderBy = 1 AND @SortBy = 2 THEN a.Hits END ASC,
+					  CASE WHEN @OrderBy = 2 AND @SortBy = 1 THEN a.No_Rates END DESC,
+					  CASE WHEN @OrderBy = 2 AND @SortBy = '' THEN a.No_Rates END DESC,
+					  CASE WHEN @OrderBy = 2 AND @SortBy = 2 THEN a.No_Rates END ASC,
+					  CASE WHEN @OrderBy = 3 AND @SortBy = 2 THEN a.Title END ASC,
+					  CASE WHEN @OrderBy = 3 AND @SortBy = '' THEN a.Title END ASC,
+					  CASE WHEN @OrderBy = 3 AND @SortBy = 1 THEN a.Title END DESC,
+					  CASE WHEN @OrderBy = 4 AND @SortBy = 1 OR @OrderBy = '' THEN a.Post_Date END DESC,
+					  CASE WHEN @OrderBy = 4 AND @SortBy = '' OR @OrderBy = '' THEN a.Post_Date END DESC,
+					  CASE WHEN @OrderBy = 4 AND @SortBy = 2 THEN a.Post_Date END ASC
+			 ) AS RowNumber, 
+				  a.ID,
+				  a.CAT_ID,
+				  b.CAT_NAME, 
+				  a.Title, 
+				  a.Post_Date, 
+				  a.Content, 
+				  a.Hits, 
+				  a.Author,
+				  a.Keyword,
+				  a.No_Rates,
+				  a.UID,
+				  CAST((1.0 * a.No_Rating/a.No_Rates) AS DECIMAL(2,1)) AS Rates,
+				  @Counter As RCount, 
+				  a.Summary,
+				  a.Total_Comments        
+		   FROM 
+				dbo.Cooking_Article a WITH (NOLOCK)
+		   INNER JOIN 
+				dbo.Cooking_Article_Category b WITH (NOLOCK)
+		   ON 
+				a.CAT_ID = b.CAT_ID
+		   INNER JOIN 
+				dbo.COMMENTS_ARTICLE c WITH (NOLOCK)
+		   ON
+				a.ID = c.ID
+		   WHERE 
+				a.Show = 1 AND c.UID = @UserID
+		   GROUP BY
+				  a.ID,
+				  a.CAT_ID,
+				  b.CAT_NAME, 
+				  a.Title, 
+				  a.Post_Date, 
+				  a.Content, 
+				  a.Hits, 
+				  a.Author,
+				  a.Keyword,
+				  a.No_Rates,
+				  a.UID,
+				  a.No_Rating,
+				  a.Summary,
+				  a.Total_Comments   
+	)
+	-- Statement that executes the CTE
+	SELECT a.*
+	FROM
+		  Article a
+	WHERE
+		  a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+	ORDER BY
+		  a.RowNumber
+
+END
+
+		

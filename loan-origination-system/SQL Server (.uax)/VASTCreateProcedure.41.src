@@ -1,0 +1,53 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/21/2008>
+-- Description:	<Return random recipe>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetRandomRecipe]
+
+@CatId int
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+DECLARE @CatIdValue int
+DECLARE @CatID_Val int
+
+If (@CatId <> '')
+   BEGIN
+	 IF NOT Exists (SELECT CAT_ID FROM dbo.RECIPE_CAT WITH (NOLOCK) WHERE CAT_ID = @CatId)
+		  BEGIN
+			SET @CatIdValue = (SELECT TOP 1 CAT_ID FROM dbo.RECIPE_CAT WITH (NOLOCK))
+		  END
+		ELSE
+		  BEGIN
+			SET @CatIdValue = @CatId
+		  END
+     SET @CatID_Val = 1
+   END
+ELSE
+   BEGIN
+     SET @CatID_Val = NULL
+   END
+
+SELECT ID, 
+       CAT_ID, 
+       Category, 
+       [Name],  
+       HITS, 
+       RATING,
+       NO_RATES, 
+       Cast((1.0 * RATING/NO_RATES) as decimal(2,1)) as Rates,
+       COALESCE(NULLIF(RecipeImage, ''), 'noimageavailable.gif') as RecipeImage 
+       FROM 
+			dbo.Recipes WITH (NOLOCK) 
+       WHERE 
+	   (@CatID_Val IS NOT NULL AND (LINK_APPROVED = 1 AND CAT_ID = @CatIdValue)) OR
+       (@CatID_Val IS NULL AND LINK_APPROVED = 1)
+       ORDER BY NEWID()
+
+END
+
+		

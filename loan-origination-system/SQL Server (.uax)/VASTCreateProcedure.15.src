@@ -1,0 +1,227 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/29/2008>
+-- Description:	<Returns admin manager recipe with custom paging and filter>
+-- =============================================
+CREATE PROCEDURE [dbo].[AdminManagerGetRecipe]
+
+@Letter char(1) = '',
+@CAT_ID int = '',
+@Tab int = '',
+@Find varchar(50) = '',
+@Top int = '',
+@Year int = '',
+@Month int = '',
+@RecipeImage int = '',
+@LastViewed int = '',
+@PageIndex int = 1,
+@PageSize int = 20
+
+AS
+BEGIN
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+IF (@LastViewed <> '')
+    BEGIN
+
+    DECLARE @NumDays int
+
+    IF (@LastViewed = 1)
+        BEGIN
+	        SET @NumDays = 1 -- 1 day
+        END
+    ELSE IF (@LastViewed = 2) 
+        BEGIN
+	        SET @NumDays = 2 -- 2 days
+        END
+    ELSE IF (@LastViewed = 3)
+        BEGIN
+	        SET @NumDays = 3 -- 3 days
+        END
+    ELSE IF (@LastViewed = 4)
+        BEGIN
+	        SET @NumDays = 4 -- 4 days
+        END
+    ELSE IF (@LastViewed = 5)
+        BEGIN
+	        SET @NumDays = 5 -- 5 days
+        END
+    ELSE IF (@LastViewed = 6)
+        BEGIN
+	        SET @NumDays = 6 -- 6 days
+        END
+    ELSE IF (@LastViewed = 7)
+        BEGIN
+	        SET @NumDays = 7 -- 1 week
+        END
+    ELSE IF (@LastViewed = 14)
+        BEGIN
+	       SET @NumDays = 14 -- 2 weeks
+        END
+    ELSE IF (@LastViewed = 30)
+        BEGIN
+	       SET @NumDays = 30 -- 1 month
+        END
+    ELSE
+        BEGIN
+	        SET @NumDays = 1 -- default to 1 day
+        END
+END
+
+DECLARE @Letter_Val varchar(50)
+DECLARE @CAT_ID_Val int
+DECLARE @Tab_Val int
+DECLARE @Find_Val varchar(50)
+DECLARE @Top_Val int
+DECLARE @Year_Val int
+DECLARE @Month_Val int
+DECLARE @Date_Val int
+DECLARE @RecipeImage_Val int
+DECLARE @LastViewed_Val int
+
+IF (@Letter <> '')
+   BEGIN
+		SET @Letter_Val = @Letter
+   END
+ELSE
+   BEGIN
+		SET @Letter_Val = NULL
+   END
+
+IF (@CAT_ID <> '')
+	BEGIN
+		SET @CAT_ID_Val = @CAT_ID
+	END
+ELSE
+	BEGIN
+		SET @CAT_ID_Val = NULL
+	END
+
+IF (@Tab <> '')
+	BEGIN
+		SET @Tab_Val = @Tab
+	END
+ELSE
+	BEGIN
+		SET @Tab_Val = NULL
+	END
+
+IF (@Find <> '')
+	BEGIN
+		SET @Find_Val = @Find
+	END
+ELSE
+	BEGIN
+		SET @Find_Val = NULL
+	END
+
+IF (@Top <> '')
+	BEGIN
+		SET @Top_Val = @Top
+	END
+ELSE
+	BEGIN
+		SET @Top_Val = NULL
+	END
+
+IF (@Year <> '' AND @Month <> '')
+	BEGIN
+        SET @Date_Val = 1
+		SET @Year_Val = @Year
+		SET @Month_Val = @Month
+	END
+ELSE
+	BEGIN
+		SET @Date_Val = NULL
+		SET @Year_Val = NULL
+		SET @Month_Val = NULL
+	END
+
+IF (@RecipeImage <> '')
+	BEGIN
+		SET @RecipeImage_Val = @RecipeImage
+	END
+ELSE
+	BEGIN
+		SET @RecipeImage_Val = NULL
+	END
+
+IF (@LastViewed <> '')
+	BEGIN
+		SET @LastViewed_Val = @LastViewed
+	END
+ELSE
+	BEGIN
+		SET @LastViewed_Val = NULL
+	END
+
+
+DECLARE @MaxHits int
+SET @MaxHits = 1000
+
+DECLARE @CountRecord int
+
+--Returns total count
+SELECT @CountRecord = Count(*) FROM dbo.Recipes WITH (NOLOCK) 
+	WHERE 
+	(@Find_Val IS NOT NULL AND [Name] LIKE '%' + COALESCE(@Find, [Name]) + '%') OR
+	(@Letter_Val IS NOT NULL AND [Name] LIKE COALESCE(@Letter, [Name]) + '%') OR
+	(@CAT_ID_Val IS NOT NULL AND CAT_ID = @CAT_ID) OR
+	(@Tab_Val IS NOT NULL AND LINK_APPROVED = 0) OR
+	(@Top_Val IS NOT NULL AND Hits > @MaxHits) OR
+	(@Date_Val IS NOT NULL AND (DATEPART([year], Date) = @Year AND DATEPART([month], Date) = @Month)) OR
+	(@RecipeImage_Val IS NOT NULL AND (RecipeImage IS NOT NULL AND LEN(RecipeImage) > 1)) OR
+	(@LastViewed_Val IS NOT NULL AND HIT_DATE >= DATEADD(day, - @NumDays, GETDATE()) OR
+    (@Letter_Val IS NULL AND @CAT_ID_Val IS NULL AND @Find_Val IS NULL AND @Tab_Val IS NULL AND @Top_Val IS NULL 
+    AND @Year_Val IS NULL AND @Month_Val IS NULL AND @RecipeImage_Val IS NULL AND @LastViewed_Val IS NULL))
+
+
+ SET NOCOUNT ON;
+
+ WITH Recipe AS
+   (
+	 SELECT
+	   ROW_NUMBER() OVER 
+		 (
+			ORDER BY ID
+		 ) AS RowNumber, 
+		   ID, 
+		   CAT_ID, 
+		   Category, 
+		   [Name], 
+		   Author, 
+		   Date, 
+		   HITS,
+           HIT_DATE,
+		   RecipeImage,
+		   @CountRecord AS RCount
+	  FROM dbo.Recipes WITH (NOLOCK) 
+		  WHERE 
+		  (@Find_Val IS NOT NULL AND [Name] LIKE '%' + COALESCE(@Find, [Name]) + '%') OR
+		  (@Letter_Val IS NOT NULL AND [Name] LIKE COALESCE(@Letter, [Name]) + '%') OR
+		  (@CAT_ID_Val IS NOT NULL AND CAT_ID = @CAT_ID) OR
+		  (@Tab_Val IS NOT NULL AND LINK_APPROVED = 0) OR
+		  (@Top_Val IS NOT NULL AND Hits >= @MaxHits) OR
+		  (@Date_Val IS NOT NULL AND (DATEPART([year], Date) = @Year AND DATEPART([month], Date) = @Month)) OR
+		  (@RecipeImage_Val IS NOT NULL AND (RecipeImage IS NOT NULL AND LEN(RecipeImage) > 1)) OR
+		  (@LastViewed_Val IS NOT NULL AND HIT_DATE >= DATEADD(day, - @NumDays, GETDATE()) 
+		  OR --Returns no filter record set
+          (@Letter_Val IS NULL AND @CAT_ID_Val IS NULL AND @Find_Val IS NULL AND @Tab_Val IS NULL AND @Top_Val IS NULL 
+		  AND @Year_Val IS NULL AND @Month_Val IS NULL AND @RecipeImage_Val IS NULL AND @LastViewed_Val IS NULL))
+	 )
+	 -- Statement that executes the CTE
+	 SELECT a.*
+	 FROM
+		   Recipe a
+	 WHERE
+		   a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+	 ORDER BY
+		   a.RowNumber
+
+END
+		

@@ -1,0 +1,27 @@
+
+CREATE PROCEDURE [dbo].[spSelectCountUsersWhoSavedMyRecipeInCookBook]
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT COUNT(DISTINCT ucb.UID) as Counter 
+	FROM 
+		dbo.userCookBook ucb WITH (NOLOCK)
+	INNER JOIN
+		dbo.Recipes r WITH (NOLOCK)
+	ON
+		ucb.RecipeID = r.ID
+	INNER JOIN
+		dbo.usersmain u WITH (NOLOCK)
+	ON
+		ucb.UID = u.UID
+	WHERE 
+		r.UID = @UserID
+
+END
+
+		

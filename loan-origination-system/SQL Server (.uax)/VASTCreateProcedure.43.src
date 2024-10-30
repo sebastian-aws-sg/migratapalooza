@@ -1,0 +1,28 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/21/2008>
+-- Description:	<Returns category list for the side menu with count>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetRecipeCategoryListSideMenu]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT *, 
+       (
+         SELECT COUNT (*) 
+         FROM 
+            Recipes WITH (NOLOCK) 
+         WHERE 
+            Recipes.CAT_ID = RECIPE_CAT.CAT_ID AND LINK_APPROVED = 1
+       ) AS REC_COUNT 
+    FROM 
+         RECIPE_CAT WITH (NOLOCK) 
+    ORDER BY 
+         CAT_TYPE ASC
+
+END
+
+		

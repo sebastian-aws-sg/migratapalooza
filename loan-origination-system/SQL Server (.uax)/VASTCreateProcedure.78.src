@@ -1,0 +1,34 @@
+
+CREATE PROCEDURE [dbo].[spInsertAFriendToFriendsList] 
+
+@UserID int,
+@FriendID int
+
+AS
+BEGIN
+    --Prevent user from adding himsel/herself
+	IF (@UserID <> @FriendID)
+		BEGIN
+			--Check if the friend userID exist in the "dbo.usersmain" table.
+			IF Exists (SELECT [UID] FROM dbo.usersmain WITH (NOLOCK) WHERE [UID] = @FriendID)
+			   BEGIN
+				--If the friendID already added for this user, then just update it.
+				--Else insert a new friend.
+				IF Exists (SELECT * FROM dbo.FriendsList WITH (NOLOCK) WHERE [UID] = @UserID AND FriendID = @FriendID)
+				   BEGIN
+					 UPDATE  dbo.FriendsList
+					 SET FriendID = @FriendID
+					 WHERE [UID] = @UserID
+				   END
+				ELSE
+				   BEGIN
+					 INSERT INTO dbo.FriendsList ([UID], FriendID, Date)
+					 VALUES (@UserID, @FriendID, GETDATE())
+				   END
+			 END
+
+		END
+
+END
+
+		

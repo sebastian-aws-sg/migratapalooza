@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE spUpdateConfigNumberOfRecordsInFriendsListAdmin
+
+@NumRecords int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	UPDATE dbo.Configuration SET NumberOfFriendsInFriendsList = @NumRecords
+
+END
+
+		

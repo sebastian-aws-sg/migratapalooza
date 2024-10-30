@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateIndex.8" instanceOf="CAST_MSTSQL_Index">
+  <CAST_SQL_Object owner="dbo" objectId="3" version="10.50.1600.1"/>
+  <CAST_AST_ANSISQL_WithUniqueness unique="0"/>
+  <CAST_Resolution_Identification resolutionName="CAT_ID"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <CAST_TSQL_IsClustered isClustered="0"/>
+  <CAST_ANSISQL_Index indexedObject="VASTCreateTable.16"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.208(1,1,2,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.208" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateIndex.8.src"/>
+  <shell fullPath="VASTCreateIndex.8.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.15" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.8"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.16"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_SortedColumnReference.9" instanceOf="CAST_AST_ANSISQL_SortedColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_ANSISQL_SortOrder ordering="1"/>
+ <CAST_Named nameAST="CAT_ID"/>
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.8"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.97"/>
+</instance>
+</instances>

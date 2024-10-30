@@ -1,0 +1,20 @@
+
+CREATE PROCEDURE [dbo].[spSelectPMReadingSentMsgValidation] 
+
+@PMID int,
+@UserID int 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT COUNT(*) col1 
+	FROM 
+		dbo.PrivateMessage pm WITH (NOLOCK)
+	WHERE 
+		M_From = @UserID AND M_ID = @PMID
+
+END
+
+		

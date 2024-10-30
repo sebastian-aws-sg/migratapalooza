@@ -1,0 +1,22 @@
+
+CREATE PROCEDURE [dbo].[spUpdatePreferredLayoutPageSizeFromMyAccount] 
+
+@UserID int,
+@ChoosePreferredLayout int,
+@PreferredLayout int,
+@PreferredPagesize int
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+	UPDATE dbo.usersmain SET IsUserChoosePreferredLayout = @ChoosePreferredLayout WHERE [UID] = @UserID;
+
+	EXEC spUpdateUserPreferredLayout @UserID, @PreferredLayout
+
+	EXEC spUpdateUserPreferredPageSize @UserID, @PreferredPagesize
+
+END
+
+		

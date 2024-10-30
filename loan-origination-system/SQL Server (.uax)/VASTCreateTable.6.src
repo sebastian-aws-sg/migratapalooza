@@ -1,0 +1,20 @@
+CREATE TABLE dbo.Cooking_Article (
+  ID int NOT NULL,
+  CAT_ID int NOT NULL,
+  Title nvarchar NOT NULL,
+  Post_Date datetime NOT NULL,
+  Content varchar NOT NULL,
+  Hits int NOT NULL,
+  Author nvarchar NOT NULL,
+  Keyword nvarchar NOT NULL,
+  Show int NOT NULL,
+  No_Rating int NOT NULL,
+  No_Rates int NOT NULL,
+  Summary nvarchar NOT NULL,
+  Total_Comments int NOT NULL,
+  UID int NOT NULL,
+  Update_date datetime NOT NULL,
+  PRIMARY KEY CLUSTERED ( ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

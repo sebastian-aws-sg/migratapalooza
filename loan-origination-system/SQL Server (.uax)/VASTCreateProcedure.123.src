@@ -1,0 +1,28 @@
+
+CREATE PROCEDURE [dbo].[spSelectLast20UserWhoSubmittedRecipe] 
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+	SELECT MAX(u.UID) [UID], 
+		   u.UserName,
+		   MAX(r.Date) Date
+	FROM 
+		 dbo.usersmain u WITH (NOLOCK)
+	INNER JOIN
+	(
+		SELECT TOP 20 [UID], Date
+		FROM 
+			 dbo.Recipes WITH (NOLOCK)
+		GROUP BY [UID], Date
+		ORDER BY Date DESC
+	) r
+	ON
+		r.UID = u.UID
+	GROUP BY u.UserName 
+
+END
+
+		

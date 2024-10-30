@@ -1,0 +1,43 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/24/2008>
+-- Description:	<Returns search result count>
+-- =============================================
+CREATE FUNCTION [dbo].[GetSearchResultCount] 
+(
+@Search varchar(50),
+@CAT_ID int
+)
+RETURNS int
+AS
+BEGIN
+
+	-- Declare the return variable here
+	DECLARE @GetCountSearchResult int
+
+if (@CAT_ID <> 0)
+ 
+ Begin
+
+    -- Specific category search result count
+	Set @GetCountSearchResult = (SELECT Count(*) As RecCount from Recipes
+    Where LINK_APPROVED = 1 AND CAT_ID = @CAT_ID AND Name Like '%' + @Search + '%')
+
+End
+
+Else
+
+Begin
+
+    -- All category search result count
+	Set @GetCountSearchResult = (SELECT Count(*) As RecCount from Recipes
+    Where LINK_APPROVED = 1 AND Name Like '%' + @Search + '%')
+
+End
+
+	-- Return the result of the function
+	RETURN @GetCountSearchResult
+
+END
+
+		

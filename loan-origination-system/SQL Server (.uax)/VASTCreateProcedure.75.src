@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE [dbo].[spGetCountofUnApprovedArticle] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Count(*) TotalCount 
+	FROM 
+		dbo.Cooking_Article WITH (NOLOCK) 
+	WHERE 
+		Show = 0
+
+END
+
+		

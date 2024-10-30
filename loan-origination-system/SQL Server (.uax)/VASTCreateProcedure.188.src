@@ -1,0 +1,31 @@
+CREATE PROCEDURE [dbo].[spValidateUsernameAndEmailOnRegistration] 
+
+@UserName varchar(50),
+@Email varchar(50)
+
+AS
+BEGIN
+
+--This sp will validate the username and email during registration.
+--Preventing duplicate username and email.
+
+IF Exists (SELECT UserName, Email FROM dbo.usersmain WITH (NOLOCK) WHERE UserName = @UserName AND Email = @Email)
+	BEGIN
+		SELECT 'USERNAME AND EMAIL ALREADY TAKEN' as Result
+	END
+ELSE IF Exists (SELECT UserName, Email FROM dbo.usersmain WITH (NOLOCK) WHERE UserName = @UserName)
+	BEGIN
+		SELECT 'USERNAME ALREADY TAKEN' as Result
+	END
+ELSE IF Exists (SELECT UserName, Email FROM dbo.usersmain WITH (NOLOCK) WHERE Email = @Email)
+	BEGIN
+		SELECT 'EMAIL ALREADY TAKEN' as Result
+	END
+ELSE
+	BEGIN
+		SELECT 'GOOD' as Result
+	END
+
+END
+
+		

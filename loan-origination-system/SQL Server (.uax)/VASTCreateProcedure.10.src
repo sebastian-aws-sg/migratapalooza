@@ -1,0 +1,26 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/4/2008>
+-- Description:	<Delete recipe category>
+-- =============================================
+CREATE PROCEDURE [dbo].[AdminDeleteRecipeCategory] 
+
+@CatId int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    -- Category table
+    DELETE dbo.RECIPE_CAT WHERE CAT_ID = @CatId;
+
+    --Cscade Delete to Recipe table, delete all associated recipes.
+    DELETE dbo.Recipes WHERE CAT_ID = @CatId;
+
+    -- Cascade delete to userCookBook table. Delete all recipe in CookBook belong to this category.
+    DELETE dbo.userCookBook WHERE RecipeID IN (SELECT ID FROM dbo.Recipes WHERE CAT_ID = @CatId)
+
+END
+
+		

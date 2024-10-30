@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE spSelectCountPMinTrashByUserID 
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Count(*) Col1 FROM dbo.PrivateMessage WITH (NOLOCK) WHERE M_To = @UserID AND isTrash = 1	
+
+END
+
+		

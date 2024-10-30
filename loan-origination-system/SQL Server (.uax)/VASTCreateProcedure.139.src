@@ -1,0 +1,32 @@
+
+CREATE PROCEDURE [dbo].[spSelectReadPrivateMessage]
+
+@PMID int,
+@UserID int 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT pm.M_ID,
+			pm.M_Subject, 
+			pm.PM_Message, 
+			pm.M_From,
+			u.UserName,
+			pm.M_Sent,
+			pm.M_To 
+	FROM 
+		dbo.PrivateMessage pm WITH (NOLOCK)
+	INNER JOIN
+		dbo.usersmain u WITH (NOLOCK)
+	ON
+		pm.M_From = u.UID
+	WHERE 
+		pm.M_To = @UserID AND pm.M_ID = @PMID;
+
+	UPDATE dbo.PrivateMessage SET M_Read = 1 WHERE M_ID = @PMID AND M_To = @UserID
+
+END
+
+		

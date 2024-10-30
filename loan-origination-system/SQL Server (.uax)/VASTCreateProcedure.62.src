@@ -1,0 +1,20 @@
+
+CREATE PROCEDURE [dbo].[spCheckUsernameAvailabilityAjax]
+
+@Username varchar(50)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Count(*) Col1 
+	FROM 
+		dbo.usersmain WITH (NOLOCK) 
+	WHERE 
+		UserName = @Username
+
+
+END
+
+		

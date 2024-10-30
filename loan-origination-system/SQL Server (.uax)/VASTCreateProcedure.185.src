@@ -1,0 +1,35 @@
+
+CREATE PROCEDURE [dbo].[spUpdateUserPreferredPageSize]
+
+@UserID int,
+@PreferredPagesize int
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+--Here we create a temp table variable to store our pagesize value for validation
+--We don't want pagesize value that does not exists or too high.
+DECLARE @TemptableVar TABLE (Pagesize int)
+INSERT INTO @TemptableVar (Pagesize)
+SELECT 10
+UNION
+SELECT 20
+UNION
+SELECT 30
+UNION
+SELECT 40
+UNION
+SELECT 50
+
+--Check is the passed in pagesize value is exists before updating.
+IF Exists (SELECT Pagesize FROM @TemptableVar WHERE Pagesize = @PreferredPagesize)
+   BEGIN
+	 UPDATE dbo.usersmain SET PreferredPageSize = @PreferredPagesize
+     WHERE [UID] = @UserID
+   END
+
+END
+
+		

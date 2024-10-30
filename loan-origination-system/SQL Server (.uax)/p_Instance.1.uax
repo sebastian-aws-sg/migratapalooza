@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="p_Instance.1" instanceOf="CAST_MSTSQL_Instance">
+  <CAST_SQL_Object version="10.50.1600.1"/>
+  <CAST_Machine hostName="AGRW7LAP"/>
+  <CAST_AST_TSQL_WithSimpleCollator collatorName="Latin1_General_CS_AS" lcid="1033" codePage="1252" comparisonStyle="196608"/>
+  <CAST_SQL_Area DBMSType="MSSQLServer"/>
+  <CAST_Resolution_Identification resolutionName="AGRSQL2K8"/>
+ </instance>
+</instances>

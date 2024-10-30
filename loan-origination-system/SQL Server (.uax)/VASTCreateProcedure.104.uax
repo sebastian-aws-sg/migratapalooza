@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.104" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="727673640" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="spSelectCountUsersWhoSavedMyRecipeInCookBook"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.104(1,1,27,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.104"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.104" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.104.src"/>
+  <shell fullPath="VASTCreateProcedure.104.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.200" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@UserID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.104"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

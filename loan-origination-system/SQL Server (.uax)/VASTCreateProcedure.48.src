@@ -1,0 +1,71 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/24/2008>
+-- Description:	<Returns search result>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetSearchResult]
+
+@Search varchar(50),
+@CAT_ID int,
+@OrderBy int = '',
+@PageIndex int = 1,
+@PageSize int = 20
+
+AS
+BEGIN
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+IF (@CAT_ID = 0)
+ BEGIN
+      SET @CAT_ID = Null
+ END
+
+	SET NOCOUNT ON;
+
+	WITH RecipeSearch AS
+	(
+		SELECT
+		   ROW_NUMBER() OVER 
+			 (
+			   -- Dynamic sorting
+				ORDER BY 
+					  CASE WHEN @OrderBy = 1 THEN HITS END DESC,
+					  CASE WHEN @OrderBy = 2 THEN NO_RATES END DESC,
+					  CASE WHEN @OrderBy = 3 THEN Name END,
+					  CASE WHEN @OrderBy = 4 OR @OrderBy = '' THEN Date END DESC
+			 ) AS RowNumber, 
+				  ID, 
+				  CAT_ID, 
+				  Category, 
+				  Name, 
+				  Author, 
+				  Date, 
+				  HITS, 
+				  RATING, 
+				  NO_RATES,
+                  [UID],
+				  COALESCE(NULLIF(RecipeImage, ''), 'noimageavailable.gif') as RecipeImage,
+				  Cast((1.0 * RATING/NO_RATES) as decimal(2,1)) as Rates,
+				  dbo.GetSearchResultCount(@Search, @CAT_ID) As RCount  
+		   FROM 
+               dbo.Recipes WITH (NOLOCK) 
+		   WHERE 
+               LINK_APPROVED = 1 AND CAT_ID = COALESCE(@CAT_ID, CAT_ID) AND [Name] Like '%' + @Search + '%'
+	)
+	-- Statement that executes the CTE
+	SELECT a.*
+	FROM
+		  RecipeSearch a
+	WHERE
+		  a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+	ORDER BY
+		  a.RowNumber
+
+END
+
+		

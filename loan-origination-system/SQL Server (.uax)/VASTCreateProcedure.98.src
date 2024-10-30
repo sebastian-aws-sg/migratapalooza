@@ -1,0 +1,25 @@
+
+CREATE PROCEDURE [dbo].[spSelectCommentArticle]
+
+@ID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+       SELECT ID, 
+				Author, 
+				Email, 
+				Comments, 
+				Date, 
+				[UID] 
+			FROM 
+				dbo.COMMENTS_ARTICLE WITH (NOLOCK) 
+			WHERE 
+				ID = @ID
+			ORDER BY DATE DESC
+
+END
+
+		

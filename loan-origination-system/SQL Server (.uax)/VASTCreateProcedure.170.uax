@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.170" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="1790629422" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="spUpdateArticle"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.170(1,1,65,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.170"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.170" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.170.src"/>
+  <shell fullPath="VASTCreateProcedure.170.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.294" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@UserID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.170"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.295" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_Named nameAST="@AID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.170"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.296" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="3"/>
+ <CAST_Named nameAST="@Title"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.170"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="200" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.297" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="4"/>
+ <CAST_Named nameAST="@Content"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.170"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="8000" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.298" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="5"/>
+ <CAST_Named nameAST="@CAT_ID"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.170"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.299" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="6"/>
+ <CAST_Named nameAST="@Keyword"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.170"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="100" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.300" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="7"/>
+ <CAST_Named nameAST="@Summary"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.170"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="500" precision="0" scale="0"/>
+</instance>
+</instances>

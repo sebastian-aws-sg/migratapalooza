@@ -1,0 +1,19 @@
+
+CREATE PROCEDURE [dbo].[spSelectPrivateMessageByPMID]
+
+@PMID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT PM_Message 
+	FROM 
+		dbo.PrivateMessage WITH (NOLOCK) 
+	WHERE 
+		M_ID = @PMID
+
+END
+
+		

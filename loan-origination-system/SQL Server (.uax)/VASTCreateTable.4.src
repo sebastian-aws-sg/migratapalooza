@@ -1,0 +1,11 @@
+CREATE TABLE dbo.Configuration (
+  HideShowComment int NOT NULL,
+  HideShowArticleComment int NOT NULL,
+  NumberOfrecipeInCookBook int NOT NULL,
+  NumberOfFriendsInFriendsList int NOT NULL,
+  Email varchar NOT NULL,
+  SmtpServer varchar NOT NULL,
+  PublicPrivateProfile int NOT NULL
+)
+go
+  

@@ -1,0 +1,16 @@
+
+CREATE PROCEDURE [dbo].[spSelectAdminUserLogin]
+
+@Username varchar(50),
+@UserPassword varchar(50)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Count(*) col1 FROM dbo.usersadmin WITH (NOLOCK) WHERE uname = @Username AND [password] = @UserPassword
+
+END
+
+		

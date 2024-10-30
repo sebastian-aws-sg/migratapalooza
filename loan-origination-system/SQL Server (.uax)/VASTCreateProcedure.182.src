@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE spUpdateShowHideFriendsListProfile 
+
+@UserID int,
+@NewValue int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    UPDATE dbo.usersmain SET ShowFriendsListinProfile = @NewValue
+    WHERE [UID] = @UserID
+
+END
+
+		

@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE spUpdateShowHideCookBookInProfile 
+
+@UserID int,
+@NewValue int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    UPDATE dbo.usersmain SET ShowCookBookinProfile = @NewValue
+    WHERE [UID] = @UserID
+
+END
+
+		

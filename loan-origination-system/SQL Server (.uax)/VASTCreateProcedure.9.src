@@ -1,0 +1,19 @@
+
+CREATE PROCEDURE [dbo].[AdminDeleteArticleComments] 
+
+@ID int,
+@AID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    DELETE dbo.COMMENTS_ARTICLE WHERE COM_ID = @ID;
+
+    -- Decrement Total comments count in article tabale
+    UPDATE dbo.Cooking_Article SET Total_Comments = Total_Comments - 1 WHERE ID = @AID
+
+END
+
+		

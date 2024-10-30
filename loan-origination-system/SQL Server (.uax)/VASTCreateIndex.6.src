@@ -1,0 +1,2 @@
+CREATE  NONCLUSTERED INDEX M_Read ON dbo.tableName ( M_Read ASC )
+

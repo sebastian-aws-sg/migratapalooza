@@ -1,0 +1,24 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/4/2008>
+-- Description:	<Update recipe category>
+-- =============================================
+CREATE PROCEDURE UpdateRecipeCategory 
+
+@Catid int,
+@CatName varchar(100)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+    
+    -- Category table
+    Update RECIPE_CAT Set CAT_TYPE = @CatName Where CAT_ID = @Catid;
+
+    -- Recipe table
+    Update Recipes set Category = @CatName Where CAT_ID = @Catid
+ 
+END
+
+		

@@ -1,0 +1,15 @@
+
+CREATE PROCEDURE spSelectUserPhotoByUserID
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Photo FROM dbo.usersmain WITH (NOLOCK) WHERE [UID] = @UserID
+
+END
+
+		

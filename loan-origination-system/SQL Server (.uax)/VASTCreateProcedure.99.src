@@ -1,0 +1,29 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/23/2008>
+-- Description:	<Returns comments>
+-- =============================================
+CREATE PROCEDURE [dbo].[spSelectCommentRecipe]
+
+@ID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+       SELECT ID, 
+				AUTHOR, 
+				EMAIL, 
+				COMMENTS, 
+				DATE, 
+				[UID] 
+			FROM 
+				dbo.COMMENTS_RECIPE WITH (NOLOCK) 
+			WHERE 
+				ID = @ID
+			ORDER BY DATE DESC
+
+END
+
+		

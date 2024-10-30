@@ -1,0 +1,43 @@
+
+CREATE PROCEDURE [dbo].[spSelectOtherArticlesByThisAuthor] 
+
+@UserID int,
+@ID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DECLARE @Counter int
+
+	SELECT @Counter = Count(*) FROM dbo.Cooking_Article WHERE Show = 1 AND [UID] =  @UserID
+
+IF (@Counter > 1)
+   BEGIN
+
+		SELECT TOP 10 a.ID,
+			   c.CAT_NAME,
+			   a.Title,
+			   a.Hits,
+			   @Counter TotalCount
+		FROM
+			dbo.Cooking_Article a
+		INNER JOIN
+			dbo.Cooking_Article_Category c
+		ON
+			a.CAT_ID = c.CAT_ID
+		WHERE 
+			a.Show = 1 AND a.ID <> @ID AND a.UID = @UserID
+		ORDER BY 
+			a.Hits DESC
+
+   END
+ELSE
+   BEGIN
+      SELECT 1 AS ID, 'Catname' AS CAT_NAME, 'Title' AS Title, 1 AS Hits, 1 AS TotalCount
+   END
+
+END
+
+		

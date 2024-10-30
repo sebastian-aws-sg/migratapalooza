@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateFunction.7" instanceOf="CAST_MSTSQL_Function">
+  <CAST_SQL_Object objectId="1623676832" owner="dbo" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="fnConvertCSVToINT"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.200(1,1,47,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.200"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.200" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateFunction.7.src"/>
+  <shell fullPath="VASTCreateFunction.7.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.375" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="ID"/>
+ <CAST_AST_WithParent parentAST="VASTCreateFunction.7"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_ReturnParameter.7" instanceOf="CAST_AST_ANSISQL_ReturnParameter">
+ <CAST_AST_ANSISQL_WithOrder order="-1"/>
+ <CAST_Named nameAST="&lt;return value&gt;"/>
+ <CAST_AST_WithParent parentAST="VASTCreateFunction.7"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

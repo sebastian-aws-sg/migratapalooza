@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.146" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="1707153127" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="spSelectSiteConfigurationAdmin"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.146(1,1,25,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.146"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.146" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.146.src"/>
+  <shell fullPath="VASTCreateProcedure.146.src"/>
+ </instance>
+</instances>

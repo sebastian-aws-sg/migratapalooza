@@ -1,0 +1,32 @@
+
+CREATE PROCEDURE [dbo].[spSelectUserPrivateMessage]
+
+@UserID int
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+	SELECT	pm.M_ID, 
+			pm.M_Subject, 
+			pm.M_From, 
+			pm.M_To, 
+			pm.M_Sent, 
+			pm.PM_Message, 
+			pm.M_Read, 
+			pm.M_OutBox, 
+			pm.M_mail,
+			u.UserName as FromUserName
+	FROM 
+		dbo.PrivateMessage pm WITH (NOLOCK)
+	INNER JOIN
+		dbo.usersmain u WITH (NOLOCK)
+	ON
+		pm.M_From = u.UID
+	WHERE
+		pm.M_To = @UserID
+
+END
+
+		

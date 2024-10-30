@@ -1,0 +1,19 @@
+
+CREATE PROCEDURE [dbo].[spCheckIfAccountIsActivated]
+
+@Guid varchar(100)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT Activation 
+	FROM 
+		dbo.usersmain WITH (NOLOCK) 
+	WHERE 
+		[GUID] = @Guid
+
+END
+
+		

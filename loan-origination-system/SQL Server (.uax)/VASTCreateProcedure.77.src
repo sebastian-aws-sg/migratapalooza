@@ -1,0 +1,20 @@
+
+CREATE PROCEDURE [dbo].[spGetUserID] 
+
+@Username varchar(50),
+@UserPassword varchar(50)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT [UID] 
+	FROM 
+		dbo.usersmain WITH (NOLOCK) 
+	WHERE 
+		UserName = @Username AND [Password] = @UserPassword
+
+END
+
+		

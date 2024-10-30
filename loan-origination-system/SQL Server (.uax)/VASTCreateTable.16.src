@@ -1,0 +1,23 @@
+CREATE TABLE dbo.Recipes (
+  ID int NOT NULL,
+  CAT_ID int NOT NULL,
+  Category nvarchar NOT NULL,
+  Name nvarchar NOT NULL,
+  Author nvarchar NOT NULL,
+  Ingredients nvarchar NOT NULL,
+  Instructions nvarchar NOT NULL,
+  Date datetime NOT NULL,
+  HOMEPAGE nvarchar NULL,
+  LINK_APPROVED int NOT NULL,
+  HITS int NOT NULL,
+  RATING int NOT NULL,
+  NO_RATES int NOT NULL,
+  TOTAL_COMMENTS int NOT NULL,
+  HIT_DATE datetime NULL,
+  RecipeImage varchar NULL,
+  UID int NOT NULL,
+  upsize_ts timestamp NULL,
+  PRIMARY KEY CLUSTERED ( ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

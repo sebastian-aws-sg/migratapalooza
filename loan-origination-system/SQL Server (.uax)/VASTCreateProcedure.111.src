@@ -1,0 +1,42 @@
+
+CREATE PROCEDURE [dbo].[spSelectFriendsListMainPage] 
+
+@UserID int
+
+AS
+BEGIN
+
+	DECLARE @NumRecords int
+
+	SELECT @NumRecords = NumberOfFriendsInFriendsList FROM dbo.Configuration WITH (NOLOCK)
+
+	SET ROWCOUNT @NumRecords
+
+	DECLARE @TotalCount int
+	SELECT @TotalCount = Count(*) FROM dbo.FriendsList WITH (NOLOCK) WHERE IsApproved = 1 AND [UID] = @UserID
+
+	SELECT fl.ID, 
+		   @TotalCount TotalCount,
+		   fl.FriendID, 
+		   u.UserName, 
+		   fl.Date,
+		   u.FirstName,
+		   u.LastName,
+		   u.Country,
+		   COALESCE(NULLIF(u.Photo, ''), 'nophotoavailable.gif') as Photo,
+		   u.Hits,
+		   u.LastVisit,
+           u.DateJoined
+	FROM 
+		dbo.FriendsList fl WITH (NOLOCK)
+	INNER JOIN 
+		dbo.usersmain u WITH (NOLOCK)
+	ON
+		fl.FriendID = u.UID
+	WHERE 
+		fl.IsApproved = 1 AND fl.UID = @UserID
+
+END
+
+
+		

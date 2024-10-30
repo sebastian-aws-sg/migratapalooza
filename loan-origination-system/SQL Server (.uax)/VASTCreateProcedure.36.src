@@ -1,0 +1,17 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/23/2008>
+-- Description:	<Returns homepage total category count>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetHompageTotalCategoryCount] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT COUNT(*) FROM RECIPE_CAT WITH (NOLOCK)
+
+END
+
+		

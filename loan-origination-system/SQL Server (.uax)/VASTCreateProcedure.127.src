@@ -1,0 +1,19 @@
+
+CREATE PROCEDURE [dbo].[spSelectLast50ExceptionErrorLog] 
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+	SELECT TOP 50 ID,
+           URL, 
+		   Exception, 
+		   Date
+	FROM 
+		dbo.ExceptionLog WITH (NOLOCK)
+    ORDER BY Date DESC
+
+END
+
+		

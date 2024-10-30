@@ -1,0 +1,145 @@
+
+CREATE PROCEDURE [dbo].[spSelectDisplayAllMembersAdmin]
+
+@Input varchar(50),
+@NumDays int = 0,
+@OrderBy int = '',
+@SortBy int = '',
+@PageIndex int = 1,
+@PageSize int = 20
+
+AS
+BEGIN
+
+DECLARE @StartRow int
+DECLARE @EndRow int
+
+SET @StartRow = (@PageSize * (@PageIndex - 1))  + 1  
+SET @EndRow = @PageSize * @PageIndex + 1
+
+DECLARE @ItemCounter int
+
+--Returns total records count
+SELECT @ItemCounter = Count(*) 
+FROM 
+	dbo.usersview 
+WHERE
+(UserName LIKE COALESCE(@Input, '%')
+ OR FirstName LIKE COALESCE(@Input, '%')
+ OR LastName LIKE COALESCE(@Input, '%')
+ OR City LIKE COALESCE(@Input, '%')
+ OR [State] LIKE COALESCE(@Input, '%')
+ OR Country LIKE COALESCE(@Input, '%')
+ OR Email LIKE COALESCE(@Input, '%')
+ OR (@NumDays > 0 AND DateJoined >= DATEADD(day, - @NumDays, GETDATE()))
+ OR UserName LIKE COALESCE(@Input, UserName) + '%') -- Counter for Username alpha Letter search
+ OR (@Input = 'none' AND @NumDays = 0) --Count all, no filter
+
+SET NOCOUNT ON;
+
+WITH Users AS
+	(
+		SELECT
+		   ROW_NUMBER() OVER 
+			 (
+			  ORDER BY 
+              CASE WHEN @OrderBy = 1 AND @SortBy = 1 THEN Hits END DESC,
+              CASE WHEN @OrderBy = 1 AND @SortBy = '' THEN Hits END DESC,
+              CASE WHEN @OrderBy = 1 AND @SortBy = 2 THEN Hits END ASC,
+              CASE WHEN @OrderBy = 2 AND @SortBy = 1 THEN Email END DESC,
+              CASE WHEN @OrderBy = 2 AND @SortBy = '' THEN Email END DESC,
+              CASE WHEN @OrderBy = 2 AND @SortBy = 2 THEN Email END ASC,
+              CASE WHEN @OrderBy = 3 AND @SortBy = 2 THEN UserName END ASC,
+              CASE WHEN @OrderBy = 3 AND @SortBy = '' THEN UserName END ASC,
+              CASE WHEN @OrderBy = 3 AND @SortBy = 1 THEN UserName END DESC,
+              CASE WHEN @OrderBy = 4 AND @SortBy = 1 OR @OrderBy = '' THEN DateJoined END DESC,
+              CASE WHEN @OrderBy = 4 AND @SortBy = '' OR @OrderBy = '' THEN DateJoined END DESC,
+              CASE WHEN @OrderBy = 4 AND @SortBy = 2 THEN DateJoined END ASC,
+              CASE WHEN @OrderBy = 5 AND @SortBy = 1 THEN LastVisit END DESC,
+              CASE WHEN @OrderBy = 5 AND @SortBy = '' THEN LastVisit END DESC,
+              CASE WHEN @OrderBy = 5 AND @SortBy = 2 THEN LastVisit END ASC,
+              CASE WHEN @OrderBy = 6 AND @SortBy = 1 THEN isActive END DESC,
+              CASE WHEN @OrderBy = 6 AND @SortBy = '' THEN isActive END DESC,
+              CASE WHEN @OrderBy = 6 AND @SortBy = 2 THEN isActive END ASC,
+              CASE WHEN @OrderBy = 7 AND @SortBy = 1 THEN TotalSavedRecipe END DESC,
+              CASE WHEN @OrderBy = 7 AND @SortBy = '' THEN TotalSavedRecipe END DESC,
+              CASE WHEN @OrderBy = 7 AND @SortBy = 2 THEN TotalSavedRecipe END ASC,
+              CASE WHEN @OrderBy = 8 AND @SortBy = 1 THEN TotalFriends END DESC,
+              CASE WHEN @OrderBy = 8 AND @SortBy = '' THEN TotalFriends END DESC,
+              CASE WHEN @OrderBy = 8 AND @SortBy = 2 THEN TotalFriends END ASC,
+              CASE WHEN @OrderBy = 9 AND @SortBy = 1 THEN TotalSubmittedRecipe END DESC,
+              CASE WHEN @OrderBy = 9 AND @SortBy = '' THEN TotalSubmittedRecipe END DESC,
+              CASE WHEN @OrderBy = 9 AND @SortBy = 2 THEN TotalSubmittedRecipe END ASC,
+              CASE WHEN @OrderBy = 10 AND @SortBy = 1 THEN TotalSubmittedArticle END DESC,
+              CASE WHEN @OrderBy = 10 AND @SortBy = '' THEN TotalSubmittedArticle END DESC,
+              CASE WHEN @OrderBy = 10 AND @SortBy = 2 THEN TotalSubmittedArticle END ASC,
+              CASE WHEN @OrderBy = 11 AND @SortBy = 1 THEN LastUpdated END DESC,
+              CASE WHEN @OrderBy = 11 AND @SortBy = '' THEN LastUpdated END DESC,
+              CASE WHEN @OrderBy = 11 AND @SortBy = 2 THEN LastUpdated END ASC,
+              CASE WHEN @OrderBy = 12 AND @SortBy = 1 THEN TotalCommentRecipe END DESC,
+              CASE WHEN @OrderBy = 12 AND @SortBy = '' THEN TotalCommentRecipe END DESC,
+              CASE WHEN @OrderBy = 12 AND @SortBy = 2 THEN TotalCommentRecipe END ASC,
+              CASE WHEN @OrderBy = 13 AND @SortBy = 1 THEN TotalCommentArticle END DESC,
+              CASE WHEN @OrderBy = 13 AND @SortBy = '' THEN TotalCommentArticle END DESC,
+              CASE WHEN @OrderBy = 13 AND @SortBy = 2 THEN TotalCommentArticle END ASC
+			 ) AS RowNumber, 
+				[UID], 
+				UserName,
+				[Password],
+				Email,
+				FirstName,
+				LastName,
+				City,
+				[State],
+				Country,
+				isActive,
+				DateJoined,
+				Activation,
+				LastVisit,
+				Hits,
+                LastUpdated,
+				ShowFriendsListinProfile,
+				ShowCookBookinProfile,
+                NumRecordsCookBookQuickView,
+                NumRecordsFriendsList,
+				PreferredLayout,
+				PreferredPageSize,
+				IsUserChoosePreferredLayout,
+				ReceivePM,
+				PMEmailNotification,
+				UserLevel,
+				TotalSavedRecipe,
+				TotalFriends,
+				TotalSubmittedRecipe,
+				TotalSubmittedArticle,
+                TotalCommentRecipe,
+                TotalCommentArticle,
+				@ItemCounter TotalCount,
+				UserImage
+				FROM 
+					dbo.usersview
+                WHERE (
+                 UserName LIKE COALESCE(@Input, '%') OR
+                 FirstName LIKE COALESCE(@Input, '%') OR
+                 LastName LIKE COALESCE(@Input, '%') OR
+                 City LIKE COALESCE(@Input, '%') OR
+                 [State] LIKE COALESCE(@Input, '%') OR
+                 Country LIKE COALESCE(@Input, '%') OR
+                 Email LIKE COALESCE(@Input, '%') OR
+                 (@NumDays > 0 AND DateJoined >= DATEADD(day, - @NumDays, GETDATE())) OR
+                 UserName LIKE COALESCE(@Input, UserName) + '%')-- User name letter search
+                 OR (@Input = 'none' AND @NumDays = 0) -- Returns default no filter record set.
+                 
+	)
+	-- Statement that executes the CTE
+	SELECT a.*
+	FROM
+		  Users a
+	WHERE
+		  a.RowNumber BETWEEN @StartRow AND @EndRow - 1
+	ORDER BY
+		  a.RowNumber
+
+END
+
+		

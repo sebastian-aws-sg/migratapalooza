@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateIndex.4" instanceOf="CAST_MSTSQL_Index">
+  <CAST_SQL_Object owner="dbo" objectId="12" version="10.50.1600.1"/>
+  <CAST_AST_ANSISQL_WithUniqueness unique="0"/>
+  <CAST_Resolution_Identification resolutionName="startdate"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <CAST_TSQL_IsClustered isClustered="0"/>
+  <CAST_ANSISQL_Index indexedObject="VASTCreateTable.9"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.204(1,1,2,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.204" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateIndex.4.src"/>
+  <shell fullPath="VASTCreateIndex.4.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.7" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.4"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.9"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_SortedColumnReference.5" instanceOf="CAST_AST_ANSISQL_SortedColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_ANSISQL_SortOrder ordering="1"/>
+ <CAST_Named nameAST="START_DATE"/>
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.4"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.52"/>
+</instance>
+</instances>

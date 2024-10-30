@@ -1,0 +1,30 @@
+
+CREATE PROCEDURE [dbo].[spSelectLast10UpdatedRecipe] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT TOP 10 rul.RID,
+		   rul.DateUpdated,
+		   r.Name
+	FROM
+		(
+		   SELECT TOP 10 RID, Max(DateUpdated) DateUpdated 
+		   FROM 
+				dbo.RecipeUpdateLog WITH (NOLOCK)
+		   GROUP BY RID
+        ) rul
+	INNER JOIN
+		dbo.Recipes r WITH (NOLOCK)
+	ON
+		rul.RID = r.ID
+	WHERE 
+		r.LINK_APPROVED = 1
+	ORDER BY 
+		rul.DateUpdated DESC
+
+END
+
+		

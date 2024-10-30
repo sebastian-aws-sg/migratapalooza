@@ -1,0 +1,11 @@
+CREATE TABLE dbo.WhosOnline (
+  UserName nvarchar NULL,
+  UserIP nvarchar NULL,
+  DateCreated datetime NULL,
+  LastDateChecked datetime NULL,
+  CheckedIn datetime NULL,
+  LastChecked datetime NULL,
+  PageBrowse nvarchar NULL
+)
+go
+  

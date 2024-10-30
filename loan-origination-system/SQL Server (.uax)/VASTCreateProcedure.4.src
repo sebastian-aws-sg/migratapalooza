@@ -1,0 +1,45 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/5/2008>
+-- Description:	<Add cooking article>
+-- =============================================
+CREATE PROCEDURE [dbo].[AdminAddCookingArticle] 
+
+@Title varchar(200),
+@Content ntext,
+@Author varchar(50),
+@CAT_ID int,
+@Keyword varchar(255),
+@Summary ntext
+
+AS
+
+DECLARE @ErrorCode int
+
+SET @ErrorCode = @@error
+
+BEGIN TRANSACTION
+
+IF ( @ErrorCode = 0 )
+
+	BEGIN
+
+	INSERT INTO dbo.Cooking_Article (Title,[Content],Author,CAT_ID,Keyword,Summary)
+		VALUES(
+			@Title,
+			@Content,
+			@Author,
+			@CAT_ID,
+			@Keyword,
+			@Summary
+			)
+	END
+
+IF ( @ErrorCode = 0 )
+	COMMIT TRANSACTION
+ELSE
+	ROLLBACK TRANSACTION
+
+RETURN @ErrorCode
+
+		

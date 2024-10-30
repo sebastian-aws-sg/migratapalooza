@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="p_Schema.1" instanceOf="CAST_MSTSQL_Schema">
+  <CAST_SQL_Object objectId="1" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="dbo"/>
+  <CAST_Symbol_WithParent parent="p_Database.1"/>
+ </instance>
+</instances>

@@ -1,0 +1,18 @@
+
+CREATE PROCEDURE spUpdateMarkPMUnreadOrRead
+
+@UserID int,
+@ID int,
+@Val int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+UPDATE dbo.PrivateMessage SET M_Read = @Val 
+WHERE M_ID = @ID AND M_To = @UserID
+
+END
+
+		

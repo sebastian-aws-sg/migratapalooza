@@ -1,0 +1,25 @@
+
+CREATE PROCEDURE [dbo].[spSelectWhoAddsMeInFriendsList]
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT TOP 5 fl.UID, 
+				u.UserName, 
+				fl.Date 
+	FROM 
+		dbo.FriendsList fl WITH (NOLOCK)
+	INNER JOIN 
+		dbo.usersmain u WITH (NOLOCK)
+	ON
+		fl.UID = u.UID
+	WHERE 
+		fl.FriendID = @UserID
+
+END
+
+		

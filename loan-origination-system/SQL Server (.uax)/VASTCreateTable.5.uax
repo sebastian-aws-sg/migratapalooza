@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateTable.5" instanceOf="CAST_MSTSQL_RelationalTable">
+  <CAST_SQL_Object owner="dbo" objectId="1141579105" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="ConfigureLastViewedHours"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.216(1,1,5,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.216" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateTable.5.src"/>
+  <shell fullPath="VASTCreateTable.5.src"/>
+ </instance>
+<instance id="p_ColumnOfTable.27" instanceOf="CAST_MSTSQL_TableColumn">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_SQL_Object version="10.50.1600.1"/>
+ <CAST_ANSISQL_Column isNull="0"/>
+ <CAST_Resolution_Identification resolutionName="Hourspan"/>
+ <CAST_Symbol_WithParent parent="VASTCreateTable.5"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="int" length="4" precision="10" scale="0"/>
+</instance>
+</instances>

@@ -1,0 +1,17 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/29/2008>
+-- Description:	<Returns waiting for approval recipe count.>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetUnApprovedRecipeCount]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT Count(*) FROM dbo.Recipes WITH (NOLOCK) WHERE LINK_APPROVED = 0
+
+END
+
+		

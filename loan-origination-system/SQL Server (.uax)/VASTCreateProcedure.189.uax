@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateProcedure.189" instanceOf="CAST_MSTSQL_Procedure">
+  <CAST_SQL_Object objectId="930102354" version="10.50.1600.1"/>
+  <CAST_Resolution_Identification resolutionName="spVerifyUserLoginCredential"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.189(1,1,16,-1)"/>
+  <CAST_CodeExpandable sourceFile="CAST_TargetSourceFile.189"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.189" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateProcedure.189.src"/>
+  <shell fullPath="VASTCreateProcedure.189.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.357" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_Named nameAST="@Username"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.189"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_Generic_Parameter.358" instanceOf="CAST_AST_ANSISQL_Generic_Parameter">
+ <CAST_AST_ANSISQL_WithOrder order="2"/>
+ <CAST_Named nameAST="@UserPassword"/>
+ <CAST_AST_Parameter modeByValue="1" modeByReference="0" modeOutput="0"/>
+ <CAST_AST_WithParent parentAST="VASTCreateProcedure.189"/>
+ <CAST_AST_ANSISQL_GenericDatatypeAttributes typeName="varchar" length="50" precision="0" scale="0"/>
+</instance>
+</instances>

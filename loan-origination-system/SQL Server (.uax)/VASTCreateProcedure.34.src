@@ -1,0 +1,30 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/21/2008>
+-- Description:	<Return recipe homepage category main course>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetHomePageCategoryMainCourseRecipe] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+     SELECT *,
+        (
+          SELECT COUNT (*)  
+          FROM 
+             Recipes WITH (NOLOCK) 
+          WHERE 
+             Recipes.CAT_ID = RECIPE_CAT.CAT_ID AND LINK_APPROVED = 1
+        ) AS REC_COUNT 
+     FROM 
+          RECIPE_CAT WITH (NOLOCK) 
+     WHERE 
+          GROUPCAT = 1
+     ORDER BY 
+          CAT_TYPE ASC
+
+END
+
+		

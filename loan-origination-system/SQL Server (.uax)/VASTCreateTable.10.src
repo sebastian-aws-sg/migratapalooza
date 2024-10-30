@@ -1,0 +1,9 @@
+CREATE TABLE dbo.ExceptionLog (
+  ID int NOT NULL,
+  URL varchar NULL,
+  Exception varchar NULL,
+  Date datetime NOT NULL,
+  PRIMARY KEY CLUSTERED ( ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

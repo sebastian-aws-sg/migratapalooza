@@ -1,0 +1,25 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/25/2008>
+-- Description:	<Return Article category count>
+-- =============================================
+CREATE FUNCTION GetCategoryArticleCount 
+(
+@CatId int
+)
+RETURNS int
+AS
+BEGIN
+	-- Declare the return variable here
+	DECLARE @GetCount int
+
+	Set @GetCount = (SELECT Count(*) As RecCount from Cooking_Article
+    Where Show = 1 AND CAT_ID = @CatId)
+
+	-- Return the result of the function
+	RETURN @GetCount
+
+END
+
+
+		

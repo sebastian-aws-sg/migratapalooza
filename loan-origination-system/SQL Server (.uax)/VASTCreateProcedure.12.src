@@ -1,0 +1,25 @@
+-- =============================================
+-- Author:		<DExter Zafra>
+-- Create date: <7/4/2008>
+-- Description:	<Return admin category manager grid>
+-- =============================================
+CREATE PROCEDURE [dbo].[AdminGetRecipeCategoryManager] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT CAT_ID, CAT_TYPE, 
+           CASE GROUPCAT
+              WHEN '1' THEN 'Main Course'
+              WHEN '2' THEN 'Ethnic Regional'
+           END AS GROUPCAT, (SELECT COUNT (*)
+     FROM Recipes WITH (NOLOCK) WHERE Recipes.CAT_ID = RECIPE_CAT.CAT_ID 
+     AND LINK_APPROVED = 1) AS REC_COUNT
+     FROM RECIPE_CAT WITH (NOLOCK)
+     ORDER BY CAT_ID ASC
+
+END
+
+		

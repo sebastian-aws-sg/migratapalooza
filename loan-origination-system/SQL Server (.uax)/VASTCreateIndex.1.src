@@ -1,0 +1,2 @@
+CREATE  NONCLUSTERED INDEX ID ON dbo.tableName ( ID ASC, COM_ID ASC, id ASC )
+

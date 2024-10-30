@@ -1,0 +1,35 @@
+
+CREATE PROCEDURE [dbo].[spSelectNewFriendsWaitingForApproval]
+
+@UserID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT fl.ID,  
+		   fl.FriendID,
+		   fl.UID,
+		   u.UserName,
+		   u.Email,
+		   fl.Date,
+		   u.FirstName,
+		   u.LastName,
+		   u.Country,
+		   COALESCE(NULLIF(u.Photo, ''), 'nophotoavailable.gif') as Photo,
+		   u.Hits,
+		   u.LastVisit,
+           u.DateJoined
+	FROM 
+		dbo.FriendsList fl WITH (NOLOCK)
+	INNER JOIN 
+		dbo.usersmain u WITH (NOLOCK)
+	ON
+		fl.UID = u.UID
+	WHERE 
+		fl.IsApproved = 0 AND fl.FriendID = @UserID
+
+END
+
+		

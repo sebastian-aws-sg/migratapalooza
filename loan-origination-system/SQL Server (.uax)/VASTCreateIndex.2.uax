@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateIndex.2" instanceOf="CAST_MSTSQL_Index">
+  <CAST_SQL_Object owner="dbo" objectId="5" version="10.50.1600.1"/>
+  <CAST_AST_ANSISQL_WithUniqueness unique="0"/>
+  <CAST_Resolution_Identification resolutionName="UID"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <CAST_TSQL_IsClustered isClustered="0"/>
+  <CAST_ANSISQL_Index indexedObject="VASTCreateTable.2"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.202(1,1,2,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.202" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateIndex.2.src"/>
+  <shell fullPath="VASTCreateIndex.2.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.2" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.2"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.2"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.4" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.2"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.3"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.5" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.2"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.6"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.8" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.2"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.11"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.17" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.2"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.16"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.18" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.2"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.18"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_SortedColumnReference.2" instanceOf="CAST_AST_ANSISQL_SortedColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_ANSISQL_SortOrder ordering="1"/>
+ <CAST_Named nameAST="UID"/>
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.2"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.11"/>
+</instance>
+</instances>

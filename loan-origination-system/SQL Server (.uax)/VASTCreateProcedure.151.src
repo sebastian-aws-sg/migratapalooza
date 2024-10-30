@@ -1,0 +1,28 @@
+
+CREATE PROCEDURE [dbo].[spSelectUnApprovedArticle] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT a.ID, 
+		   a.CAT_ID, 
+		   ac.CAT_NAME,
+		   a.Title, 
+		   a.Post_Date, 
+		   a.Author,
+		   a.UID
+	FROM 
+		dbo.Cooking_Article a
+	INNER JOIN
+		dbo.Cooking_Article_Category ac
+	ON
+		a.CAT_ID = ac.CAT_ID
+	WHERE 
+		a.Show = 0
+	ORDER BY a.Post_Date
+
+END
+
+		

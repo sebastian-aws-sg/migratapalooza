@@ -1,0 +1,21 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <7/4/2008>
+-- Description:	<Update article category>
+-- =============================================
+CREATE PROCEDURE UpdateArticleCategory
+
+@Catid int,
+@CatName varchar(100)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+    
+    Update Cooking_Article_Category Set CAT_NAME = @CatName Where CAT_ID = @Catid
+
+ 
+END
+
+		

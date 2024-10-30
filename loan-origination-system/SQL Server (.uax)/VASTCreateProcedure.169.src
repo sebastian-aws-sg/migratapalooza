@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE [dbo].[spUdateApprovedAFriend]
+
+@UserID int,
+@ID int 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	UPDATE dbo.FriendsList SET IsApproved = 1
+	WHERE ID = @ID AND FriendID = @UserID
+
+END
+
+		

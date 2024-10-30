@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+ <instance id="VASTCreateIndex.1" instanceOf="CAST_MSTSQL_Index">
+  <CAST_SQL_Object owner="dbo" objectId="6" version="10.50.1600.1"/>
+  <CAST_AST_ANSISQL_WithUniqueness unique="0"/>
+  <CAST_Resolution_Identification resolutionName="ID"/>
+  <CAST_Symbol_WithParent parent="p_Schema.1"/>
+  <CAST_TSQL_IsClustered isClustered="0"/>
+  <CAST_ANSISQL_Index indexedObject="VASTCreateTable.2"/>
+  <POSITIONABLE POSITIONS="CAST_TargetSourceFile.201(1,1,2,-1)"/>
+ </instance>
+ <instance id="CAST_TargetSourceFile.201" instanceOf="CAST_TargetSourceFile">
+  <bookmark source="VASTCreateIndex.1.src"/>
+  <shell fullPath="VASTCreateIndex.1.src"/>
+ </instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.1" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.1"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.2"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.3" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.1"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.3"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.16" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.1"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.16"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_IndexTableReference.19" instanceOf="CAST_AST_ANSISQL_IndexTableReference">
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.1"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="VASTCreateTable.19"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_SortedColumnReference.1" instanceOf="CAST_AST_ANSISQL_SortedColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_ANSISQL_SortOrder ordering="1"/>
+ <CAST_Named nameAST="ID"/>
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.1"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.6"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_SortedColumnReference.3" instanceOf="CAST_AST_ANSISQL_SortedColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_ANSISQL_SortOrder ordering="1"/>
+ <CAST_Named nameAST="COM_ID"/>
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.1"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.12"/>
+</instance>
+<instance id="CAST_AST_ANSISQL_SortedColumnReference.10" instanceOf="CAST_AST_ANSISQL_SortedColumnReference">
+ <CAST_AST_ANSISQL_WithOrder order="1"/>
+ <CAST_AST_ANSISQL_SortOrder ordering="1"/>
+ <CAST_Named nameAST="id"/>
+ <CAST_AST_WithParent parentAST="VASTCreateIndex.1"/>
+ <CAST_AST_WithResolutionSymbolReference resolutionSymbol="p_ColumnOfTable.124"/>
+</instance>
+</instances>

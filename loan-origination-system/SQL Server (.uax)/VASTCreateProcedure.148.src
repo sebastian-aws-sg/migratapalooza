@@ -1,0 +1,17 @@
+
+CREATE PROCEDURE [dbo].[spSelectTop25UsersWhoCommentAnArticle] 
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT AUTHOR, 
+	       Count(*) TotalComments 
+    FROM 
+		dbo.COMMENTS_ARTICLE
+	GROUP BY AUTHOR
+
+END
+
+		

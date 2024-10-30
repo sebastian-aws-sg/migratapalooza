@@ -1,0 +1,26 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 8C1C-B93B
+
+ Directory of C:\SOURCE\chantiers\training\RecipePortal\v2.11\DOTNET\js
+
+01/01/2014  22:48    <DIR>          .
+01/01/2014  22:48    <DIR>          ..
+31/12/2013  12:41            18ÿ413 Ajaxrequest.js
+31/12/2013  12:41            11ÿ347 alertbox.js
+31/12/2013  12:41            14ÿ725 dragtable.js
+31/12/2013  12:41               820 dropdownmenu.js
+31/12/2013  12:41            88ÿ308 jquery.datepick.js
+31/12/2013  12:41             4ÿ986 jquery.easing.1.3.js
+31/12/2013  12:41             3ÿ545 jquery.maskedinput.js
+31/12/2013  12:41            55ÿ272 jquery.min.js
+31/12/2013  12:41             6ÿ661 jquery.timePicker.js
+31/12/2013  12:41             8ÿ015 popupAjax.js
+31/12/2013  12:41            22ÿ302 popupcalendarpicker.js
+31/12/2013  12:41             2ÿ551 rcipejs.js
+31/12/2013  12:41             8ÿ019 showimageajax.js
+31/12/2013  12:41             5ÿ969 thickbox-compressed.js
+01/01/2014  22:48                 0 TT.txt
+31/12/2013  12:41            10ÿ115 validator.js
+31/12/2013  12:41            36ÿ551 wz_tooltip.js
+              17 File(s)        297ÿ599 bytes
+               2 Dir(s)  324ÿ471ÿ902ÿ208 bytes free

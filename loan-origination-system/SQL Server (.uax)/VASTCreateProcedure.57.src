@@ -1,0 +1,64 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <5/28/2008>
+-- Description:	<Add recipe>
+-- =============================================
+CREATE PROCEDURE [dbo].[spAddRecipe]
+
+@Name varchar(50),
+@Author varchar(20),
+@Cat_Id int,
+@Ingredients varchar(1000),
+@Instructions varchar(2000),
+@RecipeImage varchar(50) = Null,
+@UserID int
+
+AS
+
+DECLARE @ErrorCode int
+
+SET @ErrorCode = @@error
+
+BEGIN TRANSACTION
+
+IF ( @ErrorCode = 0 )
+
+BEGIN
+
+	DECLARE @CategoryValue varchar(50)
+
+	SELECT @CategoryValue = CAT_TYPE FROM dbo.RECIPE_CAT WHERE CAT_ID = @Cat_Id
+
+	DECLARE @RecipeImage_Val varchar(50)
+
+	IF (@RecipeImage = '' OR @RecipeImage = NULL)
+		BEGIN
+		  SET @RecipeImage_Val = NULL
+		END
+	ELSE
+		BEGIN
+		  SET @RecipeImage_Val = @RecipeImage
+		END
+
+	INSERT INTO Recipes (Name,Author,CAT_ID,Category,Ingredients,Instructions, RecipeImage, [UID])
+		VALUES(
+				@Name,
+				@Author,
+				@Cat_Id,
+				@CategoryValue,
+				@Ingredients,
+				@Instructions,
+				@RecipeImage_Val,
+				@UserID
+			  )
+
+END
+
+IF ( @ErrorCode = 0 )
+	COMMIT TRANSACTION
+ELSE
+	ROLLBACK TRANSACTION
+
+RETURN @ErrorCode
+
+		

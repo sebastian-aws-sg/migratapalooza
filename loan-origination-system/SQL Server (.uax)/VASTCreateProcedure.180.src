@@ -1,0 +1,85 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <6/12/2008>
+-- Description:	<Update Recipe>
+-- =============================================
+CREATE PROCEDURE [dbo].[spUpdateRecipe] 
+
+@UserID int,
+@ID int,
+@Name varchar(50),
+@Cat_Id int,
+@Ingredients varchar(1000),
+@Instructions varchar(2000),
+@Hits int,
+@RecipeImage varchar(50) = Null
+
+AS
+
+DECLARE @ErrorCode int
+DECLARE @Image varchar(50)
+DECLARE @CatName varchar(50)
+
+BEGIN
+
+IF (@RecipeImage = '')
+    BEGIN 
+        SET @Image = NULL
+     END
+ELSE
+    BEGIN
+        SET @Image = @RecipeImage
+    END
+
+--Make sure it belongs to the right owner.
+IF Exists (SELECT ID FROM dbo.Recipes WHERE [UID] = @UserID AND ID = @ID)
+
+BEGIN
+
+		IF (@Cat_Id = 0)
+
+			BEGIN
+
+			UPDATE Recipes SET 
+						   [Name] = @Name,
+						   Ingredients = @Ingredients,
+						   Instructions = @Instructions,
+						   HITS = @Hits,
+						   RecipeImage = @Image,
+						   [UID] = @UserID
+						   WHERE ID = @ID
+			SET @ErrorCode = @@error
+
+			END
+
+		ELSE
+
+			BEGIN
+
+			--Get Category Name
+			SELECT @CatName = CAT_TYPE From RECIPE_CAT WHERE CAT_ID = @Cat_Id
+
+			UPDATE Recipes SET 
+						   Name = @Name,
+						   CAT_ID = @Cat_Id,
+						   Category = @CatName,
+						   Ingredients = @Ingredients,
+						   Instructions = @Instructions,
+						   HITS = @Hits,
+						   RecipeImage = @Image,
+						   [UID] = @UserID
+						   WHERE ID = @ID
+			SET @ErrorCode = @@error
+
+			END
+
+--Insert Recipe Update Log
+INSERT INTO dbo.RecipeUpdateLog(RID, [UID], DateUpdated) VALUES(@ID, @UserID, GETDATE())
+
+END
+		
+END
+
+RETURN @ErrorCode
+
+		

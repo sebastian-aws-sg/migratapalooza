@@ -1,0 +1,18 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <9/7/2008>
+-- Description:	<Get image filename for update>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetRecipeImageFileNameForUpdate] 
+
+@ID int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    SELECT RecipeImage FROM Recipes WITH (NOLOCK) WHERE ID = @ID
+END
+
+		

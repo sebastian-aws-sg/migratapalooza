@@ -1,0 +1,11 @@
+CREATE TABLE dbo.userCookBook (
+  ID int NOT NULL,
+  UID int NOT NULL,
+  RecipeID int NOT NULL,
+  RecipeName varchar NOT NULL,
+  Hits int NULL,
+  Date datetime NULL,
+  PRIMARY KEY CLUSTERED ( ID ASC  ) WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)
+go
+  

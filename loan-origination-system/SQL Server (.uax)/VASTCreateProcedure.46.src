@@ -1,0 +1,56 @@
+-- =============================================
+-- Author:		<Dexter Zafra>
+-- Create date: <2/23/2008>
+-- Description:	<Returns recipe of the day query with sub-query>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetRecipeOfTheDay]
+
+AS
+BEGIN
+
+SET TEXTSIZE 150 --Set Ingredients and Instruction output character
+
+	SET NOCOUNT ON;
+
+/**********************************************************************************
+* This query will return the recipe of the day. Use sub-query to claculate the absolute  
+* date and modulo by the total rows count.
+* You can use substring in SP to limit the character output for Text field.
+* Example Code:
+* Ingred = (Substring(Ingredients, 1, 100) + '...'), 
+* Instruct = (Substring(Instructions, 1, 100) + '...'),
+* Note: ROW_NUMBER() function don't work on SQL 2000
+***********************************************************************************/
+
+SELECT ID, 
+       CAT_ID, 
+       Category, 
+       [Name],  
+       HITS, 
+       RATING,
+       NO_RATES, 
+       Ingredients = (Substring(Ingredients, 1, 150) + '...'),
+       Instructions = (Substring(Instructions, 1, 100) + '...'),
+       Cast((1.0 * RATING/NO_RATES) as decimal(2,1)) as Rates
+FROM	(
+	   SELECT ID, 
+       CAT_ID, 
+       Category, 
+       [Name],  
+       HITS, 
+       RATING,
+       NO_RATES, 
+       Ingredients,
+       Instructions,
+       Cast((1.0 * RATING/NO_RATES) as decimal(2,1)) as Rates,
+	   ROW_NUMBER() OVER (ORDER BY ID) - 1 as RecID
+	   FROM	
+          dbo.Recipes WITH (NOLOCK)
+	) AS d
+WHERE 
+     RecID = ABS(CHECKSUM(CONVERT(varchar(10), GETDATE(), 120))) % (SELECT COUNT(*) FROM Recipes WITH (NOLOCK))
+
+END
+
+
+		

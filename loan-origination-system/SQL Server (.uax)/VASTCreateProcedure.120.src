@@ -1,0 +1,31 @@
+
+CREATE PROCEDURE [dbo].[spSelectLast10UpdatedArticle]
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	SELECT TOP 10 aul.AID,
+		   aul.DateUpdated,
+		   a.Title,
+		   a.Author
+	FROM
+		(
+		   SELECT TOP 10 AID, Max(DateUpdated) DateUpdated 
+		   FROM 
+			  dbo.ArticleUpdateLog WITH (NOLOCK)
+		   GROUP BY AID
+	    ) aul
+	INNER JOIN
+		dbo.Cooking_Article a WITH (NOLOCK)
+	ON
+		aul.AID = a.ID
+	WHERE 
+		a.Show = 1
+	ORDER BY 
+		aul.DateUpdated DESC
+
+END
+
+		
